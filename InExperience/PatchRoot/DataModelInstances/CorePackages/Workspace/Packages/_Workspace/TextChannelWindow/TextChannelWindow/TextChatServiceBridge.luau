@@ -8,7 +8,6 @@ local _ = require(script.Parent.createChannelMessagesStore)
 local IsTextSourceMutedModule = require(script.Parent.isTextSourceMuted)
 local ConnectHistoryReplayModule = require(script.Parent.connectHistoryReplay)
 local FFlagExpChatTextChannelWindowHistoryReplayModule = require(script.Parent.Flags.FFlagExpChatTextChannelWindowHistoryReplay)
-local FFlagExpChatTextChannelWindowChannelSystemMessagesModule = require(script.Parent.Flags.FFlagExpChatTextChannelWindowChannelSystemMessages)
 local GetFFlagExpChatProtectedChatInternalAPIsFunction = SharedFlagsModule.getFFlagExpChatProtectedChatInternalAPIs
 local GetFFlagExpChatUseChatMuteStoreModule = require(script.Parent.getFFlagExpChatUseChatMuteStore)
 
@@ -19,17 +18,17 @@ local function getMessageStatus(p1): string
 end
 
 return function(Service, p1, p2, p3)
-	-- upvalues: FFlagExpChatTextChannelWindowChannelSystemMessagesModule (copy), GetFFlagExpChatUseChatMuteStoreModule (copy), IsTextSourceMutedModule (copy), TextChatServiceIntegrationModule (copy), TextChannelWindowPerfTracker (copy), TextChannelWindowAnalyticsModule (copy), getMessageStatus (copy), GetFFlagExpChatProtectedChatInternalAPIsFunction (copy), FFlagExpChatTextChannelWindowHistoryReplayModule (copy), ConnectHistoryReplayModule (copy), MessageModule (copy)
+	-- upvalues: GetFFlagExpChatUseChatMuteStoreModule (copy), IsTextSourceMutedModule (copy), TextChatServiceIntegrationModule (copy), TextChannelWindowPerfTracker (copy), TextChannelWindowAnalyticsModule (copy), getMessageStatus (copy), GetFFlagExpChatProtectedChatInternalAPIsFunction (copy), FFlagExpChatTextChannelWindowHistoryReplayModule (copy), ConnectHistoryReplayModule (copy), MessageModule (copy)
 	local t = {}
 	
 	local function connectChannel(TextChannel)
-		-- upvalues: t (copy), FFlagExpChatTextChannelWindowChannelSystemMessagesModule (upval), GetFFlagExpChatUseChatMuteStoreModule (upval), IsTextSourceMutedModule (upval), TextChatServiceIntegrationModule (upval), p1 (copy), p2 (copy), TextChannelWindowPerfTracker (upval), TextChannelWindowAnalyticsModule (upval), getMessageStatus (upval)
+		-- upvalues: t (copy), GetFFlagExpChatUseChatMuteStoreModule (upval), IsTextSourceMutedModule (upval), TextChatServiceIntegrationModule (upval), p1 (copy), p2 (copy), TextChannelWindowPerfTracker (upval), TextChannelWindowAnalyticsModule (upval), getMessageStatus (upval)
 		if not t[TextChannel] then
 			local IsRBXSystem = TextChannel.Name == "RBXSystem"
 			local DestroyingConnections = {
 				(TextChannel.MessageReceived:Connect(function(p4)
-					-- upvalues: FFlagExpChatTextChannelWindowChannelSystemMessagesModule (upval), IsRBXSystem (copy), GetFFlagExpChatUseChatMuteStoreModule (upval), IsTextSourceMutedModule (upval), TextChatServiceIntegrationModule (upval), p1 (upval), p2 (upval), TextChannel (copy), TextChannelWindowPerfTracker (upval), TextChannelWindowAnalyticsModule (upval), getMessageStatus (upval)
-					if not FFlagExpChatTextChannelWindowChannelSystemMessagesModule and not p4.TextSource and not IsRBXSystem then return end
+					-- upvalues: IsRBXSystem (copy), GetFFlagExpChatUseChatMuteStoreModule (upval), IsTextSourceMutedModule (upval), TextChatServiceIntegrationModule (upval), p1 (upval), p2 (upval), TextChannel (copy), TextChannelWindowPerfTracker (upval), TextChannelWindowAnalyticsModule (upval), getMessageStatus (upval)
+					if not p4.TextSource and not IsRBXSystem then return end
 					if GetFFlagExpChatUseChatMuteStoreModule() and p4.TextSource and IsTextSourceMutedModule(p4.TextSource) then return end
 					local MapTextChatMessageResult = TextChatServiceIntegrationModule.mapTextChatMessage(p4, p1)
 					

@@ -11,6 +11,7 @@ local _ = require(script.Parent.LeaderboardStoreTypes)
 local FilterNewPlayerListValueStat = game:DefineFastFlag("FilterNewPlayerListValueStat", false)
 local PlayerListHideUnusedStats = game:DefineFastFlag("PlayerListHideUnusedStats", false)
 local FFlagPlayerListFixLeaderstatsStacking = SharedFlagsModule.FFlagPlayerListFixLeaderstatsStacking
+local PlayerListSortByLowercaseUsername = game:DefineFastFlag("PlayerListSortByLowercaseUsername", false)
 local LeaderboardStore = {}
 LeaderboardStore.__index = LeaderboardStore
 
@@ -165,8 +166,9 @@ function LeaderboardStore:_sortPlayers(Team, p2)
 end
 
 function LeaderboardStore._compareStatsValue(p3, Entry)
+	-- upvalues: PlayerListSortByLowercaseUsername (copy)
 	return function(p4, p5)
-		-- upvalues: Entry (copy), p3 (copy)
+		-- upvalues: Entry (copy), p3 (copy), PlayerListSortByLowercaseUsername (upval)
 		local Entry1 = Entry[1]
 		
 		if Entry1 then
@@ -194,6 +196,8 @@ function LeaderboardStore._compareStatsValue(p3, Entry)
 			
 			if typeof(DataResult) == typeof(DataResult1) and DataResult ~= DataResult1 then
 				return p3:_compareRawStatsValue(DataResult, DataResult1)
+			elseif not PlayerListSortByLowercaseUsername then
+				return p4.key.Name < p5.key.Name
 			end
 		end
 		return p4.key.DisplayName:lower() < p5.key.DisplayName:lower()

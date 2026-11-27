@@ -80,9 +80,9 @@ function ErrorQueueModule:startTimer()
 	-- upvalues: RunService (copy)
 	if self._renderSteppedConnection == nil then
 		self._runningTime = if self._flushImmediately then self._queueTimeLimit else 0
-		self._renderSteppedConnection = RunService.RenderStepped:Connect(function(DeltaTime)
+		self._renderSteppedConnection = RunService.renderStepped:Connect(function(p1)
 			-- upvalues: self (copy)
-			self:_onRenderStep(DeltaTime)
+			self:_onRenderStep(p1)
 		end)
 	end
 end

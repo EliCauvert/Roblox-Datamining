@@ -1,7 +1,6 @@
 ﻿local BuildExperience = script:FindFirstAncestor("BuildExperience")
 local _ = require(BuildExperience.Parent.DataHydration.CreatorAgentChat)
 local _ = require(BuildExperience.Chat.chatTypes)
-local _ = require(BuildExperience.Telemetry.getCreatorCreditUsageImpressionParameters)
 
 return {
 	BUILD_HOME_SCREEN = "BuildHome",
@@ -20,8 +19,5 @@ return {
 	end,
 	getShouldDismissOnBack = function(p1): boolean
 		return p1.getParam("dismissOnBack") == true
-	end,
-	getUsageEntryContext = function(p1)
-		return (p1.getParam("entryContext"))
 	end
 }

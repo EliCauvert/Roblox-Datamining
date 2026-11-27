@@ -76,13 +76,11 @@ Amp.Upsell.Title.RequestSent,已傳送請求
 Authentication.AccountSwitch.Action.SwitchAccount,切換帳戶
 Authentication.AccountSwitch.Header.SwitchAccountSentenceCase,切換帳號
 Authentication.CrossDevice.Heading.QuickLogin,快速登入
-Authentication.Login.Action.Leave,離開
 Authentication.Login.Action.QuickSignIn,
 Authentication.Login.Action.Save,儲存
 Authentication.Login.Button.CloseAndSwitchPlatformAccount,離開 Roblox 以切換成 {platformAccountName} 帳號
 Authentication.Login.Button.UseDifferentRobloxAccount,使用其他 Roblox 帳號
 Authentication.Login.Button.XboxAccountSwitcher,切換 Xbox 帳號
-Authentication.Login.Description.LeaveAccountSetup,如果現在離開，你的 Roblox 帳號將無法設定。
 Authentication.Login.Error.PasskeyOnlyAccount,您的帳號只有一組密碼金鑰可用於登入。請嘗試使用密碼金鑰登入或恢復帳號。
 Authentication.Login.Error.PlatformAccountConnectionFailure,無法驗證平台帳號，請稍後再試。
 Authentication.Login.Heading.IncompatibleAccounts,帳號不相容
@@ -111,7 +109,7 @@ Authentication.SignUp.Action.Cancel,
 Authentication.SignUp.Action.ContinueSetup,繼續設定
 Authentication.SignUp.Action.Create,建立
 Authentication.SignUp.Action.CreateAccountSentenceCase,建立帳號
-Authentication.SignUp.Action.ExitModalLeave,
+Authentication.SignUp.Action.ExitModalLeave,離開
 Authentication.SignUp.Action.RespawnNow,立即重生
 Authentication.SignUp.Button.OKCaptialized,確定
 Authentication.SignUp.Button.RetryLogIn,重試登入
@@ -2125,11 +2123,8 @@ Feature.AvatarSwitcher.Message.UnknownSupport,你仍可切換虛擬人偶，但�
 Feature.AvatarSwitcher.Message.Unsupported,此體驗使用自訂虛擬人偶，不支援 Roblox 虛擬人偶。
 Feature.AvatarWorkshop.Action.EditAvatar,編輯虛擬人偶
 Feature.AvatarWorkshop.Action.TryAgain,再試一次
-Feature.AvatarWorkshop.Description.AddAvatar,要將此虛擬人偶新增至你的虛擬人偶嗎？
-Feature.AvatarWorkshop.Heading.AddAvatar,要新增虛擬人偶嗎？
 Feature.AvatarWorkshop.Heading.Customize,
 Feature.AvatarWorkshop.Heading.YourAvatars,你的虛擬人偶
-Feature.AvatarWorkshop.Label.DefaultAvatarName,
 Feature.AvatarWorkshop.Message.LoadItemsError,載入物品時發生錯誤。
 Feature.AvatarWorkshop.Message.LoadMoreItemsError,無法載入更多物品。
 Feature.AvatarWorkshop.Message.NoItemsOwned,你在此處還沒有任何物品。
@@ -2402,8 +2397,6 @@ Feature.Build.Label.AdvancedModel,
 Feature.Build.Label.All,
 Feature.Build.Label.AllGames,所有遊戲
 Feature.Build.Label.AmountAvailable,尚有 {AMOUNT} 次可使用
-Feature.Build.Label.AttachmentCountPlural,{count} 個附件
-Feature.Build.Label.AttachmentCountSingular,1 個附件
 Feature.Build.Label.Autosaved,已自動儲存
 Feature.Build.Label.Available,可供使用
 Feature.Build.Label.AvailableForPurchase,開放購買
@@ -2423,7 +2416,6 @@ Feature.Build.Label.DefaultDeveloperProductName,開發者產品
 Feature.Build.Label.DefaultModel,
 Feature.Build.Label.Deleted,已刪除
 Feature.Build.Label.DescribeIdea,描述想法
-Feature.Build.Label.DescribeIdeaOrPick,描述想法或從下方選擇一個
 Feature.Build.Label.Description,
 Feature.Build.Label.DeveloperProductDescription,說明：{DESCRIPTION}
 Feature.Build.Label.DeveloperProductName,名稱：{NAME}
@@ -3311,7 +3303,6 @@ Feature.Chat.Label.SearchFriends,搜尋好友
 Feature.Chat.Label.SearchWord,
 Feature.Chat.Label.SelectToRemove,選擇以移除
 Feature.Chat.Label.SnoozePartyNotifications,將體驗內的隊伍通知靜音：
-Feature.Chat.Label.StartChatting,開始聊天
 Feature.Chat.Label.SwipeToReplyTooltip,滑動以回覆
 Feature.Chat.Label.TapToRemove,輕觸即可移除
 Feature.Chat.Label.TimestampDaysAbbreviatedPlural,{num_days} 天
@@ -3578,7 +3569,6 @@ Feature.Friends.Button.GotIt,
 Feature.Friends.Description.ContactsModal,您有在 Roblox 的聯絡人！和他成為好友後，您就可以看到他的完整虛擬人偶和個人檔案。前往新增好友頁面尋找更多可能認識的人。
 Feature.Friends.Description.DoMoreWithTrustedConnections,透過「信任的聯絡對象」功能，在 Roblox 享受更多樂趣！請確保新增對象是你認識且信任的人員。
 Feature.Friends.Description.DoMoreWithTrustedFriends,與信任的聯絡對象一起在 Roblox 享受更多樂趣！請確保新增對象是你認識且信任的人員。
-Feature.Friends.Description.FoundFromContactImporter,已從聯絡人匯入工具寄出
 Feature.Friends.Description.FromContacts,從通訊錄
 Feature.Friends.Description.FromContactsV2,通訊錄名稱：{contactName}
 Feature.Friends.Description.FromQrCode,來自 QR 碼
@@ -3632,7 +3622,7 @@ Feature.Friends.Label.FollowsYou,正在追蹤您
 Feature.Friends.Label.Frequent,密切玩伴
 Feature.Friends.Label.Friend,
 Feature.Friends.Label.FriendInvite,已邀請您成為 Roblox 好友
-Feature.Friends.Label.FriendOfUser,為你推薦
+Feature.Friends.Label.FriendOfUser,{displayName} 的好友
 Feature.Friends.Label.FriendOwns,1 位好友擁有
 Feature.Friends.Label.FriendRecentlyPlayed,<b>1 位好友</b>最近玩過
 Feature.Friends.Label.FriendRequest,
@@ -3669,7 +3659,6 @@ Feature.Friends.Label.SentFromWithContext,來自 {gameName}
 Feature.Friends.Label.SingularMutualFriend,位共同好友
 Feature.Friends.Label.Suggested,建議給您
 Feature.Friends.Label.Unfollowed,已取消追蹤
-Feature.Friends.Label.YouAreFollowing,您在追蹤
 Feature.Friends.Label.YourLinkedParent,已連結的家長
 Feature.Friends.LinkText.LearnMore,
 Feature.Friends.Message.DiscoverableSettings,您想被推薦給其他擁有您的手機號碼的 Roblox 使用者嗎？
@@ -3714,7 +3703,6 @@ Feature.FriendsActivityFeed.Label.ViewRecentActivity,檢視近期活動
 Feature.FriendsMenu.Label.SelectedFriendsCount,已選取 {numerator}/{denominator} 名好友
 Feature.FriendsMenu.Label.SelectedFriendsCountNoLimit,已選取 {selectedCount} 名好友
 Feature.GameBadges.Label.Experience,
-Feature.GameDetails.Action.Continue,
 Feature.GameDetails.Action.GameDetails,
 Feature.GameDetails.Action.GiveFeedback,
 Feature.GameDetails.Action.NotInterested,沒有興趣
@@ -3746,12 +3734,9 @@ Feature.GameDetails.Label.WhyThisAd,為何會顯示這則廣告？
 Feature.GameDetails.Label.Yes,
 Feature.GameDetails.Message.AdPreferences,廣告偏好
 Feature.GameDetails.Message.AnonymousFeedbackTermsOfUse,系統會以匿名方式分享回應，並根據 {underlineStart}Roblox 使用條款{underlineEnd}將回應視為回饋。
-Feature.GameDetails.Message.ExternalLinkWarning,按一下「繼續」後，系統會將你重新導向至非 Roblox 擁有或經營的網站。該網站可能有不同的條款與隱私權政策。
 Feature.GameDetails.Message.HelpImproveExperience,請協助我們改善體驗
 Feature.GameDetails.Message.HidingExperienceQuestion,請問你隱藏此體驗的原因為何？
-Feature.GameDetails.Message.LeavingRobloxTitle,您即將離開 Roblox
 Feature.GameDetails.Message.PurchaseGameV2,要以 {X} Robux 解鎖 {gameName} 嗎？
-Feature.GameDetails.Message.RobloxWebsiteSignedInWarning,按一下「繼續」之後，roblox.com 會在網頁瀏覽器中開啟，且你將會登入自身的 Roblox 帳號。
 Feature.GameDetails.Message.SponsoredDisclosure.Error,由於暫時發生錯誤，無法顯示贊助資訊。
 Feature.GameDetails.Message.SponsoredDisclosure.O18NonPersonalizedNoLink,目前看到的這項贊助內容，是根據非個人化因素（例如裝置資訊、地點與年齡）所顯示的相關內容。此體驗的創作者為 {CreatorName}，贊助費用由 {PayerName} 支付。如需瞭解詳情，請前往帳號中「設定」下的「隱私與成年適宜內容」頁面：
 Feature.GameDetails.Message.SponsoredDisclosure.O18PersonalizedNoLink,目前看到的這項贊助內容，是根據地點、裝置資訊、年齡與平台行為等各種因素，所顯示的相關內容。此體驗的創作者是 {CreatorName}，贊助費用由 {PayerName} 支付。如需瞭解詳情，請前往帳號中「設定」下的「隱私與成年適宜內容」頁面：
@@ -3770,12 +3755,9 @@ Feature.GameFollows.TooltipTurnedOnNotifications,{experienceName} 的通知已�
 Feature.GameJoin.Description.DifferentServer,你將在不同的伺服器上開始遊戲
 Feature.GameJoin.Label.PlayTogether,你們可以一起玩
 Feature.GameJoin.Label.PlayTogetherSoon,你們很快就可以一起玩了
-Feature.GameJoin.Label.Played,已玩過
-Feature.GameJoin.Label.RecentCoplay,你們最近一起玩過
 Feature.GamePage.Action.BackToTop,回到頂端
 Feature.GamePage.Label.Ad,
 Feature.GamePage.Label.Sponsored,
-Feature.GamePage.LabelCancelField,
 Feature.GamePage.QuickLaunch.LaunchError.ContextualPlayabilityUnverifiedSeventeenPlusUser,您的年齡驗證狀態無法參訪此體驗。
 Feature.GamePage.QuickLaunch.LaunchError.GuestProhibited,訪客無法加入此體驗。
 Feature.GamePage.QuickLaunch.LaunchError.PurchaseRequired,必須購買此體驗的參訪權。
@@ -4006,7 +3988,6 @@ Feature.Moments.Action.Hide,隱藏詳細資訊
 Feature.Moments.Action.HowToCapture,檢視擷取方式
 Feature.Moments.Action.KeepEditing,繼續編輯
 Feature.Moments.Action.Leave,
-Feature.Moments.Action.LoadMore,
 Feature.Moments.Action.Minimize,最小化
 Feature.Moments.Action.Ok,
 Feature.Moments.Action.Play,
@@ -4309,7 +4290,7 @@ Feature.PlayerSearchResults.Label.NewUsername,新使用者名稱
 Feature.PlayerSearchResults.Label.Previously,之前為
 Feature.PlayerSearchResults.Label.ThisIsYou,這是您
 Feature.PlayerSearchResults.Label.You,您自己
-Feature.PlayerSearchResults.Label.YouAreFollowing,
+Feature.PlayerSearchResults.Label.YouAreFollowing,您在追蹤
 Feature.PlayerSearchResults.Label.YouAreFriends,您們是好友
 Feature.PrivateServers.Action.CreatePrivateServer,建立私人伺服器
 Feature.PrivateServers.Action.FreeWithBlackbird,透過 Plus 免費使用
@@ -5034,6 +5015,7 @@ Feature.UniversalShareSheet.Response.SharedCustomMessage,{CUSTOM_MESSAGE} 和另
 Feature.UniversalShareSheet.Response.SharedMessage,訊息已傳送
 Feature.UniversalShareSheet.Response.SharedMultipleMessages,
 Feature.UniversalShareSheet.SharedCustomMultipleMessages,{CUSTOM_MESSAGE} 和另外 {N} 人
+Feature.UserLibrary.Label.MyLibrary,我的收藏庫
 Feature.VIPServer.Message.TooManyFreeServersOnGame,無法在此遊戲擁有更多免費私人伺服器。
 Feature.VIPServer.Message.TooManyTotalActiveFreeServers,無法啟用更多免費私人伺服器，請先停用其他伺服器。
 Feature.VerificationUpsell.Action.AddPhone,新增手機號碼
@@ -5205,7 +5187,7 @@ IAPExperience.InsufficientRobux.Title.InsufficientRobux,
 IAPExperience.LeaveRoblox.Action.Cancel,
 IAPExperience.LeaveRoblox.Action.Continue,
 IAPExperience.LeaveRoblox.Text.ExternalWebsiteWarning,按下「繼續」後，系統會將你導向 Roblox 以外的網站，該網站的條款與隱私權政策可能與 Roblox 不同。
-IAPExperience.LeaveRoblox.Title.LeavingRoblox,
+IAPExperience.LeaveRoblox.Title.LeavingRoblox,您即將離開 Roblox
 IAPExperience.Loading.Text.PurchasingItem,正在購買道具……
 IAPExperience.Loading.Text.PurchasingRobux,正在購買 Robux ……
 IAPExperience.Loading.Text.WaitingForPurchase,正在等待購買……

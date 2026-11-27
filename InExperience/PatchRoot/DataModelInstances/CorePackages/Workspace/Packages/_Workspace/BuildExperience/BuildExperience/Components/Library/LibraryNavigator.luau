@@ -30,8 +30,7 @@ local function CategoryScreen(p1)
 		onOpenItem = ScreenProps.onOpenItem,
 		onOpenCategory = ScreenProps.onOpenCategory,
 		library = ScreenProps.library,
-		isReady = ScreenProps.isReady,
-		isOpen = ScreenProps.isOpen
+		isReady = ScreenProps.isReady
 	})
 end
 
@@ -48,7 +47,6 @@ return RoactNavigationModule.createAppContainer(RoactNavigationModule.createRobl
 					onOpenCategory = ScreenProps.onOpenCategory,
 					library = ScreenProps.library,
 					isReady = ScreenProps.isReady,
-					isOpen = ScreenProps.isOpen,
 					worldCutout = ScreenProps.worldCutout
 				})
 			end

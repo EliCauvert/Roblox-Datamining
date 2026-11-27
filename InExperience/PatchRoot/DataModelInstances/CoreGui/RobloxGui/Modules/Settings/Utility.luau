@@ -16,6 +16,7 @@ local VRService = game:GetService("VRService")
 local Workspace = game:GetService("Workspace")
 local CorePackages = game:GetService("CorePackages")
 local UserGameSettings = UserSettings():GetService("UserGameSettings")
+local FFlagRefactorMenuConfirmationButtonsModule = require(RobloxGui.Modules.Settings.Flags.FFlagRefactorMenuConfirmationButtons)
 local RepositionDropDownScrim = game:DefineFastFlag("RepositionDropDownScrim", false)
 local FFlagEnablePioneerIGMAccountSectionModule = require(RobloxGui.Modules.Settings.Flags.FFlagEnablePioneerIGMAccountSection)
 local FFlagAddFromUserToIndexChangedModule = require(RobloxGui.Modules.Settings.Flags.FFlagAddFromUserToIndexChanged)
@@ -1085,18 +1086,18 @@ local function CreateSelector(p7, CurrentIndex)
 	})
 	
 	if UserInputService.PreferredInput ~= Enum.PreferredInput.Touch then
-		local function v176(Image)
+		local function v177(Image)
 			-- upvalues: ARROWCOLOR (upval)
 			Image.ImageColor3 = ARROWCOLOR
 		end
 		
-		local function v177(Image)
+		local function v178(Image)
 			-- upvalues: ARROWCOLORHOVER (upval)
 			Image.ImageColor3 = ARROWCOLORHOVER
 		end
 		
-		addHoverState(Parent, Image, v176, v177)
-		addHoverState(Parent1, Image1, v176, v177)
+		addHoverState(Parent, Image, v177, v178)
+		addHoverState(Parent1, Image1, v177, v178)
 	end
 	config.Selections = {}
 	local t1 = {}
@@ -1805,18 +1806,18 @@ local function CreateNewSlider(p9, CurrentStep, MinStep, Text, Text1)
 	})
 	
 	if UserInputService.PreferredInput ~= Enum.PreferredInput.Touch then
-		local function v242(Image)
+		local function v243(Image)
 			-- upvalues: ARROWCOLOR (upval)
 			Image.ImageColor3 = ARROWCOLOR
 		end
 		
-		local function v243(Image)
+		local function v244(Image)
 			-- upvalues: ARROWCOLORHOVER (upval)
 			Image.ImageColor3 = ARROWCOLORHOVER
 		end
 		
-		addHoverState(Parent1, v6, v242, v243)
-		addHoverState(Parent2, v7, v242, v243)
+		addHoverState(Parent1, v6, v243, v244)
+		addHoverState(Parent2, v7, v243, v244)
 	end
 	t.Steps = {}
 	local XScale = 1 / Number
@@ -2293,7 +2294,7 @@ local function CreateNewSlider(p9, CurrentStep, MinStep, Text, Text1)
 		end
 	end)
 	
-	local function v254()
+	local function v255()
 		-- upvalues: CurrentTime (ref), setCurrentStep (copy), CurrentStep1 (ref), v4 (ref)
 		if CurrentTime == nil then return end
 		if tick() - CurrentTime >= 0.2 then
@@ -2391,7 +2392,7 @@ local function CreateNewSlider(p9, CurrentStep, MinStep, Text, Text1)
 	end)
 	local Flag1 = false
 	GuiService.Changed:Connect(function(p13)
-		-- upvalues: GuiService (upval), t (copy), Flag1 (ref), CurrentTime (ref), RunService (upval), Guid (copy), v254 (copy)
+		-- upvalues: GuiService (upval), t (copy), Flag1 (ref), CurrentTime (ref), RunService (upval), Guid (copy), v255 (copy)
 		if p13 ~= "SelectedCoreObject" then return end
 		local SelectedCoreObject = GuiService.SelectedCoreObject
 		
@@ -2399,7 +2400,7 @@ local function CreateNewSlider(p9, CurrentStep, MinStep, Text, Text1)
 			if not Flag1 then
 				Flag1 = true
 				CurrentTime = tick()
-				RunService:BindToRenderStep(Guid, Enum.RenderPriority.Input.Value + 1, v254)
+				RunService:BindToRenderStep(Guid, Enum.RenderPriority.Input.Value + 1, v255)
 				
 				return
 			end
@@ -3042,11 +3043,6 @@ local function AddNewRowObject(Key, Text, Gui, Amount, p13, Text1)
 	return Image
 end
 
-local _ = function()
-	-- upvalues: config (copy), UserInputService (copy)
-	return config[UserInputService:GetLastInputType()] or false
-end
-
 local UtilityModule = {
 	GetEaseLinear = function(_)
 		-- upvalues: Linear (copy)
@@ -3095,43 +3091,58 @@ local UtilityModule = {
 		local _Vector2 = if _G.__TESTEZ_RUNNING_TEST__ then Vector2.new(1024, 1024) else GuiService:GetHardwareSafeViewport()
 		
 		return _Vector2.X < _Vector2.Y
-	end,
-	IsUsingGamepad = function(_)
-		-- upvalues: config (copy), UserInputService (copy)
-		return config[UserInputService:GetLastInputType()] or false
-	end,
-	MakeStyledButton = function(_, p13, p14, p15, p16, p17, p18)
-		-- upvalues: MakeButton (copy)
-		return MakeButton(p13, p14, p15, p16, p17, p18)
-	end,
-	MakeStyledImageButton = function(_, p13, Image, p14, Size, p15, p16, p17, p18)
-		-- upvalues: MakeImageButton (copy)
-		return MakeImageButton(p13, Image, p14, Size, p15, p16, p17, p18)
-	end,
-	AddButtonRow = function(_, p13, p14, p15, p16, p17, p18)
-		-- upvalues: AddButtonRow (copy)
-		return AddButtonRow(p13, p14, p15, p16, p17, p18)
-	end,
-	MakeFocusState = function(_, p13, ActionName)
-		-- upvalues: MakeRoundedRectFocusState (copy)
-		return MakeRoundedRectFocusState(p13, ActionName)
-	end,
-	CreateSignal = function(_)
-		-- upvalues: CreateSignal (copy)
-		return (CreateSignal())
-	end,
-	UsesSelectedObject = function(_)
-		-- upvalues: VRService (copy), UserInputService (copy)
-		return not VRService.VREnabled and (UserInputService.PreferredInput ~= Enum.PreferredInput.Touch or UserInputService.GamepadEnabled)
-	end,
-	TweenProperty = function(_, p13, p14, p15, p16, p17, p18, p19)
-		return PropertyTweener(p13, p14, p15, p16, p17, p18, p19)
-	end,
-	OnResized = function(_, p13, p14)
-		-- upvalues: addOnResizedCallback (copy)
-		return addOnResizedCallback(p13, p14)
 	end
 }
+
+if FFlagRefactorMenuConfirmationButtonsModule then
+	local _ = function()
+		-- upvalues: config (copy), UserInputService (copy)
+		return config[UserInputService:GetLastInputType()] or false
+	end
+	
+	function UtilityModule:IsUsingGamepad()
+		-- upvalues: config (copy), UserInputService (copy)
+		return config[UserInputService:GetLastInputType()] or false
+	end
+end
+function UtilityModule:MakeStyledButton(p13, p14, p15, p16, p17, p18)
+	-- upvalues: MakeButton (copy)
+	return MakeButton(p13, p14, p15, p16, p17, p18)
+end
+
+function UtilityModule:MakeStyledImageButton(p13, Image, p14, Size, p15, p16, p17, p18)
+	-- upvalues: MakeImageButton (copy)
+	return MakeImageButton(p13, Image, p14, Size, p15, p16, p17, p18)
+end
+
+function UtilityModule:AddButtonRow(p13, p14, p15, p16, p17, p18)
+	-- upvalues: AddButtonRow (copy)
+	return AddButtonRow(p13, p14, p15, p16, p17, p18)
+end
+
+function UtilityModule:MakeFocusState(p13, ActionName)
+	-- upvalues: MakeRoundedRectFocusState (copy)
+	return MakeRoundedRectFocusState(p13, ActionName)
+end
+
+function UtilityModule:CreateSignal()
+	-- upvalues: CreateSignal (copy)
+	return (CreateSignal())
+end
+
+function UtilityModule:UsesSelectedObject()
+	-- upvalues: VRService (copy), UserInputService (copy)
+	return not VRService.VREnabled and (UserInputService.PreferredInput ~= Enum.PreferredInput.Touch or UserInputService.GamepadEnabled)
+end
+
+function UtilityModule:TweenProperty(p13, p14, p15, p16, p17, p18, p19)
+	return PropertyTweener(p13, p14, p15, p16, p17, p18, p19)
+end
+
+function UtilityModule:OnResized(p13, p14)
+	-- upvalues: addOnResizedCallback (copy)
+	return addOnResizedCallback(p13, p14)
+end
 
 function UtilityModule:FireOnResized()
 	-- upvalues: GuiService (copy), UtilityModule (copy), t (copy)

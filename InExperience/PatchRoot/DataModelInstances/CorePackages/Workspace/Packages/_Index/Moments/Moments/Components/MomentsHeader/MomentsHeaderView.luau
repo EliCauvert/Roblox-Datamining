@@ -1,6 +1,5 @@
 ﻿local Moments = script:FindFirstAncestor("Moments")
 local Parent = Moments.Parent
-local FFlagMomentsSearchInterfaceModule = require(Moments.Flags.FFlagMomentsSearchInterface)
 local BuilderIconsModule = require(Parent.BuilderIcons)
 local FoundationModule = require(Parent.Foundation)
 local ReactModule = require(Parent.React)
@@ -78,7 +77,7 @@ local function renderCreateAction(p1, LayoutOrder)
 end
 
 return function(p1)
-	-- upvalues: renderAction (copy), ChevronLargeLeft (copy), FFlagMomentsCreateAvatarPosts (copy), renderCreateAction (copy), PlusLarge (copy), ReactModule (copy), IconButton (copy), ButtonVariant (copy), InputSize (copy), NavigationMenuModule (copy), View (copy), renderFeedTypeChips (copy), FlyoutSidePanelIXP (copy), FlyoutLeftHeader (copy), Text (copy), FFlagMomentsSearchInterfaceModule (copy), BuilderIconsModule (copy), FoundationModule (copy), FFlagMomentsFtuxTooltipCreateCopyModule (copy), Coachmark (copy), CirclePerson (copy), HeaderBar (copy), GradientBackdrop (copy), FFlagMomentsFixFeedForDeviceSafeInsetsModule (copy), ShouldUseDeviceSafeInsets (copy), ConstantsModule (copy)
+	-- upvalues: renderAction (copy), ChevronLargeLeft (copy), FFlagMomentsCreateAvatarPosts (copy), renderCreateAction (copy), PlusLarge (copy), ReactModule (copy), IconButton (copy), ButtonVariant (copy), InputSize (copy), NavigationMenuModule (copy), View (copy), renderFeedTypeChips (copy), FlyoutSidePanelIXP (copy), FlyoutLeftHeader (copy), Text (copy), FoundationModule (copy), FFlagMomentsFtuxTooltipCreateCopyModule (copy), Coachmark (copy), CirclePerson (copy), HeaderBar (copy), GradientBackdrop (copy), FFlagMomentsFixFeedForDeviceSafeInsetsModule (copy), ShouldUseDeviceSafeInsets (copy), ConstantsModule (copy)
 	local RenderLeft: (() -> any)? = nil
 	local RenderRight: (() -> any)? = nil
 	local FeedTypeChips = nil
@@ -154,19 +153,8 @@ return function(p1)
 			})
 		end
 		
-		local Element = if FFlagMomentsSearchInterfaceModule and p1.onSearch ~= nil then ReactModule.createElement(IconButton, {
-			LayoutOrder = 0,
-			isCircular = true,
-			Selectable = true,
-			testId = "--moments-header--actions--search",
-			icon = BuilderIconsModule.Icon.MagnifyingGlass,
-			onActivated = p1.onSearch,
-			variant = ButtonVariant.Utility,
-			size = InputSize.Medium
-		}) else nil
-		
 		if p1.showInteractiveButtons then
-			local Element1 = nil
+			local Element = nil
 			
 			if p1.showCreateButton then
 				local RenderCreateActionResult = if FFlagMomentsCreateAvatarPosts then renderCreateAction(p1, 1) else ReactModule.createElement(IconButton, {
@@ -179,7 +167,7 @@ return function(p1)
 					variant = ButtonVariant.Utility,
 					size = InputSize.Medium
 				})
-				Element1 = if FFlagMomentsCreateAvatarPosts or p1.showFtuxTooltip then ReactModule.createElement(Coachmark, {
+				Element = if FFlagMomentsCreateAvatarPosts or p1.showFtuxTooltip then ReactModule.createElement(Coachmark, {
 					LayoutOrder = 1,
 					isOpen = p1.showFtuxTooltip,
 					onClose = p1.onFtuxTooltipClosed,
@@ -190,10 +178,9 @@ return function(p1)
 				}, RenderCreateActionResult) else ReactModule.createElement(View, { LayoutOrder = 1, tag = "auto-xy" }, { Action = RenderCreateActionResult })
 			end
 			RenderRight = function()
-				-- upvalues: ReactModule (upval), View (upval), Element (copy), Element1 (ref), p1 (copy), CirclePerson (upval), IconButton (upval), ButtonVariant (upval), InputSize (upval), NavigationMenuModule (upval)
+				-- upvalues: ReactModule (upval), View (upval), Element (ref), p1 (copy), CirclePerson (upval), IconButton (upval), ButtonVariant (upval), InputSize (upval), NavigationMenuModule (upval)
 				return ReactModule.createElement(View, { tag = "row align-y-center gap-xsmall auto-xy" }, {
-					SearchButton = Element,
-					CreateMomentButton = Element1,
+					CreateMomentButton = Element,
 					MyMomentsButton = if p1.showMyMomentsButton then ReactModule.createElement(IconButton, {
 						LayoutOrder = 2,
 						isCircular = true,
@@ -212,11 +199,6 @@ return function(p1)
 						onNavigateToMyMoments = p1.onNavigateToMyMoments
 					})
 				})
-			end
-		elseif Element ~= nil then
-			RenderRight = function()
-				-- upvalues: Element (copy)
-				return Element
 			end
 		end
 	elseif p1.variant == "close" then

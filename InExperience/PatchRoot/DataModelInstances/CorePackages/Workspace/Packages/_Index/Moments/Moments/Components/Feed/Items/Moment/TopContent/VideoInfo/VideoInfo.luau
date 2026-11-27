@@ -8,8 +8,6 @@ local SignalsReactModule = require(Parent.SignalsReact)
 local MomentContextModule = require(script.Parent.Parent.Parent.MomentContext)
 local FFlagMomentsServeEDPVideos = require(Parent.SharedFlags).FFlagMomentsServeEDPVideos
 local FFlagMomentsRenderAvatarPostsInFeed = require(Parent.SharedFlags).FFlagMomentsRenderAvatarPostsInFeed
-local FFlagMomentsReactionCountOpensPostInsightsModule = require(Moments.Flags.FFlagMomentsReactionCountOpensPostInsights)
-local FFlagMomentsReactionCountAnalyticsModule = require(Moments.Flags.FFlagMomentsReactionCountAnalytics)
 local CreatorAttributionModule = require(script.Parent.CreatorAttribution)
 local DebugInfoModule = require(script.Parent.DebugInfo)
 local DescriptionModule = require(script.Parent.Description)
@@ -21,7 +19,7 @@ local GetMomentsCapabilitiesFunction = MomentsCommonModule.Stores.GetMomentsCapa
 local UseSignalStateFunction = SignalsReactModule.useSignalState
 
 return ReactModule.memo(function(Frame)
-	-- upvalues: MomentContextModule (copy), UseSignalStateFunction (copy), FFlagMomentsRenderAvatarPostsInFeed (copy), FFlagMomentsServeEDPVideos (copy), GetMomentsCapabilitiesFunction (copy), UseMomentsSessionFunction (copy), ReactModule (copy), DebugInfoModule (copy), CreatorAttributionModule (copy), DescriptionModule (copy), ReactionsModule (copy), FFlagMomentsReactionCountOpensPostInsightsModule (copy), FFlagMomentsReactionCountAnalyticsModule (copy), StatusChipModule (copy), View (copy)
+	-- upvalues: MomentContextModule (copy), UseSignalStateFunction (copy), FFlagMomentsRenderAvatarPostsInFeed (copy), FFlagMomentsServeEDPVideos (copy), GetMomentsCapabilitiesFunction (copy), UseMomentsSessionFunction (copy), ReactModule (copy), DebugInfoModule (copy), CreatorAttributionModule (copy), DescriptionModule (copy), ReactionsModule (copy), StatusChipModule (copy), View (copy)
 	local Kind = UseSignalStateFunction(MomentContextModule.useMoment().store.getData).kind
 	local IsExperience: boolean = Kind == "experience" or FFlagMomentsRenderAvatarPostsInFeed and Kind == "avatar"
 	local IsEdpVideo = if FFlagMomentsServeEDPVideos then Frame.moment ~= nil and Frame.moment.entityType == "edpVideo" else nil
@@ -32,10 +30,7 @@ return ReactModule.memo(function(Frame)
 		t.DebugInfo = ReactModule.createElement(DebugInfoModule, { LayoutOrder = 0 })
 		t.CreatorAttribution = if IsExperience and (not FFlagMomentsServeEDPVideos or not IsEdpVideo) then ReactModule.createElement(CreatorAttributionModule, { LayoutOrder = 1 }) else nil
 		t.Description = ReactModule.createElement(DescriptionModule, { LayoutOrder = 2 })
-		t.Reactions = if IsExperience and UseSignalStateResult then ReactModule.createElement(ReactionsModule, {
-			LayoutOrder = 3,
-			moment = if FFlagMomentsReactionCountOpensPostInsightsModule or FFlagMomentsReactionCountAnalyticsModule then Frame.moment else nil
-		}) else nil
+		t.Reactions = if IsExperience and UseSignalStateResult then ReactModule.createElement(ReactionsModule, { LayoutOrder = 3 }) else nil
 		t.StatusChip = ReactModule.createElement(StatusChipModule, { LayoutOrder = 4 })
 	end
 	return ReactModule.createElement(View, {

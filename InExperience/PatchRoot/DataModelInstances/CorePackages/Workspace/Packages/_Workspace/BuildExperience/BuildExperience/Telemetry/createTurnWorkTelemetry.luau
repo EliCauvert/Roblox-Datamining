@@ -1,7 +1,6 @@
 ﻿local BuildExperience = script:FindFirstAncestor("BuildExperience")
 local CreateAppVisibilityTrackerModule = require(BuildExperience.Telemetry.createAppVisibilityTracker)
 local SendBuildExperienceEventModule = require(BuildExperience.Telemetry.sendBuildExperienceEvent)
-local SummarizeStepsModule = require(BuildExperience.Telemetry.summarizeSteps)
 
 local function _()
 	local Success, Result = pcall(function()
@@ -22,7 +21,7 @@ local function getWallClockSeconds()
 end
 
 return function(Callback, p1)
-	-- upvalues: getWallClockSeconds (copy), v1 (ref), CreateAppVisibilityTrackerModule (copy), getIsNeverHidden (copy), SummarizeStepsModule (copy), SendBuildExperienceEventModule (copy)
+	-- upvalues: getWallClockSeconds (copy), v1 (ref), CreateAppVisibilityTrackerModule (copy), getIsNeverHidden (copy), SendBuildExperienceEventModule (copy)
 	local P0 = p1 or {}
 	local Now = P0.now or getWallClockSeconds
 	local AppLifecycleObserverService = nil
@@ -51,296 +50,160 @@ return function(Callback, p1)
 	end
 	local v2 = nil
 	local Flag = false
-	local IsNotLeft = false
+	local v3 = nil
+	local NewLargest = 0
 	local Count = 0
 	local Count1 = 0
 	local Count2 = 0
-	local t = {}
-	local CombineStatsResult = SummarizeStepsModule.combineStats({})
-	local t1 = {}
-	local Count3 = 0
-	local HeaderExpanded = false
-	local NewLargest = 0
-	local v3 = nil
+	local Amounts = {}
 	local v4 = 0
-	local Count4 = 0
-	local Tbl = {}
+	local HeaderExpanded = false
+	local List = {}
+	
+	local function closeBackground()
+		-- upvalues: v3 (ref), NewLargest (ref), Now (copy)
+		if v3 ~= nil then
+			NewLargest += math.max(0, Now() - v3)
+			v3 = nil
+		end
+	end
 	
 	local function _(): number
-		-- upvalues: v3 (ref), NewLargest (ref), Now (copy)
-		local v5 = v3
+		-- upvalues: Amounts (copy)
+		local Total = 0
 		
-		return NewLargest + (if v5 == nil then 0 else math.max(0, Now() - v5))
-	end
-	
-	local function watchVisibility()
-		-- upvalues: Count4 (ref), IsAppHiddenFunction (ref), v3 (ref), Now (copy), AppLifecycleObserverService (copy), Tbl (copy), v2 (ref), Flag (ref), Count (ref), NewLargest (ref)
-		Count4 += 1
-		
-		if Count4 > 1 then return end
-		if IsAppHiddenFunction() then
-			v3 = Now()
+		for _, amount in Amounts do
+			Total += amount
 		end
-		if AppLifecycleObserverService ~= nil then
-			table.insert(Tbl, AppLifecycleObserverService.OnHide:Connect(function()
-				-- upvalues: v3 (upval), Now (upval), v2 (upval), Flag (upval), Count (upval)
-				if v3 == nil then
-					v3 = Now()
-					
-					if v2 ~= nil and not Flag then
-						Count += 1
-					end
-				end
-			end))
-			table.insert(Tbl, AppLifecycleObserverService.OnUnhide:Connect(function()
-				-- upvalues: v3 (upval), NewLargest (upval), Now (upval)
-				local v5 = v3
-				
-				if v5 ~= nil then
-					NewLargest += math.max(0, Now() - v5)
-					v3 = nil
-				end
-			end))
-		end
-	end
-	
-	local _ = function()
-		-- upvalues: Count4 (ref), Tbl (copy), NewLargest (ref), v3 (ref)
-		Count4 -= 1
-		
-		if Count4 > 0 then return end
-		for _, Connection in Tbl do
-			Connection:Disconnect()
-		end
-		table.clear(Tbl)
-		NewLargest = 0
-		v3 = nil
-	end
-	
-	local function getCurrentStats()
-		-- upvalues: t (copy), SummarizeStepsModule (upval)
-		local List = {}
-		
-		for _, value in t do
-			table.insert(List, value)
-		end
-		return SummarizeStepsModule.combineStats(List)
-	end
-	
-	local _ = function()
-		-- upvalues: t (copy), CombineStatsResult (ref), getCurrentStats (copy)
-		return if next(t) == nil then CombineStatsResult else getCurrentStats()
+		return Total
 	end
 	
 	local _ = function(): boolean
-		-- upvalues: v2 (ref), IsNotLeft (ref)
-		return v2 ~= nil and not IsNotLeft
-	end
-	
-	local _ = function(Key, Identity)
-		-- upvalues: t1 (copy), watchVisibility (copy), Now (copy), v3 (ref), NewLargest (ref)
-		if t1[Key] == nil then
-			watchVisibility()
-			local v5 = v3
-			t1[Key] = {
-				openedAt = Now(),
-				hiddenSecondsAtOpen = NewLargest + (if v5 == nil then 0 else math.max(0, Now() - v5)),
-				identity = Identity
-			}
-			
-			return
-		end
-	end
-	
-	local function closeSpan(StepName)
-		-- upvalues: t1 (copy), Now (copy), v3 (ref), NewLargest (ref), Count4 (ref), Tbl (copy), v2 (ref), IsNotLeft (ref), SendBuildExperienceEventModule (upval), Callback (copy)
-		local Entry = t1[StepName]
-		
-		if Entry == nil then return end
-		local v5 = v3
-		local NowResultDelta = Now() - Entry.openedAt - (NewLargest + (if v5 == nil then 0 else math.max(0, Now() - v5)) - Entry.hiddenSecondsAtOpen)
-		t1[StepName] = nil
-		Count4 -= 1
-		
-		if Count4 <= 0 then
-			for _, Connection in Tbl do
-				Connection:Disconnect()
-			end
-			table.clear(Tbl)
-			NewLargest = 0
-			v3 = nil
-		end
-		local Copy = table.clone(Entry.identity)
-		Copy.openMs = tostring((math.round(math.clamp(NowResultDelta, 0, 1800) * 1000)))
-		Copy.whileRunning = tostring(v2 ~= nil and not IsNotLeft)
-		SendBuildExperienceEventModule("TURN_WORK_OPEN_TIME", Callback(), Copy)
+		-- upvalues: v2 (ref), Flag (ref)
+		return v2 ~= nil and not Flag
 	end
 	
 	return {
 		start = function()
-			-- upvalues: v2 (ref), Flag (ref), Now (copy), watchVisibility (copy), v4 (ref), v3 (ref), NewLargest (ref), Count (ref)
+			-- upvalues: v2 (ref), Flag (ref), Now (copy), IsAppHiddenFunction (ref), v3 (ref), Count (ref), AppLifecycleObserverService (copy), List (copy), closeBackground (copy)
 			if v2 ~= nil or Flag then return end
 			v2 = Now()
-			watchVisibility()
-			local v6 = v3
-			v4 = NewLargest + (if v6 == nil then 0 else math.max(0, Now() - v6))
 			
-			if v3 ~= nil then
+			if IsAppHiddenFunction() then
+				v3 = v2
 				Count += 1
+			end
+			if AppLifecycleObserverService ~= nil then
+				table.insert(List, AppLifecycleObserverService.OnHide:Connect(function()
+					-- upvalues: v3 (upval), Now (upval), Count (upval)
+					if v3 == nil then
+						v3 = Now()
+						Count += 1
+					end
+				end))
+				table.insert(List, AppLifecycleObserverService.OnUnhide:Connect(closeBackground))
 			end
 		end,
 		finish = function(p2)
-			-- upvalues: v2 (ref), Flag (ref), v3 (ref), NewLargest (ref), Now (copy), v4 (ref), IsNotLeft (ref), Count4 (ref), Tbl (copy), t (copy), CombineStatsResult (ref), SummarizeStepsModule (upval), SendBuildExperienceEventModule (upval), Callback (copy), Count (ref), HeaderExpanded (ref), Count1 (ref), Count2 (ref)
-			local v6 = v2
+			-- upvalues: v2 (ref), Flag (ref), List (copy), v3 (ref), NewLargest (ref), Now (copy), SendBuildExperienceEventModule (upval), Callback (copy), Count (ref), Amounts (copy), v4 (ref), HeaderExpanded (ref), Count1 (ref), Count2 (ref)
+			local v5 = v2
 			
-			if v6 == nil or Flag then return end
-			local v7 = v3
-			local Largest = math.max(0, NewLargest + (if v7 == nil then 0 else math.max(0, Now() - v7)) - v4)
+			if v5 == nil or Flag then return end
 			Flag = true
-			IsNotLeft = p2 ~= "left"
-			Count4 -= 1
 			
-			if Count4 <= 0 then
-				for _, Connection in Tbl do
-					Connection:Disconnect()
-				end
-				table.clear(Tbl)
-				NewLargest = 0
+			for _, Connection in List do
+				Connection:Disconnect()
+			end
+			table.clear(List)
+			
+			if v3 ~= nil then
+				NewLargest += math.max(0, Now() - v3)
 				v3 = nil
 			end
-			local Largest1 = math.max(0, (math.round((Now() - v6) * 1000)))
-			local Smallest = math.min(Largest1, (math.round(Largest * 1000)))
-			local CombineStatsResult1 = nil
-			
-			if next(t) == nil then
-				CombineStatsResult1 = CombineStatsResult
-			else
-				local List = {}
-				
-				for _, value in t do
-					table.insert(List, value)
-				end
-				CombineStatsResult1 = SummarizeStepsModule.combineStats(List)
-			end
-			SendBuildExperienceEventModule("TURN_WORK_FINISHED", Callback(), {
+			local Largest = math.max(0, (math.round((Now() - v5) * 1000)))
+			local Smallest = math.min(Largest, (math.round(NewLargest * 1000)))
+			local v6 = "TURN_WORK_FINISHED"
+			local CallbackResult = Callback()
+			local config = {
 				completed = tostring(p2 == "completed"),
 				outcome = tostring(p2),
-				turnMs = tostring(Largest1),
-				foregroundMs = tostring(Largest1 - Smallest),
+				turnMs = tostring(Largest),
+				foregroundMs = tostring(Largest - Smallest),
 				backgroundMs = tostring(Smallest),
-				backgroundCount = tostring(Count),
-				stepCount = tostring(CombineStatsResult1.count),
-				titleHeading = tostring(CombineStatsResult1.titleSources.heading or 0),
-				titleSummary = tostring(CombineStatsResult1.titleSources.summary or 0),
-				titleFallback = tostring(CombineStatsResult1.titleSources.fallback or 0),
-				titleFailed = tostring(CombineStatsResult1.titleSources.failed or 0),
-				titleAskedUser = tostring(CombineStatsResult1.titleSources.askedUser or 0),
-				fallbackTools = SummarizeStepsModule.joinFallbackTools(CombineStatsResult1.fallbackTools),
-				headerExpanded = tostring(HeaderExpanded),
-				headerToggleCount = tostring(Count1),
-				stepToggleCount = tostring(Count2)
-			})
+				backgroundCount = tostring(Count)
+			}
+			local Total = nil
+			
+			if next(Amounts) == nil then
+				Total = v4
+			else
+				Total = 0
+				
+				for _, amount in Amounts do
+					Total += amount
+				end
+			end
+			config.stepCount = tostring(Total)
+			config.headerExpanded = tostring(HeaderExpanded)
+			config.headerToggleCount = tostring(Count1)
+			config.stepToggleCount = tostring(Count2)
+			SendBuildExperienceEventModule(v6, CallbackResult, config)
 		end,
-		setSegmentSteps = function(Key, p3)
-			-- upvalues: t (copy), CombineStatsResult (ref), SummarizeStepsModule (upval)
+		setSegmentStepCount = function(Key, p3)
+			-- upvalues: Amounts (copy), v4 (ref)
 			if p3 == nil then
-				t[Key] = nil
+				Amounts[Key] = nil
 				
 				return
 			end
-			t[Key] = p3
-			local List = {}
+			Amounts[Key] = p3
+			local Total = 0
 			
-			for _, value in t do
-				table.insert(List, value)
+			for _, amount in Amounts do
+				Total += amount
 			end
-			CombineStatsResult = SummarizeStepsModule.combineStats(List)
+			v4 = Total
 		end,
 		setHeaderExpanded = function(Value)
 			-- upvalues: HeaderExpanded (ref)
 			HeaderExpanded = Value
 		end,
 		recordHeaderToggle = function(p4)
-			-- upvalues: Count1 (ref), SendBuildExperienceEventModule (upval), Callback (copy), v2 (ref), IsNotLeft (ref), t (copy), SummarizeStepsModule (upval)
+			-- upvalues: Count1 (ref), SendBuildExperienceEventModule (upval), Callback (copy), v2 (ref), Flag (ref), Amounts (copy)
 			Count1 += 1
-			local v8 = "TURN_WORK_TOGGLE"
+			local v7 = "TURN_WORK_TOGGLE"
 			local CallbackResult = Callback()
 			local config = {
 				target = "header",
 				expanded = tostring(p4),
-				whileRunning = tostring(v2 ~= nil and not IsNotLeft)
+				whileRunning = tostring(v2 ~= nil and not Flag)
 			}
-			local List = {}
+			local Total = 0
 			
-			for _, value in t do
-				table.insert(List, value)
+			for _, amount in Amounts do
+				Total += amount
 			end
-			config.stepCount = tostring(SummarizeStepsModule.combineStats(List).count)
-			SendBuildExperienceEventModule(v8, CallbackResult, config)
+			config.stepCount = tostring(Total)
+			SendBuildExperienceEventModule(v7, CallbackResult, config)
 		end,
 		recordStepToggle = function(p5, p6)
-			-- upvalues: Count2 (ref), SendBuildExperienceEventModule (upval), Callback (copy), v2 (ref), IsNotLeft (ref), t (copy), SummarizeStepsModule (upval)
+			-- upvalues: Count2 (ref), SendBuildExperienceEventModule (upval), Callback (copy), v2 (ref), Flag (ref), Amounts (copy)
 			Count2 += 1
-			local v9 = "TURN_WORK_TOGGLE"
+			local v8 = "TURN_WORK_TOGGLE"
 			local CallbackResult = Callback()
 			local config = {
 				target = "step",
 				stepIndex = tostring(p5),
 				expanded = tostring(p6),
-				whileRunning = tostring(v2 ~= nil and not IsNotLeft)
+				whileRunning = tostring(v2 ~= nil and not Flag)
 			}
-			local List = {}
+			local Total = 0
 			
-			for _, value in t do
-				table.insert(List, value)
+			for _, amount in Amounts do
+				Total += amount
 			end
-			config.stepCount = tostring(SummarizeStepsModule.combineStats(List).count)
-			SendBuildExperienceEventModule(v9, CallbackResult, config)
-		end,
-		markTurnDone = function()
-			-- upvalues: IsNotLeft (ref)
-			IsNotLeft = true
-		end,
-		openHeaderSpan = function()
-			-- upvalues: t1 (copy), watchVisibility (copy), Now (copy), v3 (ref), NewLargest (ref)
-			local Identity = { target = "header" }
-			
-			if t1.header == nil then
-				watchVisibility()
-				local v10 = v3
-				t1.header = {
-					openedAt = Now(),
-					hiddenSecondsAtOpen = NewLargest + (if v10 == nil then 0 else math.max(0, Now() - v10)),
-					identity = Identity
-				}
-				
-				return
-			end
-		end,
-		closeHeaderSpan = function()
-			-- upvalues: closeSpan (copy)
-			closeSpan("header")
-		end,
-		openStepSpan = function(p7): number
-			-- upvalues: Count3 (ref), t1 (copy), watchVisibility (copy), Now (copy), v3 (ref), NewLargest (ref)
-			Count3 += 1
-			local StepName: string = `step{Count3}`
-			local Identity = { target = "step", stepIndex = tostring(p7) }
-			
-			if t1[StepName] == nil then
-				watchVisibility()
-				local v10 = v3
-				t1[StepName] = {
-					openedAt = Now(),
-					hiddenSecondsAtOpen = NewLargest + (if v10 == nil then 0 else math.max(0, Now() - v10)),
-					identity = Identity
-				}
-			end
-			return Count3
-		end,
-		closeStepSpan = function(p7)
-			-- upvalues: closeSpan (copy)
-			closeSpan(`step{p7}`)
+			config.stepCount = tostring(Total)
+			SendBuildExperienceEventModule(v8, CallbackResult, config)
 		end
 	}
 end

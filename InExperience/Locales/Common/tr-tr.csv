@@ -77,13 +77,11 @@ Amp.Upsell.Title.RequestSent,Talep gönderildi
 Authentication.AccountSwitch.Action.SwitchAccount,Hesap Değiştir
 Authentication.AccountSwitch.Header.SwitchAccountSentenceCase,Hesap değiştir
 Authentication.CrossDevice.Heading.QuickLogin,Hızlı giriş
-Authentication.Login.Action.Leave,Ayrıl
 Authentication.Login.Action.QuickSignIn,
 Authentication.Login.Action.Save,Kaydet
 Authentication.Login.Button.CloseAndSwitchPlatformAccount,{platformAccountName} hesabını değiştirmek için Roblox'tan çıkış yap
 Authentication.Login.Button.UseDifferentRobloxAccount,Farklı bir Roblox hesabı kullan
 Authentication.Login.Button.XboxAccountSwitcher,Xbox hesabını değiştir
-Authentication.Login.Description.LeaveAccountSetup,Şimdi ayrılırsan Roblox hesabın oluşturulmayacak.
 Authentication.Login.Error.PasskeyOnlyAccount,Hesabına yalnızca giriş yapmak için bir geçiş anahtarı ayarlanmış. Geçiş anahtarınla giriş yapmayı dene veya hesabını kurtar.
 Authentication.Login.Error.PlatformAccountConnectionFailure,Platform hesabı doğrulanamıyor. Lütfen daha sonra tekrar dene.
 Authentication.Login.Heading.IncompatibleAccounts,Uyumsuz Hesaplar
@@ -112,7 +110,7 @@ Authentication.SignUp.Action.Cancel,
 Authentication.SignUp.Action.ContinueSetup,Kuruluma devam et
 Authentication.SignUp.Action.Create,Oluştur
 Authentication.SignUp.Action.CreateAccountSentenceCase,Hesap oluştur
-Authentication.SignUp.Action.ExitModalLeave,
+Authentication.SignUp.Action.ExitModalLeave,Ayrıl
 Authentication.SignUp.Action.RespawnNow,Şimdi sıfırla
 Authentication.SignUp.Button.OKCaptialized,Tamam
 Authentication.SignUp.Button.RetryLogIn,Giriş yapmayı tekrar dene
@@ -2082,11 +2080,8 @@ Feature.AvatarSwitcher.Message.UnknownSupport,Avatarını yine de değiştirebil
 Feature.AvatarSwitcher.Message.Unsupported,Bu deneyim özel bir avatar kullanıyor ve Roblox avatarlarını desteklemiyor.
 Feature.AvatarWorkshop.Action.EditAvatar,Avatarı düzenle
 Feature.AvatarWorkshop.Action.TryAgain,
-Feature.AvatarWorkshop.Description.AddAvatar,Bu avatarı avatarlarına eklemek istiyor musun?
-Feature.AvatarWorkshop.Heading.AddAvatar,Avatar eklensin mi?
 Feature.AvatarWorkshop.Heading.Customize,Özelleştir
 Feature.AvatarWorkshop.Heading.YourAvatars,Avatarların
-Feature.AvatarWorkshop.Label.DefaultAvatarName,
 Feature.AvatarWorkshop.Message.LoadItemsError,Öğelerin yüklenirken bir şeyler ters gitti.
 Feature.AvatarWorkshop.Message.LoadMoreItemsError,Daha fazla öğe yüklenemedi.
 Feature.AvatarWorkshop.Message.NoItemsOwned,Burada henüz hiçbir öğen yok.
@@ -2359,8 +2354,6 @@ Feature.Build.Label.AdvancedModel,
 Feature.Build.Label.All,
 Feature.Build.Label.AllGames,Tüm oyunlar
 Feature.Build.Label.AmountAvailable,{AMOUNT} mevcut
-Feature.Build.Label.AttachmentCountPlural,{count} eklenti
-Feature.Build.Label.AttachmentCountSingular,1 eklenti
 Feature.Build.Label.Autosaved,Otomatik olarak kaydedildi
 Feature.Build.Label.Available,mevcut
 Feature.Build.Label.AvailableForPurchase,Satın alınabilir
@@ -2380,7 +2373,6 @@ Feature.Build.Label.DefaultDeveloperProductName,geliştirici ürünü
 Feature.Build.Label.DefaultModel,
 Feature.Build.Label.Deleted,Silindi
 Feature.Build.Label.DescribeIdea,Fikrini tarif et
-Feature.Build.Label.DescribeIdeaOrPick,Fikrini anlat veya aşağıdakilerden birini seç
 Feature.Build.Label.Description,
 Feature.Build.Label.DeveloperProductDescription,Açıklama: {DESCRIPTION}
 Feature.Build.Label.DeveloperProductName,Ad: {NAME}
@@ -3268,7 +3260,6 @@ Feature.Chat.Label.SearchFriends,Arkadaş ara
 Feature.Chat.Label.SearchWord,
 Feature.Chat.Label.SelectToRemove,Kaldırmak için seç
 Feature.Chat.Label.SnoozePartyNotifications,Deneyim içi parti bildirimlerini sustur:
-Feature.Chat.Label.StartChatting,Sohbete başla
 Feature.Chat.Label.SwipeToReplyTooltip,Yanıtlamak için kaydır
 Feature.Chat.Label.TapToRemove,Kaldırmak için dokun
 Feature.Chat.Label.TimestampDaysAbbreviatedPlural,{num_days} gün
@@ -3535,7 +3526,6 @@ Feature.Friends.Button.GotIt,
 Feature.Friends.Description.ContactsModal,Rehberindeki kişiler Roblox'ta! Tam avatarlarını ve profillerini görmek için arkadaş ol. Tanıyor olabileceğin daha fazla kişiyi görmek için Arkadaş Ekle sayfasına git.
 Feature.Friends.Description.DoMoreWithTrustedConnections,Güvenilir Etkileşim Ağı ile Roblox'ta daha fazlasını yap. Yalnızca tanıdığın ve güvendiğin insanları ekle.
 Feature.Friends.Description.DoMoreWithTrustedFriends,Güvenilir arkadaşlarınla Roblox'ta daha fazlasını yap. Yalnızca tanıdığın ve güvendiğin insanları ekle.
-Feature.Friends.Description.FoundFromContactImporter,Rehber aktarıcısı tarafından gönderildi
 Feature.Friends.Description.FromContacts,Rehberden
 Feature.Friends.Description.FromContactsV2,Rehberindeki {contactName}
 Feature.Friends.Description.FromQrCode,QR kodundan
@@ -3589,7 +3579,7 @@ Feature.Friends.Label.FollowsYou,Seni Takip Ediyor
 Feature.Friends.Label.Frequent,Beraber oynadınız
 Feature.Friends.Label.Friend,
 Feature.Friends.Label.FriendInvite,Seni Roblox'ta arkadaş olmaya davet etti
-Feature.Friends.Label.FriendOfUser,Senin için önerilenler
+Feature.Friends.Label.FriendOfUser,{displayName} ile arkadaş
 Feature.Friends.Label.FriendOwns,1 Arkadaşında var
 Feature.Friends.Label.FriendRecentlyPlayed,<b>1 Arkadaşın</b> yakın zamanda oynadı
 Feature.Friends.Label.FriendRequest,
@@ -3626,7 +3616,6 @@ Feature.Friends.Label.SentFromWithContext,{gameName} oyunundan gönderildi
 Feature.Friends.Label.SingularMutualFriend,ortak arkadaş
 Feature.Friends.Label.Suggested,Önerilen
 Feature.Friends.Label.Unfollowed,Takipten çıkıldı
-Feature.Friends.Label.YouAreFollowing,Takip Ediyorsun
 Feature.Friends.Label.YourLinkedParent,Bağlantılı ebeveynin
 Feature.Friends.LinkText.LearnMore,
 Feature.Friends.Message.DiscoverableSettings,Telefon numaranı bilen Roblox kullanıcılarına tavsiye edilmek ister misin?
@@ -3671,7 +3660,6 @@ Feature.FriendsActivityFeed.Label.ViewRecentActivity,Son Etkinlikleri Görüntü
 Feature.FriendsMenu.Label.SelectedFriendsCount,{numerator}/{denominator} arkadaş seçildi
 Feature.FriendsMenu.Label.SelectedFriendsCountNoLimit,{selectedCount} arkadaş seçildi
 Feature.GameBadges.Label.Experience,
-Feature.GameDetails.Action.Continue,
 Feature.GameDetails.Action.GameDetails,
 Feature.GameDetails.Action.GiveFeedback,Geri dönüş gönder
 Feature.GameDetails.Action.NotInterested,İlgilenmiyorum
@@ -3703,12 +3691,9 @@ Feature.GameDetails.Label.WhyThisAd,
 Feature.GameDetails.Label.Yes,
 Feature.GameDetails.Message.AdPreferences,Reklam Tercihleri
 Feature.GameDetails.Message.AnonymousFeedbackTermsOfUse,Yanıtlar anonim bir şekilde paylaşılır ve {underlineStart}Roblox Kullanım Şartları{underlineEnd} uyarınca geri dönüş anlamına gelir.
-Feature.GameDetails.Message.ExternalLinkWarning,"""Devam et"" butonuna tıkladığında, Roblox'a ait olmayan veya Roblox tarafından işletilmeyen bir web sitesine yönlendirileceksin. Bu web sitesi, farklı koşullara ve gizlilik politikasına sahip olabilir."
 Feature.GameDetails.Message.HelpImproveExperience,Deneyimini iyileştirmemize yardımcı ol
 Feature.GameDetails.Message.HidingExperienceQuestion,Bu deneyimi neden gizliyorsun?
-Feature.GameDetails.Message.LeavingRobloxTitle,Roblox'tan çıkılıyor
 Feature.GameDetails.Message.PurchaseGameV2,{X} Robux karşılığında {gameName} oyununa erişimin kilidi açılsın mı?
-Feature.GameDetails.Message.RobloxWebsiteSignedInWarning,"""Devam Et"" düğmesine tıkladığında roblox.com bir web tarayıcısında açılacak ve Roblox hesabına giriş yapmış olacaksın."
 Feature.GameDetails.Message.SponsoredDisclosure.Error,Geçici bir hata nedeniyle sponsorluk bilgileri görüntülenemedi.
 Feature.GameDetails.Message.SponsoredDisclosure.O18NonPersonalizedNoLink,"Bu sponsorlu içeriği, sana uygun içeriği sunmak için kullandığımız cihaz bilgileri, konum ve yaş gibi kişiselleştirilmemiş faktörlere dayalı olarak görüyorsun. Deneyim {CreatorName} tarafından yaratıldı. Sponsorluk için {PayerName} ödeme yaptı. Daha fazla bilgi edinmek için lütfen hesabındaki Ayarlar'ın altında bulunan ""Gizlilik ve İçerik Olgunluk Düzeyi"" sayfasını ziyaret et:"
 Feature.GameDetails.Message.SponsoredDisclosure.O18PersonalizedNoLink,"Bu sponsorlu içeriği, sana alakalı içerik sunmak için kullandığımız konum, cihaz bilgileri, yaş ve platform davranışı gibi farklı faktörlere dayalı olarak görüyorsun. Deneyim {CreatorName} tarafından yaratıldı. Sponsorluk için {PayerName} ödeme yaptı. Daha fazla bilgi edinmek için lütfen hesabındaki Ayarlar'ın altında bulunan ""Gizlilik ve İçerik Olgunluk Düzeyi"" sayfasını ziyaret et:"
@@ -3727,12 +3712,9 @@ Feature.GameFollows.TooltipTurnedOnNotifications,{experienceName} için bildirim
 Feature.GameJoin.Description.DifferentServer,Farklı bir sunucuda başlayacaksın
 Feature.GameJoin.Label.PlayTogether,Birlikte oynayabilirsiniz
 Feature.GameJoin.Label.PlayTogetherSoon,Yakında birlikte oynayabileceksiniz
-Feature.GameJoin.Label.Played,oynandı
-Feature.GameJoin.Label.RecentCoplay,Yakın zamanda beraber oynadınız
 Feature.GamePage.Action.BackToTop,Başa dön
 Feature.GamePage.Label.Ad,
 Feature.GamePage.Label.Sponsored,
-Feature.GamePage.LabelCancelField,
 Feature.GamePage.QuickLaunch.LaunchError.ContextualPlayabilityUnverifiedSeventeenPlusUser,"Bu deneyim, yaş doğrulama durumun nedeniyle kullanılamıyor."
 Feature.GamePage.QuickLaunch.LaunchError.GuestProhibited,Misafirler bu deneyime katılamaz.
 Feature.GamePage.QuickLaunch.LaunchError.PurchaseRequired,Bu deneyimi ziyaret etmek için satın alım gerekiyor.
@@ -3963,7 +3945,6 @@ Feature.Moments.Action.Hide,Ayrıntıları gizle
 Feature.Moments.Action.HowToCapture,Nasıl yakalama yapılacağını görüntüle
 Feature.Moments.Action.KeepEditing,Düzenlemeye devam et
 Feature.Moments.Action.Leave,
-Feature.Moments.Action.LoadMore,Daha fazla yükle
 Feature.Moments.Action.Minimize,Küçült
 Feature.Moments.Action.Ok,
 Feature.Moments.Action.Play,
@@ -4991,6 +4972,7 @@ Feature.UniversalShareSheet.Response.SharedCustomMessage,{CUSTOM_MESSAGE}: 1 ki�
 Feature.UniversalShareSheet.Response.SharedMessage,Mesaj gönderildi
 Feature.UniversalShareSheet.Response.SharedMultipleMessages,Mesajlar gönderildi
 Feature.UniversalShareSheet.SharedCustomMultipleMessages,{CUSTOM_MESSAGE}: {N} kişiyle daha
+Feature.UserLibrary.Label.MyLibrary,Kütüphanem
 Feature.VIPServer.Message.TooManyFreeServersOnGame,Bu oyunda daha fazla ücretsiz özel sunucuya sahip olamazsın.
 Feature.VIPServer.Message.TooManyTotalActiveFreeServers,Daha fazla etkin ücretsiz özel sunucuya sahip olamazsın. Lütfen önce diğer birkaç sunucuyu devre dışı bırak.
 Feature.VerificationUpsell.Action.AddPhone,Telefon Ekle

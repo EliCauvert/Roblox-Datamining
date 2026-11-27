@@ -51,15 +51,15 @@ local CharacterHistoryStateChangeButtonActivated = AvatarExperienceCommonModule.
 local FFlagAXCatalogMakeupSupport = AvatarExperienceFlagsModule.FFlagAXCatalogMakeupSupport
 local FFlagAXMISEnableMultiShopping = AvatarExperienceFlagsModule.FFlagAXMISEnableMultiShopping
 local FFlagAXDurablesForMIS = AvatarExperienceFlagsModule.FFlagAXDurablesForMIS
+local FFlagParseHeadShapeFromAPIResponse = AvatarExperienceFlagsModule.FFlagParseHeadShapeFromAPIResponse
 local FFlagHeadRefinementFacialAnimationToggle = AvatarExperienceFlagsModule.FFlagHeadRefinementFacialAnimationToggle
 local FFlagAXPhotoboothMomentsPage = AvatarExperienceFlagsModule.FFlagAXPhotoboothMomentsPage
 local FFlagAXTryOnWithoutEquippedBody = AvatarExperienceFlagsModule.FFlagAXTryOnWithoutEquippedBody
 local FFlagAXPhotoboothMomentsTryOnAccessoryAdjustments = AvatarExperienceFlagsModule.FFlagAXPhotoboothMomentsTryOnAccessoryAdjustments
-local FFlagAXLookTryOnConvertR6ToR15 = AvatarExperienceFlagsModule.FFlagAXLookTryOnConvertR6ToR15
 local Count = 0
 
 local function formatItem(JoinResult, IsUnequipped)
-	-- upvalues: FFlagAXMISEnableMultiShopping (copy), ItemTypeEnum (copy), BundleTypeIdStrings (copy), ASSETTYPENAMETOIDSTRING (copy), FFlagHeadRefinementFacialAnimationToggle (copy), FFlagAXDurablesForMIS (copy), ASSETTYPETOACCESSORYTYPE (copy), LAYEREDCLOTHINGORDER (copy), LAYEREDASSETTYPES (copy), CryoModule (copy), ASSETTYPEIDSTRINGTOMAKEUPTYPE (copy), LAYEREDMAKEUPORDER (copy), Count (ref)
+	-- upvalues: FFlagAXMISEnableMultiShopping (copy), ItemTypeEnum (copy), BundleTypeIdStrings (copy), ASSETTYPENAMETOIDSTRING (copy), FFlagParseHeadShapeFromAPIResponse (copy), FFlagHeadRefinementFacialAnimationToggle (copy), FFlagAXDurablesForMIS (copy), ASSETTYPETOACCESSORYTYPE (copy), LAYEREDCLOTHINGORDER (copy), LAYEREDASSETTYPES (copy), CryoModule (copy), ASSETTYPEIDSTRINGTOMAKEUPTYPE (copy), LAYEREDMAKEUPORDER (copy), Count (ref)
 	local ReceivedBundleInfo: boolean = if JoinResult.receivedBundleInfo then true else false
 	local BundleInfo = JoinResult.bundleInfo
 	
@@ -76,7 +76,7 @@ local function formatItem(JoinResult, IsUnequipped)
 				if AssetType then
 					local config = { assetType = AssetType }
 					
-					if bundleItem.meta and bundleItem.meta.headShape ~= nil then
+					if FFlagParseHeadShapeFromAPIResponse and bundleItem.meta and bundleItem.meta.headShape ~= nil then
 						config.headShape = bundleItem.meta.headShape
 					end
 					if FFlagHeadRefinementFacialAnimationToggle and bundleItem.meta and bundleItem.meta.staticFacialAnimation ~= nil then
@@ -161,7 +161,7 @@ local function formatItemFromLookOutfit(JoinResult, LookType, LookId, OutfitId)
 end
 
 local function formatBundleFromLookOutfit(JoinResult, LookId)
-	-- upvalues: FFlagAXMISEnableMultiShopping (copy), LAYEREDCLOTHINGORDER (copy), LAYEREDMAKEUPORDER (copy), Count (ref)
+	-- upvalues: FFlagAXMISEnableMultiShopping (copy), LAYEREDCLOTHINGORDER (copy), LAYEREDMAKEUPORDER (copy), FFlagParseHeadShapeFromAPIResponse (copy), Count (ref)
 	local config = {
 		version = "1",
 		isUnequipped = false,
@@ -178,7 +178,7 @@ local function formatBundleFromLookOutfit(JoinResult, LookId)
 		BundleInfo[item.itemId] = {
 			assetType = item.itemSubType,
 			order = LAYEREDCLOTHINGORDER[item.itemSubType] or LAYEREDMAKEUPORDER[item.itemSubType],
-			headShape = item.headShape
+			headShape = if FFlagParseHeadShapeFromAPIResponse then item.headShape else nil
 		}
 	end
 	config.bundleInfo = BundleInfo
@@ -237,18 +237,18 @@ local function getTryOnItemsMakeupAndAvatarLookIds(TryOnItems)
 end
 
 local function reconcileAllTryOnState(JoinResult)
-	-- upvalues: FFlagAXMISEnableMultiShopping (copy), getTryOnItemsMakeupAndAvatarLookIds (copy), getTryOnItemsContainsRecolorableBody (copy), FFlagAXPhotoboothMomentsPage (copy), CryoModule (copy), TutilsModule (copy), LOOKTYPE (copy), FFlagAXLookTryOnConvertR6ToR15 (copy), FFlagAXTryOnWithoutEquippedBody (copy)
+	-- upvalues: FFlagAXMISEnableMultiShopping (copy), getTryOnItemsMakeupAndAvatarLookIds (copy), getTryOnItemsContainsRecolorableBody (copy), FFlagAXPhotoboothMomentsPage (copy), CryoModule (copy), TutilsModule (copy), LOOKTYPE (copy), FFlagAXTryOnWithoutEquippedBody (copy)
 	local TryOnItems = JoinResult.TryOnItems
-	local None = nil
 	local v1 = nil
+	local v2 = nil
 	
 	if FFlagAXMISEnableMultiShopping then
-		None, v81 = getTryOnItemsMakeupAndAvatarLookIds(TryOnItems)
+		v1, v81 = getTryOnItemsMakeupAndAvatarLookIds(TryOnItems)
 	end
 	local TryOnItemsContainsRecolorableBody = getTryOnItemsContainsRecolorableBody(TryOnItems)
 	
 	if FFlagAXMISEnableMultiShopping then
-		TryOnItemsContainsRecolorableBody = TryOnItemsContainsRecolorableBody or None ~= nil
+		TryOnItemsContainsRecolorableBody = TryOnItemsContainsRecolorableBody or v1 ~= nil
 	end
 	if FFlagAXPhotoboothMomentsPage then
 		TryOnItemsContainsRecolorableBody = TryOnItemsContainsRecolorableBody or JoinResult.OutfitId ~= nil
@@ -257,18 +257,17 @@ local function reconcileAllTryOnState(JoinResult)
 	local BodyPartColorRangeIds = if TryOnItemsContainsRecolorableBody then JoinResult.BodyPartColorRangeIds else CryoModule.None
 	local DefaultTryOnBodyColorsToggled = if TryOnItemsContainsRecolorableBody then JoinResult.DefaultTryOnBodyColorsToggled else false
 	local IsFieldCountResultMatch = if FFlagAXMISEnableMultiShopping then TutilsModule.fieldCount(TryOnItems) == 0 else nil
-	local None1 = if FFlagAXMISEnableMultiShopping then if IsFieldCountResultMatch then CryoModule.None else JoinResult.LookType else nil
-	local None2 = if FFlagAXMISEnableMultiShopping then if IsFieldCountResultMatch or not v1 then CryoModule.None else LOOKTYPE.Makeup else nil
+	local None = if FFlagAXMISEnableMultiShopping then if IsFieldCountResultMatch then CryoModule.None else JoinResult.LookType else nil
+	local None1 = if FFlagAXMISEnableMultiShopping then if IsFieldCountResultMatch or not v2 then CryoModule.None else LOOKTYPE.Makeup else nil
 	
 	return CryoModule.Dictionary.join(JoinResult, {
 		BodyColor3s = BodyColor3s,
 		BodyPartColorRangeIds = BodyPartColorRangeIds,
 		DefaultTryOnBodyColorsToggled = DefaultTryOnBodyColorsToggled,
-		AvatarType = if FFlagAXLookTryOnConvertR6ToR15 and None == CryoModule.None and JoinResult.OutfitId == nil then CryoModule.None else nil,
-		LookId = if FFlagAXMISEnableMultiShopping then None else nil,
-		LookType = if FFlagAXMISEnableMultiShopping then None1 else nil,
-		MakeupLookId = if FFlagAXMISEnableMultiShopping then v1 else nil,
-		MakeupLookType = if FFlagAXMISEnableMultiShopping then None2 else nil,
+		LookId = if FFlagAXMISEnableMultiShopping then v1 else nil,
+		LookType = if FFlagAXMISEnableMultiShopping then None else nil,
+		MakeupLookId = if FFlagAXMISEnableMultiShopping then v2 else nil,
+		MakeupLookType = if FFlagAXMISEnableMultiShopping then None1 else nil,
 		ShouldTryOnWithoutEquippedItems = if FFlagAXMISEnableMultiShopping then not IsFieldCountResultMatch and JoinResult.ShouldTryOnWithoutEquippedItems else nil,
 		ShouldTryOnWithoutEquippedBody = if FFlagAXTryOnWithoutEquippedBody then not IsFieldCountResultMatch and JoinResult.ShouldTryOnWithoutEquippedBody else nil
 	})
@@ -301,7 +300,7 @@ return RoduxModule.createReducer(Tbl, {
 		return Copy
 	end,
 	[ToggleTryOnModule.name] = function(p1, JoinResult)
-		-- upvalues: Tbl (copy), GetTryOnItemReducerKeyFunction (copy), FFlagAXMISEnableMultiShopping (copy), reconcileAllTryOnState (copy), removeItem (copy), ReducerUtilsModule (copy), formatItem (copy), GetFilteredTryOnItemsFunction (copy), ItemTypeEnum (copy), ASSETTYPENAMETOIDSTRING (copy), BundleTypeIdStrings (copy), CryoModule (copy), FFlagAXLookTryOnConvertR6ToR15 (copy), getTryOnItemsContainsRecolorableBody (copy), FFlagAXPhotoboothMomentsPage (copy), FFlagAXCatalogMakeupSupport (copy), RemoveMakeupAssetsFromTryOnsIfOverLimitFunction (copy)
+		-- upvalues: Tbl (copy), GetTryOnItemReducerKeyFunction (copy), FFlagAXMISEnableMultiShopping (copy), reconcileAllTryOnState (copy), removeItem (copy), ReducerUtilsModule (copy), formatItem (copy), GetFilteredTryOnItemsFunction (copy), ItemTypeEnum (copy), ASSETTYPENAMETOIDSTRING (copy), BundleTypeIdStrings (copy), CryoModule (copy), getTryOnItemsContainsRecolorableBody (copy), FFlagAXPhotoboothMomentsPage (copy), FFlagAXCatalogMakeupSupport (copy), RemoveMakeupAssetsFromTryOnsIfOverLimitFunction (copy)
 		local Tbl1 = if p1 then p1 else Tbl
 		local TryOnItems = Tbl1.TryOnItems or {}
 		local HasLookId = Tbl1.LookId ~= nil
@@ -328,7 +327,6 @@ return RoduxModule.createReducer(Tbl, {
 				LastToggledItem = FormatItemResult,
 				LastAnimOrEmoteToggledItem = FormatItemResult1,
 				LookId = CryoModule.None,
-				AvatarType = if FFlagAXLookTryOnConvertR6ToR15 and Tbl1.OutfitId == nil then CryoModule.None else nil,
 				BodyColor3s = {},
 				BodyPartColorRangeIds = CryoModule.None
 			})
@@ -369,7 +367,7 @@ return RoduxModule.createReducer(Tbl, {
 		})
 	end,
 	[TryOnLooksOutfitModule.name] = function(p1, p2)
-		-- upvalues: Tbl (copy), FFlagAXMISEnableMultiShopping (copy), FFlagAXCatalogMakeupSupport (copy), LOOKTYPE (copy), MAKEUPLOOKASSETTYPES (copy), GetTryOnItemReducerKeyFunction (copy), formatItemFromLookOutfit (copy), FFlagAXPhotoboothMomentsPage (copy), formatBundleFromLookOutfit (copy), CryoModule (copy), FFlagAXTryOnWithoutEquippedBody (copy), FFlagAXLookTryOnConvertR6ToR15 (copy)
+		-- upvalues: Tbl (copy), FFlagAXMISEnableMultiShopping (copy), FFlagAXCatalogMakeupSupport (copy), LOOKTYPE (copy), MAKEUPLOOKASSETTYPES (copy), GetTryOnItemReducerKeyFunction (copy), formatItemFromLookOutfit (copy), FFlagAXPhotoboothMomentsPage (copy), formatBundleFromLookOutfit (copy), CryoModule (copy), FFlagAXTryOnWithoutEquippedBody (copy)
 		local Tbl1 = if p1 then p1 else Tbl
 		local TryOnItems = {}
 		
@@ -411,7 +409,7 @@ return RoduxModule.createReducer(Tbl, {
 			Scale = if p2.scale then p2.scale else CryoModule.None,
 			ShouldTryOnWithoutEquippedItems = if FFlagAXMISEnableMultiShopping then p2.lookId ~= nil or FFlagAXPhotoboothMomentsPage and p2.outfitId ~= nil else nil,
 			ShouldTryOnWithoutEquippedBody = if FFlagAXTryOnWithoutEquippedBody then p2.shouldTryOnWithoutEquippedBody == true else nil,
-			AvatarType = if FFlagAXPhotoboothMomentsPage or FFlagAXLookTryOnConvertR6ToR15 then if p2.avatarType then p2.avatarType else CryoModule.None else nil,
+			AvatarType = if FFlagAXPhotoboothMomentsPage then if p2.avatarType then p2.avatarType else CryoModule.None else nil,
 			OutfitId = if FFlagAXPhotoboothMomentsPage then if p2.outfitId == nil then CryoModule.None else p2.outfitId else nil
 		})
 	end,
@@ -456,7 +454,7 @@ return RoduxModule.createReducer(Tbl, {
 		return CryoModule.Dictionary.join(Tbl1, { TryOnItems = TryOnItems })
 	end,
 	[RemoveLookFromTryOnModule.name] = if FFlagAXMISEnableMultiShopping then function(p4, p5)
-		-- upvalues: Tbl (copy), FFlagAXCatalogMakeupSupport (copy), CryoModule (copy), FFlagAXLookTryOnConvertR6ToR15 (copy), FFlagAXTryOnWithoutEquippedBody (copy)
+		-- upvalues: Tbl (copy), FFlagAXCatalogMakeupSupport (copy), CryoModule (copy), FFlagAXTryOnWithoutEquippedBody (copy)
 		local Tbl1 = if p4 then p4 else Tbl
 		local TryOnItems = {}
 		
@@ -475,7 +473,6 @@ return RoduxModule.createReducer(Tbl, {
 			ShouldTryOnWithoutEquippedItems = false,
 			TryOnItems = TryOnItems,
 			LookId = CryoModule.None,
-			AvatarType = if FFlagAXLookTryOnConvertR6ToR15 and Tbl1.OutfitId == nil then CryoModule.None else nil,
 			LookType = CryoModule.None,
 			LookAnalyticsInfo = CryoModule.None,
 			BodyColor3s = CryoModule.None,
@@ -494,7 +491,7 @@ return RoduxModule.createReducer(Tbl, {
 		return if ItemInTryOnItems == nil then Tbl1 else reconcileAllTryOnState(removeItem(Tbl1, TryOnItems, ItemInTryOnItems))
 	end,
 	[RemoveLookItemsFromTryOnModule.name] = function(p6, p7)
-		-- upvalues: Tbl (copy), GetTryOnItemReducerKeyFunction (copy), ItemTypeEnum (copy), CryoModule (copy), FFlagAXLookTryOnConvertR6ToR15 (copy), FFlagAXMISEnableMultiShopping (copy), FFlagAXTryOnWithoutEquippedBody (copy), FFlagAXCatalogMakeupSupport (copy)
+		-- upvalues: Tbl (copy), GetTryOnItemReducerKeyFunction (copy), ItemTypeEnum (copy), CryoModule (copy), FFlagAXMISEnableMultiShopping (copy), FFlagAXTryOnWithoutEquippedBody (copy), FFlagAXCatalogMakeupSupport (copy)
 		local Tbl1 = if p6 then p6 else Tbl
 		
 		if p7.lookId == Tbl1.LookId then
@@ -518,7 +515,6 @@ return RoduxModule.createReducer(Tbl, {
 			Tbl1 = CryoModule.Dictionary.join(Tbl1, {
 				TryOnItems = TryOnItems,
 				LookId = CryoModule.None,
-				AvatarType = if FFlagAXLookTryOnConvertR6ToR15 and Tbl1.OutfitId == nil then CryoModule.None else nil,
 				LookType = CryoModule.None,
 				BodyColor3s = CryoModule.None,
 				BodyPartColorRangeIds = CryoModule.None,
@@ -716,7 +712,7 @@ return RoduxModule.createReducer(Tbl, {
 		return p11.outfitTryOns
 	end,
 	[RemoveLookModule.name] = function(p11, p12)
-		-- upvalues: Tbl (copy), FFlagAXMISEnableMultiShopping (copy), FFlagAXCatalogMakeupSupport (copy), CryoModule (copy), FFlagAXLookTryOnConvertR6ToR15 (copy), FFlagAXTryOnWithoutEquippedBody (copy)
+		-- upvalues: Tbl (copy), FFlagAXMISEnableMultiShopping (copy), FFlagAXCatalogMakeupSupport (copy), CryoModule (copy), FFlagAXTryOnWithoutEquippedBody (copy)
 		local Tbl1 = if p11 then p11 else Tbl
 		
 		if p12.lookId == Tbl1.LookId or FFlagAXMISEnableMultiShopping and FFlagAXCatalogMakeupSupport and p12.lookId == Tbl1.MakeupLookId then
@@ -736,7 +732,6 @@ return RoduxModule.createReducer(Tbl, {
 						ShouldTryOnWithoutEquippedItems = false,
 						TryOnItems = TryOnItems,
 						LookId = CryoModule.None,
-						AvatarType = if FFlagAXLookTryOnConvertR6ToR15 and Tbl1.OutfitId == nil then CryoModule.None else nil,
 						LookType = CryoModule.None,
 						BodyColor3s = CryoModule.None,
 						BodyPartColorRangeIds = CryoModule.None,
@@ -759,7 +754,6 @@ return RoduxModule.createReducer(Tbl, {
 				Tbl1 = CryoModule.Dictionary.join(Tbl1, {
 					TryOnItems = TryOnItems,
 					LookId = CryoModule.None,
-					AvatarType = if FFlagAXLookTryOnConvertR6ToR15 and Tbl1.OutfitId == nil then CryoModule.None else nil,
 					LookType = CryoModule.None,
 					BodyColor3s = CryoModule.None,
 					BodyPartColorRangeIds = CryoModule.None,

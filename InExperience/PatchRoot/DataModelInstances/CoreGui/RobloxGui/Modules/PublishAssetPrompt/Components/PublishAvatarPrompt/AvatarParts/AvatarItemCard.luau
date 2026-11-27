@@ -4,19 +4,40 @@ local UIBloxModule = require(CorePackages.Packages.UIBlox)
 local NormalizeFontFaceFunction = require(CorePackages.Packages.Foundation).Utility.normalizeFontFace
 local UseStyleFunction = UIBloxModule.Core.Style.useStyle
 local AvatarPartViewportModule = require(script.Parent.AvatarPartViewport)
+local GetFFlagSingleUploadMakeupSupportModule = require(script.Parent.Parent.Parent.Parent.Flags.GetFFlagSingleUploadMakeupSupport)
 
 return function(Frame)
-	-- upvalues: UseStyleFunction (copy), ReactModule (copy), AvatarPartViewportModule (copy), NormalizeFontFaceFunction (copy)
+	-- upvalues: UseStyleFunction (copy), GetFFlagSingleUploadMakeupSupportModule (copy), ReactModule (copy), AvatarPartViewportModule (copy), NormalizeFontFaceFunction (copy)
 	local UseStyleResult = UseStyleFunction()
 	local UseStyleResultFont = UseStyleResult.Font
 	local Asset = Frame.asset
 	local CaptionHeader = UseStyleResultFont.CaptionHeader
 	local Color = UseStyleResult.Theme.TextEmphasis.Color
-	assert(typeof(Asset) == "table" or (Asset:IsA("MeshPart") or (Asset:IsA("Accessory") or Asset:IsA("Decal"))), "Assert that asset is a table, MeshPart, Accessory, or Decal")
+	
+	if GetFFlagSingleUploadMakeupSupportModule() then
+		assert(typeof(Asset) == "table" or (Asset:IsA("MeshPart") or (Asset:IsA("Accessory") or Asset:IsA("Decal"))), "Assert that asset is a table, MeshPart, Accessory, or Decal")
+	else
+		assert(typeof(Asset) == "table" or (Asset:IsA("MeshPart") or Asset:IsA("Accessory")), "Assert that asset is a table, MeshPart, or Accessory")
+	end
 	local BodyName = Frame.bodyName
 	local PartName = Frame.partName
-	local Text = if BodyName and PartName then BodyName .. "'s " .. PartName elseif PartName then PartName else nil
+	local Text: string? = nil
+	local HasPartName = nil
 	
+	if GetFFlagSingleUploadMakeupSupportModule() then
+		if BodyName and PartName then
+			Text = BodyName .. "'s " .. PartName
+		elseif PartName then
+			Text = PartName
+		end
+		HasPartName = Text ~= nil
+	else
+		HasPartName = BodyName ~= nil and PartName ~= nil
+		
+		if BodyName and PartName then
+			Text = BodyName .. "'s " .. PartName
+		end
+	end
 	return ReactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
 		Size = UDim2.fromScale(1, 1),
@@ -30,10 +51,10 @@ return function(Frame)
 		AvatarPartViewport = ReactModule.createElement(AvatarPartViewportModule, {
 			LayoutOrder = 1,
 			asset = Asset,
-			assetType = Frame.assetType,
+			assetType = if GetFFlagSingleUploadMakeupSupportModule() then Frame.assetType else nil,
 			viewportSize = Frame.viewportSize
 		}),
-		TitleText = Text ~= nil and ReactModule.createElement("TextLabel", {
+		TitleText = HasPartName and ReactModule.createElement("TextLabel", {
 			LayoutOrder = 2,
 			BackgroundTransparency = 1,
 			TextWrapped = true,

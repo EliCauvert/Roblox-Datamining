@@ -60,6 +60,37 @@ local function toAnswerQuestions(Entry)
 	return if #List > 0 then List else nil
 end
 
+local function extractQuestionsFromToolCall(ToolCall)
+	-- upvalues: toAnswerQuestions (copy)
+	local AnswerQuestions = toAnswerQuestions(ToolCall.rawInput)
+	
+	if AnswerQuestions == nil then
+		return nil
+	end
+	local Kind: string = ToolCall.kind
+	
+	if typeof(Kind) ~= "string" or string.lower(Kind) ~= "ask_user" then
+		local Title: string = ToolCall.title
+		
+		if typeof(Title) ~= "string" or string.lower(Title) ~= "ask_user" then
+			local RawInput = ToolCall.rawInput
+			repeat
+				if typeof(RawInput) ~= "table" then break end
+				local Name: string = RawInput.name
+				
+				if typeof(Name) ~= "string" or string.lower(Name) ~= "ask_user" then
+					local ToolName: string = RawInput.toolName
+					
+					if typeof(ToolName) ~= "string" or string.lower(ToolName) ~= "ask_user" then continue end
+				end
+				return AnswerQuestions
+			until true
+			return nil
+		end
+	end
+	return AnswerQuestions
+end
+
 local _ = function(p1)
 	-- upvalues: HttpService (copy)
 	local Success, Result = pcall(HttpService.JSONDecode, HttpService, p1)
@@ -293,73 +324,17 @@ return {
 			}
 		}
 	},
-	toolCallLooksLikeAskUser = function(p5): boolean
-		local Kind: string = p5.kind
-		
-		if typeof(Kind) ~= "string" or string.lower(Kind) ~= "ask_user" then
-			local Title: string = p5.title
-			
-			if typeof(Title) ~= "string" or string.lower(Title) ~= "ask_user" then
-				local RawInput = p5.rawInput
-				
-				if typeof(RawInput) ~= "table" then
-					return false
-				end
-				local Name: string = RawInput.name
-				local IsAskUser: boolean = typeof(Name) == "string" and string.lower(Name) == "ask_user"
-				
-				if not IsAskUser then
-					local ToolName: string = RawInput.toolName
-					IsAskUser = typeof(ToolName) == "string" and string.lower(ToolName) == "ask_user"
-				end
-				return IsAskUser
-			end
-		end
-		return true
-	end,
-	extractQuestionsFromToolCall = function(p5)
-		-- upvalues: toAnswerQuestions (copy)
-		local AnswerQuestions = toAnswerQuestions(p5.rawInput)
-		
-		if AnswerQuestions == nil then
-			return nil
-		end
-		local Kind: string = p5.kind
-		local IsAskUser = nil
-		repeat
-			if typeof(Kind) ~= "string" or string.lower(Kind) ~= "ask_user" then
-				local Title: string = p5.title
-				
-				if typeof(Title) ~= "string" or string.lower(Title) ~= "ask_user" then
-					local RawInput = p5.rawInput
-					
-					if typeof(RawInput) == "table" then
-						local Name: string = RawInput.name
-						IsAskUser = typeof(Name) == "string" and string.lower(Name) == "ask_user"
-						
-						if IsAskUser then break end
-						local ToolName: string = RawInput.toolName
-						IsAskUser = typeof(ToolName) == "string" and string.lower(ToolName) == "ask_user"
-						break
-					end
-					IsAskUser = false
-				end
-			end
-			IsAskUser = true
-			break
-		until true
-		return if IsAskUser then AnswerQuestions else nil
-	end,
+	extractQuestionsFromToolCall = extractQuestionsFromToolCall,
 	findQuestionsInTurnState = function(p5, p6)
-		-- upvalues: getPersistedToolResultText (copy), toAnswerQuestions (copy)
+		-- upvalues: getPersistedToolResultText (copy), extractQuestionsFromToolCall (copy)
 		local List = {}
 		
 		for toolCall in p5.toolCalls do
 			table.insert(List, toolCall)
 		end
 		table.sort(List)
-		local v2 = nil
 		local ToolCall = nil
+		local ExtractQuestionsFromToolCallResult = nil
 		
 		for _, value in List do
 			local IsCompleted = p6 and p6[value]
@@ -368,42 +343,14 @@ return {
 				ToolCall = p5.toolCalls[value]
 				IsCompleted = ToolCall.status == "completed" or ToolCall.status == "failed" or ToolCall.status == "cancelled" or getPersistedToolResultText(ToolCall) ~= nil
 			end
-			if not IsCompleted then
-				local AnswerQuestions = toAnswerQuestions(ToolCall.rawInput)
-				
-				if AnswerQuestions == nil then
-					v2 = nil
-				else
-					local Kind: string = ToolCall.kind
-					local IsAskUser: boolean = typeof(Kind) == "string" and string.lower(Kind) == "ask_user"
-					
-					if not IsAskUser then
-						local Title: string = ToolCall.title
-						IsAskUser = typeof(Title) == "string" and string.lower(Title) == "ask_user"
-					end
-					local IsAskUser1 = nil
-					if IsAskUser then
-						IsAskUser1 = true
-					else
-						local RawInput = ToolCall.rawInput
-						
-						if typeof(RawInput) == "table" then
-							local Name: string = RawInput.name
-							IsAskUser1 = typeof(Name) == "string" and string.lower(Name) == "ask_user"
-							
-							if not IsAskUser1 then
-								local ToolName: string = RawInput.toolName
-								IsAskUser1 = typeof(ToolName) == "string" and string.lower(ToolName) == "ask_user"
-							end
-						else
-							IsAskUser1 = false
-						end
-					end
-					v2 = if IsAskUser1 then AnswerQuestions else nil
-				end
-				if v2 ~= nil then
-					return v2, value, ToolCall.rawInput, ToolCall.turnId, ToolCall.referenceId
-				end
+			local NoExtractQuestionsFromToolCallResult: boolean = IsCompleted
+			
+			if not NoExtractQuestionsFromToolCallResult then
+				ExtractQuestionsFromToolCallResult = extractQuestionsFromToolCall(ToolCall)
+				NoExtractQuestionsFromToolCallResult = ExtractQuestionsFromToolCallResult == nil
+			end
+			if not NoExtractQuestionsFromToolCallResult then
+				return ExtractQuestionsFromToolCallResult, value, ToolCall.rawInput, ToolCall.turnId, ToolCall.referenceId
 			end
 		end
 		return nil, nil, nil, nil, nil
@@ -414,7 +361,7 @@ return {
 		return { text = formatToolResultText(p7) }
 	end,
 	getAnsweredPromptsFromTurnState = function(p7)
-		-- upvalues: toAnswerQuestions (copy), getPersistedToolResultText (copy), getAnswersByQuestionId (copy), getPromptFromToolResult (copy), getToolCallOrder (copy)
+		-- upvalues: extractQuestionsFromToolCall (copy), getPersistedToolResultText (copy), getAnswersByQuestionId (copy), getPromptFromToolResult (copy), getToolCallOrder (copy)
 		local List = {}
 		local List1 = {}
 		
@@ -425,45 +372,13 @@ return {
 		
 		for _, ToolCallId in List1 do
 			local ToolCall = p7.toolCalls[ToolCallId]
-			local AnswerQuestions = toAnswerQuestions(ToolCall.rawInput)
-			local v3 = nil
-			
-			if AnswerQuestions == nil then
-				v3 = nil
-			else
-				local Kind: string = ToolCall.kind
-				local IsAskUser: boolean = typeof(Kind) == "string" and string.lower(Kind) == "ask_user"
-				
-				if not IsAskUser then
-					local Title: string = ToolCall.title
-					IsAskUser = typeof(Title) == "string" and string.lower(Title) == "ask_user"
-				end
-				local IsAskUser1 = nil
-				if IsAskUser then
-					IsAskUser1 = true
-				else
-					local RawInput = ToolCall.rawInput
-					
-					if typeof(RawInput) == "table" then
-						local Name: string = RawInput.name
-						IsAskUser1 = typeof(Name) == "string" and string.lower(Name) == "ask_user"
-						
-						if not IsAskUser1 then
-							local ToolName: string = RawInput.toolName
-							IsAskUser1 = typeof(ToolName) == "string" and string.lower(ToolName) == "ask_user"
-						end
-					else
-						IsAskUser1 = false
-					end
-				end
-				v3 = if IsAskUser1 then AnswerQuestions else nil
-			end
+			local ExtractQuestionsFromToolCallResult = extractQuestionsFromToolCall(ToolCall)
 			local PersistedToolResultText = getPersistedToolResultText(ToolCall)
 			
-			if v3 ~= nil and PersistedToolResultText ~= nil then
+			if ExtractQuestionsFromToolCallResult ~= nil and PersistedToolResultText ~= nil then
 				local AnswersByQuestionId = getAnswersByQuestionId(PersistedToolResultText)
 				
-				for _, value in v3 do
+				for _, value in ExtractQuestionsFromToolCallResult do
 					local PromptFromToolResult = getPromptFromToolResult(value, AnswersByQuestionId[value.id], ToolCallId, (getToolCallOrder(p7, ToolCallId)))
 					
 					if PromptFromToolResult ~= nil then

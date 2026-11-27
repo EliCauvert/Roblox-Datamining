@@ -16,14 +16,12 @@ local ComposeFunction = DependenciesModule.SocialLibraries.RoduxTools.compose
 local MapStateToPropsModule = require(script.mapStateToProps)
 local MapDispatchToPropsModule = require(script.mapDispatchToProps)
 local GetInitialFilterModule = require(script.getInitialFilter)
-local GetInitialSectionModule = require(script.getInitialSection)
 local WithLocalizationFunction = DependenciesModule.withLocalization
 local GetFStringSocialAddFriendsPageLayerFunction = DependenciesModule.getFStringSocialAddFriendsPageLayer
 local FFlagFriendsPageAlwaysOpenPPV = require(Parent.SharedFlags).FFlagFriendsPageAlwaysOpenPPV
 local FFlagFriendsDeepLinkInitialFilter = require(Parent.SharedFlags).FFlagFriendsDeepLinkInitialFilter
-local FFlagFriendsDeepLinkScrollToCandidates = require(Parent.SharedFlags).FFlagFriendsDeepLinkScrollToCandidates
 
-local function v20() end
+local function v18() end
 
 local FriendsLandingEntryPoint = Roact.PureComponent:extend("FriendsLandingEntryPoint")
 FriendsLandingEntryPoint.defaultProps = {
@@ -35,7 +33,7 @@ FriendsLandingEntryPoint.defaultProps = {
 }
 
 function FriendsLandingEntryPoint.init(p1)
-	-- upvalues: Logger (copy), FilterStatesModule (copy), EnumScreensModule (copy), FFlagFriendsDeepLinkInitialFilter (copy), GetInitialFilterModule (copy), FFlagFriendsDeepLinkScrollToCandidates (copy), GetInitialSectionModule (copy), Roact (copy), v20 (copy), MemoizeFunction (copy), FriendsLandingAnalyticsModule (copy)
+	-- upvalues: Logger (copy), FilterStatesModule (copy), EnumScreensModule (copy), FFlagFriendsDeepLinkInitialFilter (copy), GetInitialFilterModule (copy), v18 (copy), MemoizeFunction (copy), FriendsLandingAnalyticsModule (copy)
 	if p1.props.logger then
 		Logger:setParent(p1.props.logger)
 	end
@@ -49,22 +47,12 @@ function FriendsLandingEntryPoint.init(p1)
 	if FFlagFriendsDeepLinkInitialFilter then
 		p1.state.filter = GetInitialFilterModule(p1.props.initialFilter)
 	end
-	if FFlagFriendsDeepLinkScrollToCandidates then
-		p1.state.initialSection = GetInitialSectionModule(p1.props.initialSection, p1.state.filter)
-	end
 	p1.localization = { pageError = "CommonUI.Messages.Response.PageError" }
 	
 	function p1.setFilterKeys(Filter)
-		-- upvalues: FFlagFriendsDeepLinkScrollToCandidates (upval), p1 (copy), Roact (upval)
+		-- upvalues: p1 (copy)
 		assert(type(Filter) == "string", "Expected value to be a string")
-		
-		if FFlagFriendsDeepLinkScrollToCandidates and Filter ~= p1.state.filter then
-			p1:setState({ filter = Filter, initialSection = Roact.None })
-			
-			return
-		else
-			p1:setState({ filter = Filter })
-		end
+		p1:setState({ filter = Filter })
 	end
 	
 	function p1.showErrorToast(ToastTitle)
@@ -75,7 +63,7 @@ function FriendsLandingEntryPoint.init(p1)
 	end
 	
 	function p1.refreshPage(p2)
-		-- upvalues: p1 (copy), Logger (upval), v20 (upval)
+		-- upvalues: p1 (copy), Logger (upval), v18 (upval)
 		return p1.props.refreshPageData({
 			localUserId = p1.props.localUserId,
 			inactiveFriendsNetworkRequestStatus = p1.props.inactiveFriendsNetworkRequestStatus,
@@ -84,7 +72,7 @@ function FriendsLandingEntryPoint.init(p1)
 				p1.showErrorToast(p2.errorMessage)
 				Logger:info("Refreshing FriendsLanding data failed")
 			end,
-			onResolve = p2.onResolve or v20
+			onResolve = p2.onResolve or v18
 		})
 	end
 	
@@ -98,9 +86,9 @@ function FriendsLandingEntryPoint.init(p1)
 end
 
 function FriendsLandingEntryPoint.render(p1)
-	-- upvalues: WithLocalizationFunction (copy), Roact (copy), FriendsLandingAnalyticsModule (copy), FriendsLandingContextModule (copy), FFlagFriendsPageAlwaysOpenPPV (copy), FFlagFriendsDeepLinkScrollToCandidates (copy), NavigatorModule (copy), BottomInsetBackground (copy)
+	-- upvalues: WithLocalizationFunction (copy), Roact (copy), FriendsLandingAnalyticsModule (copy), FriendsLandingContextModule (copy), FFlagFriendsPageAlwaysOpenPPV (copy), NavigatorModule (copy), BottomInsetBackground (copy)
 	return WithLocalizationFunction(p1.localization)(function(_)
-		-- upvalues: Roact (upval), FriendsLandingAnalyticsModule (upval), p1 (copy), FriendsLandingContextModule (upval), FFlagFriendsPageAlwaysOpenPPV (upval), FFlagFriendsDeepLinkScrollToCandidates (upval), NavigatorModule (upval), BottomInsetBackground (upval)
+		-- upvalues: Roact (upval), FriendsLandingAnalyticsModule (upval), p1 (copy), FriendsLandingContextModule (upval), FFlagFriendsPageAlwaysOpenPPV (upval), NavigatorModule (upval), BottomInsetBackground (upval)
 		return Roact.createElement(FriendsLandingAnalyticsModule.Context.Provider, { value = p1.getAnalytics(p1.props.localUserId) }, {
 			Roact.createElement(FriendsLandingContextModule.Provider, {
 				value = {
@@ -122,8 +110,7 @@ function FriendsLandingEntryPoint.render(p1)
 					openProfilePeekView = p1.props.openProfilePeekView,
 					openPlayerContextualMenu = if FFlagFriendsPageAlwaysOpenPPV then nil else p1.props.openPlayerContextualMenu,
 					openAmpUpsell = p1.props.openAmpUpsell,
-					passedNavParams = p1.props.passedNavParams,
-					initialSection = if FFlagFriendsDeepLinkScrollToCandidates then p1.state.initialSection else nil
+					passedNavParams = p1.props.passedNavParams
 				}
 			}, {
 				navigation = Roact.createElement(NavigatorModule, { navigation = p1.props.navigation }),

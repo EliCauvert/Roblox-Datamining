@@ -25,16 +25,11 @@ local ViewProfileSourceValues = AnalyticsConstantsModule.viewProfileSourceValues
 local SharedFlagsModule = require(Parent.SharedFlags)
 local FFlagBlockEDPClickthrough = SharedFlagsModule.FFlagBlockEDPClickthrough
 local FFlagJoinabilityCTARefactor = SharedFlagsModule.FFlagJoinabilityCTARefactor
-local FFlagCoplayHistoryGameJoinCard = SharedFlagsModule.FFlagCoplayHistoryGameJoinCard
 local FFlagJoinabilityCTAContextCopy = SharedFlagsModule.FFlagJoinabilityCTAContextCopy
 local FFlagDesktopGameJoinCardGamepadSupport = SharedFlagsModule.FFlagDesktopGameJoinCardGamepadSupport
 local FFlagConsoleOpenGameJoinCard = SharedFlagsModule.FFlagConsoleOpenGameJoinCard
 local FFlagGameJoinCardContent = SharedFlagsModule.FFlagGameJoinCardContent
 local FFlagLuaAppAddTestIdsForArrow = SharedFlagsModule.FFlagLuaAppAddTestIdsForArrow
-local FFlagSocialPlayIarcRatingLogoDEV = SharedFlagsModule.FFlagSocialPlayIarcRatingLogo_DEV
-local FFlagExperienceGuidelinesRatingDisplayStoreModule = require(Parent.DataHydration.FFlagExperienceGuidelinesRatingDisplayStore)
-local UseGetMinimizedRatingIcon = if FFlagSocialPlayIarcRatingLogoDEV and FFlagExperienceGuidelinesRatingDisplayStoreModule then require(Parent.SocialCommon).Hooks.useGetMinimizedRatingIcon else nil
-local AppendIarcRatingIconFunction = require(Parent.SocialCommon).Components.appendIarcRatingIcon
 local UseGameJoinCardGamepadNavigationFunction = nil
 local AssignPrimaryFocusRefFunction = nil
 
@@ -46,13 +41,11 @@ end
 local AgeCheckUpsellCTAModule = require(script.Parent.Parent.AgeCheckUpsellCTA)
 local _ = require(GameJoinCard.Components.Actions.Types)
 local BuildJoinCardActionsComponentModule = require(GameJoinCard.Components.Actions.buildJoinCardActionsComponent)
-local ContextCopyTextKeysModule = require(GameJoinCard.Components.Actions.ContextCopyTextKeys)
-local v1: number = if FFlagSocialPlayIarcRatingLogoDEV and FFlagExperienceGuidelinesRatingDisplayStoreModule then 300 else 260
 
 return function(p1)
-	-- upvalues: UseTokensFunction (copy), UseScaledValueFunction (copy), v1 (copy), UseLocalizationFunction (copy), FFlagCoplayHistoryGameJoinCard (copy), ContextCopyTextKeysModule (copy), FFlagSocialPlayIarcRatingLogoDEV (copy), UseGetMinimizedRatingIcon (copy), ReactModule (copy), GetBuilderIconForCurrentPlatformFunction (copy), ViewEDPsourceValues (copy), ViewProfileSourceValues (copy), ControlState (copy), FFlagConsoleOpenGameJoinCard (copy), FFlagDesktopGameJoinCardGamepadSupport (copy), UseGameJoinCardGamepadNavigationFunction (ref), UseComposedRefFunction (copy), FFlagJoinabilityCTARefactor (copy), FFlagGameJoinCardContent (copy), Skeleton (copy), Radius (copy), AssignPrimaryFocusRefFunction (ref), BuildJoinCardActionsComponentModule (copy), Button (copy), FFlagLuaAppAddTestIdsForArrow (copy), FFlagJoinabilityCTAContextCopy (copy), View (copy), AppendIarcRatingIconFunction (copy), Image (copy), FFlagBlockEDPClickthrough (copy), StateLayerAffordance (copy), Text (copy), Icon (copy), IconSize (copy), AgeCheckUpsellCTAModule (copy), ButtonVariant (copy), InputSize (copy), FoundationModule (copy)
+	-- upvalues: UseTokensFunction (copy), UseScaledValueFunction (copy), UseLocalizationFunction (copy), ReactModule (copy), GetBuilderIconForCurrentPlatformFunction (copy), ViewEDPsourceValues (copy), ViewProfileSourceValues (copy), ControlState (copy), FFlagConsoleOpenGameJoinCard (copy), FFlagDesktopGameJoinCardGamepadSupport (copy), UseGameJoinCardGamepadNavigationFunction (ref), UseComposedRefFunction (copy), FFlagJoinabilityCTARefactor (copy), FFlagGameJoinCardContent (copy), Skeleton (copy), Radius (copy), AssignPrimaryFocusRefFunction (ref), BuildJoinCardActionsComponentModule (copy), Button (copy), FFlagLuaAppAddTestIdsForArrow (copy), FFlagJoinabilityCTAContextCopy (copy), View (copy), Image (copy), FFlagBlockEDPClickthrough (copy), StateLayerAffordance (copy), Text (copy), Icon (copy), IconSize (copy), AgeCheckUpsellCTAModule (copy), ButtonVariant (copy), InputSize (copy), FoundationModule (copy)
 	local UseTokensResult = UseTokensFunction()
-	local UseScaledValueResult = UseScaledValueFunction(v1)
+	local UseScaledValueResult = UseScaledValueFunction(260)
 	local UseLocalizationResult = UseLocalizationFunction({
 		isPlaying = "Feature.Friends.Text.IsPlaying",
 		joinButton = "Feature.Profile.Action.JoinGame",
@@ -60,26 +53,14 @@ return function(p1)
 		viewProfile = "Feature.Profile.Action.ViewProfile",
 		playTogether = "Feature.GameJoin.Label.PlayTogether",
 		playTogetherSoon = "Feature.GameJoin.Label.PlayTogetherSoon",
-		differentServer = "Feature.GameJoin.Description.DifferentServer",
-		played = "Feature.GameJoin.Label.Played"
+		differentServer = "Feature.GameJoin.Description.DifferentServer"
 	})
-	local UseLocalizationResult1 = if FFlagCoplayHistoryGameJoinCard then UseLocalizationFunction(ContextCopyTextKeysModule) else nil
 	local LayoutOrder = p1.layoutOrder
 	local PlayerName = p1.playerName
 	local ExperienceName = p1.experienceName
-	local v2 = nil
-	local v3 = nil
-	local Size1500 = 0
-	
-	if FFlagSocialPlayIarcRatingLogoDEV then
-		if UseGetMinimizedRatingIcon ~= nil then
-			v2, v45 = UseGetMinimizedRatingIcon(if p1.isOpen then p1.universeId else nil)
-		end
-		Size1500 = if p1.isConsole then UseTokensResult.Size.Size_1500 else UseTokensResult.Size.Size_1300
-	end
 	local GameIconUrl = p1.gameIconUrl
 	local IsLoading = p1.isLoading
-	local Size1500_1 = if p1.isConsole then UseTokensResult.Size.Size_1500 else UseTokensResult.Size.Size_1000
+	local Size1500 = if p1.isConsole then UseTokensResult.Size.Size_1500 else UseTokensResult.Size.Size_1000
 	local UseMemoResult = ReactModule.useMemo(function()
 		-- upvalues: GetBuilderIconForCurrentPlatformFunction (upval)
 		return GetBuilderIconForCurrentPlatformFunction()
@@ -111,7 +92,7 @@ return function(p1)
 	local UseComposedRefResult = if FFlagDesktopGameJoinCardGamepadSupport or FFlagConsoleOpenGameJoinCard then UseComposedRefFunction(RootRef, p1.focusRootRef) else nil
 	local IsAgeCheckRequired = p1.ageCheckRequired == true
 	local t = {}
-	local v4 = nil
+	local v1 = nil
 	
 	if FFlagJoinabilityCTARefactor or FFlagGameJoinCardContent and p1.content ~= nil then
 		if p1.areActionsLoading then
@@ -121,7 +102,7 @@ return function(p1)
 				radius = Radius.Medium
 			})
 		else
-			t, v65 = BuildJoinCardActionsComponentModule(PrimaryButtonFocusRef and AssignPrimaryFocusRefFunction(p1.actions, PrimaryButtonFocusRef) or p1.actions, if FFlagCoplayHistoryGameJoinCard then UseLocalizationResult1 else {
+			t, v55 = BuildJoinCardActionsComponentModule(PrimaryButtonFocusRef and AssignPrimaryFocusRefFunction(p1.actions, PrimaryButtonFocusRef) or p1.actions, {
 				playTogether = UseLocalizationResult.playTogether,
 				playTogetherSoon = UseLocalizationResult.playTogetherSoon,
 				differentServer = UseLocalizationResult.differentServer
@@ -143,10 +124,10 @@ return function(p1)
 					LayoutOrder = LayoutOrder,
 					testId = if FFlagLuaAppAddTestIdsForArrow then `--game-join-card-action-{p2.id}` else nil
 				})
-			end, if FFlagCoplayHistoryGameJoinCard then p1.isCoplayInviteCard else nil)
+			end)
 		end
 	end
-	local NoIsConsole: boolean = if FFlagJoinabilityCTAContextCopy then not p1.isConsole else FFlagCoplayHistoryGameJoinCard and (p1.isCoplayInviteCard == true and not p1.isConsole)
+	local NoIsConsole: boolean = FFlagJoinabilityCTAContextCopy and not p1.isConsole
 	
 	return ReactModule.createElement(FoundationModule.Popover.Root, { isOpen = p1.isOpen }, {
 		Anchor = ReactModule.createElement(FoundationModule.Popover.Anchor, { anchorRef = p1.anchorRef }),
@@ -166,7 +147,7 @@ return function(p1)
 				Size = UDim2.fromOffset(UseScaledValueResult, 0),
 				AutomaticSize = Enum.AutomaticSize.Y,
 				LayoutOrder = LayoutOrder,
-				backgroundStyle = if FFlagSocialPlayIarcRatingLogoDEV then UseTokensResult.Color.OverMedia.OverMedia_100 else UseTokensResult.Color.OverMedia.OverMedia_300,
+				backgroundStyle = UseTokensResult.Color.OverMedia.OverMedia_300,
 				ref = if RootRef == nil then p1.focusRootRef else UseComposedRefResult,
 				selectionGroup = if IsConsole then {
 					SelectionBehaviorUp = Enum.SelectionBehavior.Stop,
@@ -178,15 +159,15 @@ return function(p1)
 				GameInfoRow = ReactModule.createElement(View, {
 					tag = "row gap-small items-center size-full-0 auto-y align-x-left",
 					LayoutOrder = 1
-				}, AppendIarcRatingIconFunction({
+				}, {
 					GameIcon = if IsLoading then ReactModule.createElement(Skeleton, {
 						LayoutOrder = 1,
-						Size = UDim2.fromOffset(Size1500_1, Size1500_1),
+						Size = UDim2.fromOffset(Size1500, Size1500),
 						radius = Radius.Small
 					}) else ReactModule.createElement(View, {
 						LayoutOrder = 1,
 						ClipsDescendants = true,
-						Size = UDim2.fromOffset(Size1500_1, Size1500_1)
+						Size = UDim2.fromOffset(Size1500, Size1500)
 					}, {
 						Media = if FFlagGameJoinCardContent and p1.content then p1.content.media else nil,
 						Thumbnail = ReactModule.createElement(Image, {
@@ -201,7 +182,6 @@ return function(p1)
 					TextContainer = ReactModule.createElement(View, {
 						tag = "col size-full-0 auto-y gap-xxsmall shrink align-x-left items-start",
 						LayoutOrder = 2,
-						ZIndex = if FFlagSocialPlayIarcRatingLogoDEV then 2 else nil,
 						AutomaticSize = Enum.AutomaticSize.Y
 					}, {
 						GameInfo = ReactModule.createElement(View, {
@@ -225,7 +205,7 @@ return function(p1)
 								IsPlaying = ReactModule.createElement(Text, {
 									tag = "shrink-0 auto-xy text-body-medium content-default text-align-x-left",
 									LayoutOrder = 2,
-									Text = if FFlagGameJoinCardContent and p1.content then p1.content.activityText elseif FFlagCoplayHistoryGameJoinCard and p1.isCoplayInviteCard then UseLocalizationResult.played else UseLocalizationResult.isPlaying
+									Text = if FFlagGameJoinCardContent and p1.content then p1.content.activityText else UseLocalizationResult.isPlaying
 								})
 							}),
 							GameName = if IsLoading then ReactModule.createElement(Skeleton, {
@@ -240,8 +220,7 @@ return function(p1)
 							}, {
 								Label = ReactModule.createElement(Text, {
 									tag = "size-full-0 auto-y text-title-medium text-no-wrap text-align-x-left text-truncate-split content-emphasis",
-									Text = ExperienceName,
-									LayoutOrder = if FFlagSocialPlayIarcRatingLogoDEV then 1 else nil
+									Text = ExperienceName
 								})
 							})
 						}),
@@ -266,20 +245,20 @@ return function(p1)
 							})
 						}) else nil
 					})
-				}, if IsLoading then nil else v2, v3, Size1500)),
-				CtaContext = if NoIsConsole and v4 ~= nil then ReactModule.createElement(View, {
+				}),
+				CtaContext = if NoIsConsole and v1 ~= nil then ReactModule.createElement(View, {
 					tag = "col align-x-left items-start gap-xxsmall size-full-0 auto-y",
 					LayoutOrder = 2
 				}, {
 					CtaContextTitle = ReactModule.createElement(Text, {
 						tag = "auto-xy text-body-medium text-align-x-left content-emphasis",
 						LayoutOrder = 1,
-						Text = v4.title
+						Text = v1.title
 					}),
-					CtaContextSubtitle = if v4.subtitle == nil then nil else ReactModule.createElement(Text, {
+					CtaContextSubtitle = if v1.subtitle == nil then nil else ReactModule.createElement(Text, {
 						tag = "auto-xy text-label-small text-align-x-left content-muted",
 						LayoutOrder = 2,
-						Text = v4.subtitle
+						Text = v1.subtitle
 					})
 				}) else nil,
 				Actions = if p1.isConsole then nil else ReactModule.createElement(View, {

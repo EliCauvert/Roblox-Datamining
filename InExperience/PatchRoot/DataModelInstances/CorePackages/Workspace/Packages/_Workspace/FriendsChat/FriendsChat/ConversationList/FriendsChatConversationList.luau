@@ -9,7 +9,6 @@ local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalizati
 local AppChatModule = require(Parent.AppChat)
 local UseConversationSearchModule = require(Parent.AppChat.useConversationSearch)
 local ChatPlacementContextModule = require(Parent.AppChat.ChatPlacementContext)
-local ConversationListTrailingItemsModule = require(Parent.AppChat.ConversationListTrailingItems)
 local SearchIntroducedConversationIdsModule = require(Parent.AppChat.searchIntroducedConversationIds)
 local FFlagFriendsChatServerSideConversationSearchModule = require(FriendsChat.Flags.FFlagFriendsChatServerSideConversationSearch)
 local FFlagFriendsChatUseViewRecyclerConversationListModule = require(FriendsChat.Flags.FFlagFriendsChatUseViewRecyclerConversationList)
@@ -32,11 +31,6 @@ local FFlagAppChatSearchSessionTelemetryModule = require(Parent.AppChat.FFlagApp
 local FFlagAppChatSearchSendPlacementModule = require(Parent.AppChat.FFlagAppChatSearchSendPlacement)
 local UseFriendsChatLandingTelemetryModule = require(script.Parent.Parent.Telemetry.ChatLanding.useFriendsChatLandingTelemetry)
 local GetLandingEmptyStateTypeModule = require(script.Parent.Parent.Telemetry.ChatLanding.getLandingEmptyStateType)
-local UseSuggestedUserItemsModule = require(script.Parent.SuggestedUsers.useSuggestedUserItems)
-local RenderSuggestedUserModule = require(script.Parent.SuggestedUsers.renderSuggestedUser)
-local ShouldHideSearchBarModule = require(script.Parent.shouldHideSearchBar)
-local UseIsUnderFriendCountThresholdModule = require(script.Parent.SuggestedUsers.useIsUnderFriendCountThreshold)
-local FFlagFriendsChatSuggestedUsersModule = require(FriendsChat.Flags.FFlagFriendsChatSuggestedUsers)
 local ButtonVariant = FoundationModule.Enums.ButtonVariant
 local Icon = FoundationModule.Icon
 local IconButton = FoundationModule.IconButton
@@ -127,7 +121,7 @@ local _ = function(p1, Pattern): boolean
 end
 
 return ReactModule.memo(function(Frame)
-	-- upvalues: UseTokensFunction (copy), FFlagFriendsChatScaleConversationRowHeightModule (copy), UseTextSizeOffsetFunction (copy), UseChatPlatformModule (copy), UseChatWindowSettingsModule (copy), ReactModule (copy), UseLocalizationFunction (copy), config1 (copy), UseInterpolatedClientSettingsModule (copy), ReactIsModule (copy), mergeTransparency (copy), GetConversationRowHeightModule (copy), UseChatInputBarSettingsModule (copy), LayoutConstantsModule (copy), FFlagExpChatTabShortcutNav (copy), FoundationModule (copy), UseConversationListFunction (copy), UseConversationListPaginationModule (copy), FFlagFriendsChatServerSideConversationSearchModule (copy), GetConversationTitleFunction (copy), UseConversationSearchModule (copy), FFlagAppChatSearchSendPlacementModule (copy), ChatPlacementContextModule (copy), FFlagAppChatSearchSessionTelemetryModule (copy), UseChatSearchResultsTelemetryModule (copy), ResolveListStateModule (copy), FFlagFriendsChatLandingTelemetryFieldsModule (copy), GetLandingEmptyStateTypeModule (copy), UseChatSearchSessionModule (copy), UseFriendsChatLandingTelemetryModule (copy), FFlagFriendsChatSuggestedUsersModule (copy), UseSuggestedUserItemsModule (copy), ConversationListTrailingItemsModule (copy), UseIsUnderFriendCountThresholdModule (copy), ShouldHideSearchBarModule (copy), SearchIntroducedConversationIdsModule (copy), RenderSuggestedUserModule (copy), UseChatWindowReportModule (copy), NoFFlagFriendsChatUseViewRecyclerConversationListModule (copy), ReactOtterModule (copy), FriendsChatConversationListScrollbarIdleHideMsRatio (copy), config (copy), FFlagFriendsChatConversationListFocusNav (copy), UseFocusConversationListModule (copy), ConversationRow (copy), PromiseModule (copy), FFlagFriendsChatUseViewRecyclerConversationListModule (copy), ConversationListViewRecycler (copy), FriendsChatConversationListScrollbarThickness (copy), BidirectionalFlatList (copy), FriendsChatConversationListWindowSize (copy), FriendsChatConversationListInitialNumToRender (copy), FriendsChatConversationListPaginationThresholdRows (copy), FriendsChatConversationListAutoscrollToTopThreshold (copy), View (copy), Icon (copy), IconName (copy), IconSize (copy), NormalizeFontFaceFunction (copy), Text (copy), IconButton (copy), InputSize (copy), ButtonVariant (copy)
+	-- upvalues: UseTokensFunction (copy), FFlagFriendsChatScaleConversationRowHeightModule (copy), UseTextSizeOffsetFunction (copy), UseChatPlatformModule (copy), UseChatWindowSettingsModule (copy), ReactModule (copy), UseLocalizationFunction (copy), config1 (copy), UseInterpolatedClientSettingsModule (copy), ReactIsModule (copy), mergeTransparency (copy), GetConversationRowHeightModule (copy), UseChatInputBarSettingsModule (copy), LayoutConstantsModule (copy), FFlagExpChatTabShortcutNav (copy), FoundationModule (copy), UseConversationListFunction (copy), UseConversationListPaginationModule (copy), FFlagFriendsChatServerSideConversationSearchModule (copy), GetConversationTitleFunction (copy), UseConversationSearchModule (copy), FFlagAppChatSearchSendPlacementModule (copy), ChatPlacementContextModule (copy), FFlagAppChatSearchSessionTelemetryModule (copy), UseChatSearchResultsTelemetryModule (copy), ResolveListStateModule (copy), FFlagFriendsChatLandingTelemetryFieldsModule (copy), GetLandingEmptyStateTypeModule (copy), UseChatSearchSessionModule (copy), UseFriendsChatLandingTelemetryModule (copy), SearchIntroducedConversationIdsModule (copy), UseChatWindowReportModule (copy), NoFFlagFriendsChatUseViewRecyclerConversationListModule (copy), ReactOtterModule (copy), FriendsChatConversationListScrollbarIdleHideMsRatio (copy), config (copy), FFlagFriendsChatConversationListFocusNav (copy), UseFocusConversationListModule (copy), ConversationRow (copy), PromiseModule (copy), FFlagFriendsChatUseViewRecyclerConversationListModule (copy), ConversationListViewRecycler (copy), FriendsChatConversationListScrollbarThickness (copy), BidirectionalFlatList (copy), FriendsChatConversationListWindowSize (copy), FriendsChatConversationListInitialNumToRender (copy), FriendsChatConversationListPaginationThresholdRows (copy), FriendsChatConversationListAutoscrollToTopThreshold (copy), View (copy), Icon (copy), IconName (copy), IconSize (copy), NormalizeFontFaceFunction (copy), Text (copy), IconButton (copy), InputSize (copy), ButtonVariant (copy)
 	local UseTokensResult = UseTokensFunction()
 	local UseTextSizeOffsetResult = if FFlagFriendsChatScaleConversationRowHeightModule then UseTextSizeOffsetFunction() else nil
 	local GetTransparencyStoreFunction = UseChatPlatformModule().getTransparencyStore
@@ -235,46 +229,7 @@ return ReactModule.memo(function(Frame)
 		noLoadedConversationsFound = UseLocalizationResult.NoChatFound,
 		noFriends = UseLocalizationResult.NoFriends
 	}
-	local LoadingConversations = if ResolveListStateModuleResult.isInitialLoading then config2.loadingConversations elseif ResolveListStateModuleResult.shouldShowBlockingError then config2.loadConversationsError elseif ResolveListStateModuleResult.shouldShowEmptyState then if ResolveListStateModuleResult.hasNoFriends then if FFlagFriendsChatSuggestedUsersModule then nil else config2.noFriends else config2.noLoadedConversationsFound else nil
-	local UseMemoResult2 = nil
-	local HasNewFriend = nil
-	
-	if FFlagFriendsChatSuggestedUsersModule then
-		local UseSuggestedUserItemsModuleResult = UseSuggestedUserItemsModule({
-			isSearchActive = IsNotUseStateResultMatch1,
-			hasFetchedAllConversations = ResolveListStateModuleResult.oldestConversationIsFetched == true
-		})
-		local Items2 = UseSuggestedUserItemsModuleResult.items
-		HasNewFriend = UseSuggestedUserItemsModuleResult.hasNewFriend
-		UseMemoResult2 = ReactModule.useMemo(function()
-			-- upvalues: Items2 (copy), ShouldOfferRetry (copy), LoadingConversations (copy), ConversationListTrailingItemsModule (upval)
-			if #Items2 == 0 or ShouldOfferRetry then
-				return nil
-			elseif LoadingConversations == nil then
-				return Items2
-			else
-				local list = {
-					ConversationListTrailingItemsModule.statusText("listStatus", LoadingConversations)
-				}
-				table.move(Items2, 1, #Items2, 2, list)
-				
-				return list
-			end
-		end, { Items2, LoadingConversations, ShouldOfferRetry })
-	end
-	local HasLoadingConversations: boolean = UseMemoResult2 ~= nil and LoadingConversations ~= nil
-	local v4 = nil
-	local Callback = nil
-	
-	if FFlagFriendsChatSuggestedUsersModule then
-		local UseStateResult1, UseStateResult2_1 = ReactModule.useState(false)
-		Callback = UseStateResult2_1
-		v4 = ShouldHideSearchBarModule({
-			isUnderFriendCountThreshold = UseIsUnderFriendCountThresholdModule(),
-			hasSearchText = IsNotUseStateResultMatch,
-			isSearchBoxFocused = UseStateResult1
-		})
-	end
+	local LoadingConversations = if ResolveListStateModuleResult.isInitialLoading then config2.loadingConversations elseif ResolveListStateModuleResult.shouldShowBlockingError then config2.loadConversationsError elseif ResolveListStateModuleResult.shouldShowEmptyState then if ResolveListStateModuleResult.hasNoFriends then config2.noFriends else config2.noLoadedConversationsFound else nil
 	local UseResult = ReactModule.useCallback(function(p1)
 		-- upvalues: Frame (copy), FFlagFriendsChatServerSideConversationSearchModule (upval), SearchIntroducedConversationIdsModule (upval)
 		if Frame.onConversationActivated == nil or p1 == nil or p1.id == nil then return end
@@ -283,31 +238,20 @@ return ReactModule.memo(function(Frame)
 		end
 		Frame.onConversationActivated(p1.id)
 	end, { Frame.onConversationActivated })
-	local UseResult1 = if FFlagFriendsChatSuggestedUsersModule then ReactModule.useCallback(function(p1)
-		-- upvalues: RenderSuggestedUserModule (upval), Frame (copy)
-		return RenderSuggestedUserModule(p1, Frame.onConversationActivated)
-	end, { Frame.onConversationActivated }) else nil
 	local UseChatWindowReportModuleResult = UseChatWindowReportModule(Frame.onAbsoluteSizeChanged)
 	local UseChatWindowReportModuleResult1 = UseChatWindowReportModule(Frame.onAbsolutePositionChanged)
-	local UseResult2 = ReactModule.useCallback(function()
-		-- upvalues: Callback (ref), UseFriendsChatLandingTelemetryModuleResult (copy), GetTransparencyStoreFunction (copy)
-		if Callback then
-			Callback(true)
-		end
+	local UseResult1 = ReactModule.useCallback(function()
+		-- upvalues: UseFriendsChatLandingTelemetryModuleResult (copy), GetTransparencyStoreFunction (copy)
 		UseFriendsChatLandingTelemetryModuleResult.fireSearchActivatedEvent()
 		GetTransparencyStoreFunction(false).setTextboxFocus()
 	end, {
 		GetTransparencyStoreFunction,
-		UseFriendsChatLandingTelemetryModuleResult.fireSearchActivatedEvent,
-		Callback
+		UseFriendsChatLandingTelemetryModuleResult.fireSearchActivatedEvent
 	})
-	local UseResult3 = ReactModule.useCallback(function()
-		-- upvalues: Callback (ref), GetTransparencyStoreFunction (copy)
-		if Callback then
-			Callback(false)
-		end
+	local UseResult2 = ReactModule.useCallback(function()
+		-- upvalues: GetTransparencyStoreFunction (copy)
 		GetTransparencyStoreFunction(false).clearTextboxFocus()
-	end, { GetTransparencyStoreFunction, Callback })
+	end, { GetTransparencyStoreFunction })
 	ReactModule.useEffect(function()
 		-- upvalues: GetTransparencyStoreFunction (copy)
 		return function()
@@ -315,14 +259,14 @@ return ReactModule.memo(function(Frame)
 			GetTransparencyStoreFunction(false).clearTextboxFocus()
 		end
 	end, { GetTransparencyStoreFunction })
-	local v5 = nil
-	local Callback1 = nil
+	local v4 = nil
+	local Callback = nil
 	
 	if NoFFlagFriendsChatUseViewRecyclerConversationListModule then
 		local UseRefResult1 = ReactModule.useRef(nil)
 		local UseAnimatedBindingResult2 = nil
-		v5, UseAnimatedBindingResult2 = ReactOtterModule.useAnimatedBinding(1)
-		Callback1 = ReactModule.useCallback(function()
+		v4, UseAnimatedBindingResult2 = ReactOtterModule.useAnimatedBinding(1)
+		Callback = ReactModule.useCallback(function()
 			-- upvalues: UseRefResult1 (copy), UseAnimatedBindingResult2 (ref), ReactOtterModule (upval), FriendsChatConversationListScrollbarIdleHideMsRatio (upval), config (upval)
 			if UseRefResult1.current ~= nil then
 				pcall(task.cancel, UseRefResult1.current)
@@ -346,19 +290,19 @@ return ReactModule.memo(function(Frame)
 			end
 		end, {})
 	end
-	local UseResult4 = ReactModule.useCallback(function(_)
-		-- upvalues: NoFFlagFriendsChatUseViewRecyclerConversationListModule (upval), Callback1 (ref), GetTransparencyStoreFunction (copy)
+	local UseResult3 = ReactModule.useCallback(function(_)
+		-- upvalues: NoFFlagFriendsChatUseViewRecyclerConversationListModule (upval), Callback (ref), GetTransparencyStoreFunction (copy)
 		if NoFFlagFriendsChatUseViewRecyclerConversationListModule then
-			Callback1()
+			Callback()
 		end
 		GetTransparencyStoreFunction(false).resetAllTransparency()
 	end, {
 		GetTransparencyStoreFunction,
-		if NoFFlagFriendsChatUseViewRecyclerConversationListModule then Callback1 else nil
+		if NoFFlagFriendsChatUseViewRecyclerConversationListModule then Callback else nil
 	})
 	local Text1 = if FFlagFriendsChatConversationListFocusNav and Items1[1] ~= nil then tostring(Items1[1].id) else nil
 	local UseFocusConversationListModuleResult, UseFocusConversationListModuleResult2, UseFocusConversationListModuleResult3 = UseFocusConversationListModule(GetTransparencyStoreFunction, Text1)
-	local UseResult5 = ReactModule.useCallback(function(p1)
+	local UseResult4 = ReactModule.useCallback(function(p1)
 		-- upvalues: ReactModule (upval), ConversationRow (upval), ConversationRowHeightModule (copy), UseResult (copy), UseFriendsChatLandingTelemetryModuleResult (copy), Frame (copy), FFlagFriendsChatConversationListFocusNav (upval), Text1 (ref), UseFocusConversationListModuleResult2 (copy)
 		local Text = tostring(p1.item.id)
 		
@@ -379,7 +323,7 @@ return ReactModule.memo(function(Frame)
 		UseFriendsChatLandingTelemetryModuleResult.fireConversationImpressionEvent,
 		UseResult, Frame.localUserId, Text1, UseFocusConversationListModuleResult2
 	})
-	local UseResult6 = ReactModule.useCallback(function(_, Index: number)
+	local UseResult5 = ReactModule.useCallback(function(_, Index: number)
 		-- upvalues: ConversationRowHeightModule (copy)
 		return {
 			length = ConversationRowHeightModule,
@@ -387,25 +331,25 @@ return ReactModule.memo(function(Frame)
 			index = Index
 		}
 	end, { ConversationRowHeightModule })
-	local UseResult7 = ReactModule.useCallback(function()
+	local UseResult6 = ReactModule.useCallback(function()
 		-- upvalues: ResolveListStateModuleResult (copy)
 		ResolveListStateModuleResult.loadNext()
 	end, { ResolveListStateModuleResult.loadNext })
-	local UseResult8 = ReactModule.useCallback(function(_, p1)
-		-- upvalues: UseRefResult (copy), UseResult7 (copy)
+	local UseResult7 = ReactModule.useCallback(function(_, p1)
+		-- upvalues: UseRefResult (copy), UseResult6 (copy)
 		local Current = UseRefResult.current
 		
 		if Current ~= nil and p1 <= Current.AbsoluteSize.Y then
-			UseResult7()
+			UseResult6()
 		end
-	end, { UseResult7 })
-	local UseResult9 = ReactModule.useCallback(function()
-		-- upvalues: UseResult7 (copy), PromiseModule (upval)
-		UseResult7()
+	end, { UseResult6 })
+	local UseResult8 = ReactModule.useCallback(function()
+		-- upvalues: UseResult6 (copy), PromiseModule (upval)
+		UseResult6()
 		
 		return PromiseModule.resolve()
-	end, { UseResult7 })
-	local UseResult10 = ReactModule.useCallback(function()
+	end, { UseResult6 })
+	local UseResult9 = ReactModule.useCallback(function()
 		-- upvalues: UseStateResult2 (copy)
 		UseStateResult2("")
 	end, {})
@@ -413,7 +357,7 @@ return ReactModule.memo(function(Frame)
 	local OldestConversationIsFetched = ResolveListStateModuleResult.oldestConversationIsFetched
 	local ListKey = if FFlagFriendsChatServerSideConversationSearchModule then ResolveListStateModuleResult.listKey else nil
 	local CreateElementFunction2 = ReactModule.createElement
-	local v6 = "Frame"
+	local v5 = "Frame"
 	local config3 = {
 		Name = "chatWindow",
 		Active = true,
@@ -450,8 +394,7 @@ return ReactModule.memo(function(Frame)
 			tag = "padding-small",
 			BorderSizePixel = 0,
 			LayoutOrder = 1,
-			Size = UDim2.new(1, 0, 0, Size1200),
-			Visible = not v4
+			Size = UDim2.new(1, 0, 0, Size1200)
 		}, {
 			SearchContent = ReactModule.createElement("Frame", {
 				Name = "SearchContent",
@@ -499,8 +442,8 @@ return ReactModule.memo(function(Frame)
 						TextTransparency = MergeTransparencyResult1,
 						TextXAlignment = Enum.TextXAlignment.Left,
 						TextYAlignment = Enum.TextYAlignment.Center,
-						[ReactModule.Event.Focused] = UseResult2,
-						[ReactModule.Event.FocusLost] = UseResult3,
+						[ReactModule.Event.Focused] = UseResult1,
+						[ReactModule.Event.FocusLost] = UseResult2,
 						[ReactModule.Change.Text] = ReactModule.useCallback(function(p1)
 							-- upvalues: UseStateResult2 (copy)
 							UseStateResult2(p1.Text)
@@ -512,7 +455,7 @@ return ReactModule.memo(function(Frame)
 						Name = "FriendsChatConversationListSearchClear",
 						LayoutOrder = 3,
 						tag = "auto-xy",
-						onActivated = UseResult10
+						onActivated = UseResult9
 					}, {
 						Icon = ReactModule.createElement(Icon, {
 							name = IconName.CircleX,
@@ -532,11 +475,11 @@ return ReactModule.memo(function(Frame)
 		Name = "ListArea",
 		BorderSizePixel = 0,
 		LayoutOrder = 2,
-		Size = UDim2.new(1, 0, 1, if v4 then 0 else -Size1200)
+		Size = UDim2.new(1, 0, 1, -Size1200)
 	}
 	local t = {}
 	local CreateElementFunction = ReactModule.createElement
-	local v7 = "CanvasGroup"
+	local v6 = "CanvasGroup"
 	local config6 = {
 		Name = "ListContent",
 		BackgroundTransparency = 1,
@@ -563,26 +506,23 @@ return ReactModule.memo(function(Frame)
 				Size = UDim2.fromScale(1, 1),
 				entryHeight = ConversationRowHeightModule,
 				itemList = Items1,
-				loadNext = UseResult7,
+				loadNext = UseResult6,
 				isLoadingNext = IsLoadingNextPage,
 				oldestConversationIsFetched = OldestConversationIsFetched,
 				scrollbarThickness = FriendsChatConversationListScrollbarThickness,
-				onScrollUpdate = UseResult4,
+				onScrollUpdate = UseResult3,
 				rowProps = { showBackground = false, localUserId = Frame.localUserId },
 				localUserId = Frame.localUserId,
 				handleRef = UseFocusConversationListModuleResult3,
 				onActivated = UseResult,
 				fireConversationClickedEvent = UseFriendsChatLandingTelemetryModuleResult.fireConversationClickedEvent,
-				fireConversationImpressionEvent = UseFriendsChatLandingTelemetryModuleResult.fireConversationImpressionEvent,
-				trailingItems = UseMemoResult2,
-				renderSuggestedUser = UseResult1,
-				holdScrollPositionOnChange = HasNewFriend
+				fireConversationImpressionEvent = UseFriendsChatLandingTelemetryModuleResult.fireConversationImpressionEvent
 			}) else ReactModule.createElement(BidirectionalFlatList, {
 				enableAutoscrollToTop = true,
 				key = ListKey,
 				data = Items1,
-				renderItem = UseResult5,
-				getItemLayout = UseResult6,
+				renderItem = UseResult4,
+				getItemLayout = UseResult5,
 				keyExtractor = function(p1): string
 					return (tostring(p1.id))
 				end,
@@ -593,15 +533,15 @@ return ReactModule.memo(function(Frame)
 					BackgroundTransparency = 1,
 					BorderSizePixel = 0,
 					Selectable = false,
-					ScrollBarImageTransparency = if NoFFlagFriendsChatUseViewRecyclerConversationListModule then v5 else nil,
+					ScrollBarImageTransparency = if NoFFlagFriendsChatUseViewRecyclerConversationListModule then v4 else nil,
 					ScrollBarThickness = FriendsChatConversationListScrollbarThickness
 				},
 				contentContainerStyle = { BackgroundTransparency = 1, BorderSizePixel = 0 },
 				windowSize = FriendsChatConversationListWindowSize,
 				initialNumToRender = FriendsChatConversationListInitialNumToRender,
-				onScroll = UseResult4,
-				onContentSizeChange = UseResult8,
-				onEndReached = UseResult9,
+				onScroll = UseResult3,
+				onContentSizeChange = UseResult7,
+				onEndReached = UseResult8,
 				onEndReachedThreshold = ConversationRowHeightModule * FriendsChatConversationListPaginationThresholdRows,
 				AutomaticCanvasSize = Enum.AutomaticSize.XY,
 				CanvasSize = UDim2.fromScale(0, 0),
@@ -611,7 +551,7 @@ return ReactModule.memo(function(Frame)
 	}
 	local Element = nil
 	
-	if LoadingConversations == nil or HasLoadingConversations then
+	if LoadingConversations == nil then
 		Element = nil
 	else
 		local Transparency = UseTokensResult.Color.Content.Default.Transparency
@@ -640,8 +580,8 @@ return ReactModule.memo(function(Frame)
 		}) or nil
 	end
 	config7.Status = Element
-	t.ListContent = CreateElementFunction(v7, config6, config7)
+	t.ListContent = CreateElementFunction(v6, config6, config7)
 	config4.ListArea = CreateElementFunction1(View, config5, t)
 	
-	return (CreateElementFunction2(v6, config3, config4))
+	return (CreateElementFunction2(v5, config3, config4))
 end)

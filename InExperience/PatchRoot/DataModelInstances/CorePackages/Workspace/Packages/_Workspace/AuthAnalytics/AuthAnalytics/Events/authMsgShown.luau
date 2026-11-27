@@ -1,9 +1,7 @@
-﻿local Parent = script.Parent.Parent
-local CheckAndSendEventModule = require(Parent.Utils.checkAndSendEvent)
-local FFlagLuaAppSsoLinkCandidateModule = require(Parent.Flags.FFlagLuaAppSsoLinkCandidate)
+﻿local CheckAndSendEventModule = require(script.Parent.Parent.Utils.checkAndSendEvent)
 
-return function(p1, State, Field, ErrorCode, AssociatedText, Origin)
-	-- upvalues: FFlagLuaAppSsoLinkCandidateModule (copy), CheckAndSendEventModule (copy)
+return function(p1, State, Field, ErrorCode, AssociatedText)
+	-- upvalues: CheckAndSendEventModule (copy)
 	local t = {}
 	
 	if State then
@@ -17,9 +15,6 @@ return function(p1, State, Field, ErrorCode, AssociatedText, Origin)
 	end
 	if AssociatedText then
 		t.associatedText = AssociatedText
-	end
-	if FFlagLuaAppSsoLinkCandidateModule and Origin then
-		t.origin = Origin
 	end
 	CheckAndSendEventModule(p1, "authMsgShown", t)
 end

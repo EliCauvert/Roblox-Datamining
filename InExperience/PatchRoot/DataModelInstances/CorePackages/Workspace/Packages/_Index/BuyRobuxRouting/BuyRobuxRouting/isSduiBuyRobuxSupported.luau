@@ -4,5 +4,5 @@ local EngineFeaturesModule = require(BuyRobuxRouting.EngineFeatures)
 
 return function()
 	-- upvalues: SharedFlagsModule (copy), EngineFeaturesModule (copy)
-	return SharedFlagsModule.FFlagSduiBuyRobuxHydration and (EngineFeaturesModule.isRobloxSubscriptionReadSupported() and EngineFeaturesModule.isFirstTimePurchaseConsentStorageSupported())
+	return SharedFlagsModule.FFlagSduiBuyRobuxHydration and (SharedFlagsModule.FFlagInitializeSduiForApp and (EngineFeaturesModule.isRobloxSubscriptionReadSupported() and EngineFeaturesModule.isFirstTimePurchaseConsentStorageSupported()))
 end

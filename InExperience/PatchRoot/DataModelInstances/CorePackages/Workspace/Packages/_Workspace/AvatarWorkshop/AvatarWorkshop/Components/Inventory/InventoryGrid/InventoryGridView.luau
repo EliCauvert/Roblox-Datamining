@@ -3,22 +3,17 @@ local Parent = AvatarWorkshop.Parent
 local ReactModule = require(Parent.React)
 local FoundationModule = require(Parent.Foundation)
 local LocalizationModule = require(Parent.Localization)
-local AddNewCardModule = require(AvatarWorkshop.Components.AddNewCard.AddNewCard)
 local ItemCardModule = require(AvatarWorkshop.Components.ItemCard.ItemCard)
-local _ = require(AvatarWorkshop.Constants.TileShape)
 local VirtualizedGridModule = require(AvatarWorkshop.Components.VirtualizedGrid.VirtualizedGrid)
-local InventoryGridConstantsModule = require(script.Parent.InventoryGridConstants)
 local _ = require(script.Parent.InventoryGridTypes)
 local InputSize = FoundationModule.Enums.InputSize
 local UseLocalizationFunction = LocalizationModule.Hooks.useLocalization
 
-local function renderItem(p1, TileShape)
-	-- upvalues: InventoryGridConstantsModule (copy), ReactModule (copy), AddNewCardModule (copy), ItemCardModule (copy)
-	return if p1.id == InventoryGridConstantsModule.ADD_NEW_ITEM_ID then ReactModule.createElement(AddNewCardModule, { onActivated = p1.onActivated, tileShape = TileShape }) else ReactModule.createElement(ItemCardModule, {
+local function renderItem(p1)
+	-- upvalues: ReactModule (copy), ItemCardModule (copy)
+	return ReactModule.createElement(ItemCardModule, {
 		showDetails = false,
 		image = p1.image,
-		title = p1.title,
-		tileShape = TileShape,
 		isSelected = p1.isSelected,
 		onActivated = p1.onActivated
 	})
@@ -51,18 +46,13 @@ local function renderFooter(p1, p2)
 end
 
 return function(p1)
-	-- upvalues: UseLocalizationFunction (copy), ReactModule (copy), renderItem (copy), FoundationModule (copy), VirtualizedGridModule (copy), keyExtractor (copy), renderFooter (copy)
+	-- upvalues: UseLocalizationFunction (copy), ReactModule (copy), FoundationModule (copy), VirtualizedGridModule (copy), renderItem (copy), keyExtractor (copy), renderFooter (copy)
 	local UseLocalizationResult = UseLocalizationFunction({
 		loadItemsError = "Feature.AvatarWorkshop.Message.LoadItemsError",
 		loadMoreItemsError = "Feature.AvatarWorkshop.Message.LoadMoreItemsError",
 		noItemsOwned = "Feature.AvatarWorkshop.Message.NoItemsOwned",
 		tryAgain = "Feature.AvatarWorkshop.Action.TryAgain"
 	})
-	local TileShape = p1.tileShape
-	local UseResult = ReactModule.useCallback(function(p2)
-		-- upvalues: renderItem (upval), TileShape (copy)
-		return renderItem(p2, TileShape)
-	end, { TileShape })
 	
 	return if p1.hasFetchError then ReactModule.createElement(FoundationModule.View, {
 		tag = "size-full padding-large",
@@ -100,7 +90,7 @@ return function(p1)
 			columnGap = p1.columnGap,
 			contentPaddingTop = p1.contentPaddingY,
 			contentPaddingBottom = p1.contentPaddingY,
-			renderItem = UseResult,
+			renderItem = renderItem,
 			keyExtractor = keyExtractor,
 			onEndReached = p1.onEndReached,
 			ListFooterSlot = renderFooter(p1, UseLocalizationResult)

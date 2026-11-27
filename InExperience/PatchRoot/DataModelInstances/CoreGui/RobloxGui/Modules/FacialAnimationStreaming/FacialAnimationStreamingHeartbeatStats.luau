@@ -1,12 +1,8 @@
-﻿local CorePackages = game:GetService("CorePackages")
-local RobloxGui = game:GetService("CoreGui"):WaitForChild("RobloxGui")
-local Default = require(CorePackages.Workspace.Packages.LoggingProtocol).default
-local MockableProxyServicesModule = require(CorePackages.Workspace.Packages.MockableProxyServices)
-local FFlagFacialAnimationStreamingUseExtractedModulesModule = require(RobloxGui.Modules.Flags.FFlagFacialAnimationStreamingUseExtractedModules)
-local Players = if FFlagFacialAnimationStreamingUseExtractedModulesModule then MockableProxyServicesModule.Players else game:GetService("Players")
-local RbxAnalyticsService = if FFlagFacialAnimationStreamingUseExtractedModulesModule then MockableProxyServicesModule.RbxAnalyticsService else game:GetService("RbxAnalyticsService")
-local FaceAnimatorService = if FFlagFacialAnimationStreamingUseExtractedModulesModule then MockableProxyServicesModule.FaceAnimatorService else game:GetService("FaceAnimatorService")
-local GetFIntFacialAnimationStreamingHeartbeatStatsIntervalSecModule = require(RobloxGui.Modules.Flags.GetFIntFacialAnimationStreamingHeartbeatStatsIntervalSec)
+﻿local Players = game:GetService("Players")
+local Default = require(game:GetService("CorePackages").Workspace.Packages.LoggingProtocol).default
+local RbxAnalyticsService = game:GetService("RbxAnalyticsService")
+local FaceAnimatorService = game:GetService("FaceAnimatorService")
+local GetFIntFacialAnimationStreamingHeartbeatStatsIntervalSecModule = require(game:GetService("CoreGui"):WaitForChild("RobloxGui").Modules.Flags.GetFIntFacialAnimationStreamingHeartbeatStatsIntervalSec)
 local RbxAnalyticsServiceExposePlaySessionIdEngineFeature = game:GetEngineFeature("RbxAnalyticsServiceExposePlaySessionId")
 local AvatarChatHeartbeatStatsModule = require(script.Parent.RobloxTelemetryConfigs.AvatarChatHeartbeatStats)
 local Flag = false

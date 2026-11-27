@@ -12,6 +12,7 @@ local DebounceModule = require(ExpChat.ChatWindow.Helpers.debounce)
 local GetFFlagExpChatSendWindowScrollEventModule = require(ExpChat.Flags.getFFlagExpChatSendWindowScrollEvent)
 local FFlagExpChatLimitScrollingV2WindowModule = require(ExpChat.Flags.FFlagExpChatLimitScrollingV2Window)
 local FFlagExpChatScrollbarInsetModule = require(ExpChat.Flags.FFlagExpChatScrollbarInset)
+local FFlagExpChatFixWarmMountBottomLockModule = require(ExpChat.Flags.FFlagExpChatFixWarmMountBottomLock)
 local FFlagExpChatRenderHistoricalMessagesModule = require(ExpChat.Flags.FFlagExpChatRenderHistoricalMessages)
 local ExpChatPerfTracker = require(Parent.ChatUIPrimitives).Telemetry.ExpChatPerfTracker
 local FFlagExpChatPerfTrackerTabName = require(Parent.ChatUIPrimitives).Flags.FFlagExpChatPerfTrackerTabName
@@ -37,7 +38,7 @@ local Callback = DebounceModule(function()
 end, (game:DefineFastInt("ExpChatWindowScrollV3Debounce", 0)))
 
 return ReactModule.memo(function(p1)
-	-- upvalues: UseStyleFunction (copy), ReactModule (copy), SignalsReactModule (copy), UserInputService (copy), ExpChatPerfTracker (copy), FFlagExpChatPerfTrackerTabName (copy), ExpChatScrollLockThresholdRatio (copy), GetFFlagExpChatSendWindowScrollEventModule (copy), Callback (copy), FFlagExpChatRenderHistoricalMessagesModule (copy), AdvanceHistoryScrollModule (copy), ConfigModule (copy), FFlagExpChatScrollbarInsetModule (copy), FFlagExpChatLimitScrollingV2WindowModule (copy)
+	-- upvalues: UseStyleFunction (copy), ReactModule (copy), SignalsReactModule (copy), UserInputService (copy), ExpChatPerfTracker (copy), FFlagExpChatPerfTrackerTabName (copy), ExpChatScrollLockThresholdRatio (copy), GetFFlagExpChatSendWindowScrollEventModule (copy), Callback (copy), FFlagExpChatRenderHistoricalMessagesModule (copy), AdvanceHistoryScrollModule (copy), ConfigModule (copy), FFlagExpChatScrollbarInsetModule (copy), FFlagExpChatLimitScrollingV2WindowModule (copy), FFlagExpChatFixWarmMountBottomLockModule (copy)
 	local Theme = UseStyleFunction().Theme
 	local UseRefResult = ReactModule.useRef(nil)
 	local IsScrollToTopOnReset = p1.scrollToTopOnReset == true
@@ -215,7 +216,7 @@ return ReactModule.memo(function(p1)
 			Size = UDim2.fromScale(1, 1),
 			CanvasSize = UDim2.new(),
 			[ReactModule.Change.CanvasPosition] = UseResult2,
-			[ReactModule.Change.AbsoluteWindowSize] = UseResult3
+			[ReactModule.Change.AbsoluteWindowSize] = if FFlagExpChatFixWarmMountBottomLockModule then UseResult3 else nil
 		}, {
 			contentPadding = if _UDim == nil then nil else ReactModule.createElement("UIPadding", { PaddingTop = _UDim }),
 			messages = ReactModule.createElement(ReactModule.Fragment, nil, UseSignalStateResult)

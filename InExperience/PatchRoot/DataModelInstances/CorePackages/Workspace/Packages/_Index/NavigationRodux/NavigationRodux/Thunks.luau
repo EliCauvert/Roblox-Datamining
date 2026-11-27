@@ -1,7 +1,6 @@
 ﻿local NavigationRodux = script:FindFirstAncestor("NavigationRodux")
 
 return {
-	ConfirmSignedInWebsite = require(NavigationRodux.Thunks.ConfirmSignedInWebsite),
 	NavigateBack = require(NavigationRodux.Thunks.NavigateBack),
 	NavigateDown = require(NavigationRodux.Thunks.NavigateDown),
 	NavigateSideways = require(NavigationRodux.Thunks.NavigateSideways),

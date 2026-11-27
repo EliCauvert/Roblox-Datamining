@@ -1,1 +1,1 @@
-﻿return game:DefineFastFlag("SquadMemberJoinDialogAndOverflowMenuV2", false)
+﻿return game:DefineFastFlag("SquadMemberJoinDialogAndOverflowMenu", false)

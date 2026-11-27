@@ -9,6 +9,7 @@ local CorePackages = game:GetService("CorePackages")
 local RobloxGui = game:GetService("CoreGui"):WaitForChild("RobloxGui")
 local Url = require(CorePackages.Workspace.Packages.CoreScriptsCommon).Url
 game:DefineFastFlag("EnableSetUserBlocklistInitialized", false)
+local FFlagInExperienceUserProfileSettingsEnabledModule = require(RobloxGui.Modules.Common.Flags.FFlagInExperienceUserProfileSettingsEnabled)
 local FFlagInExperienceRequestProfileSettingsModule = require(RobloxGui.Modules.Common.Flags.FFlagInExperienceRequestProfileSettings)
 local FStringRccInExperienceNameEnabledAllowListModule = require(RobloxGui.Modules.Common.Flags.FStringRccInExperienceNameEnabledAllowList)
 local UseNewDirectChatAPI = game:DefineFastFlag("UseNewDirectChatAPI", false)
@@ -383,15 +384,17 @@ local function Callback1(Player: Player)
 end
 
 local function onPlayerAdded(Player: Player)
-	-- upvalues: sendPlayerBlockList (copy), NewPlayerGroupDetails (copy), t1 (copy), getPlayerGroupDetails (copy), sendPlayerAllInExperienceNameEnabled (copy), Callback (copy), sendPlayerAllCanManage (copy), getPlayerCanManage (copy), sendCanChatWith (copy), FFlagEnablePartyNudgeAfterJoin (copy), FFlagShowFriendJoinedYouToastForNonReferredJoins (copy), Callback1 (copy)
+	-- upvalues: sendPlayerBlockList (copy), NewPlayerGroupDetails (copy), t1 (copy), getPlayerGroupDetails (copy), FFlagInExperienceUserProfileSettingsEnabledModule (copy), sendPlayerAllInExperienceNameEnabled (copy), Callback (copy), sendPlayerAllCanManage (copy), getPlayerCanManage (copy), sendCanChatWith (copy), FFlagEnablePartyNudgeAfterJoin (copy), FFlagShowFriendJoinedYouToastForNonReferredJoins (copy), Callback1 (copy)
 	coroutine.wrap(sendPlayerBlockList)(Player)
 	NewPlayerGroupDetails:FireClient(Player, t1)
 	
 	if Player.UserId > 0 then
 		coroutine.wrap(getPlayerGroupDetails)(Player)
 	end
-	sendPlayerAllInExperienceNameEnabled(Player)
-	coroutine.wrap(Callback)(Player)
+	if FFlagInExperienceUserProfileSettingsEnabledModule then
+		sendPlayerAllInExperienceNameEnabled(Player)
+		coroutine.wrap(Callback)(Player)
+	end
 	sendPlayerAllCanManage(Player)
 	coroutine.wrap(getPlayerCanManage)(Player)
 	sendCanChatWith(Player)

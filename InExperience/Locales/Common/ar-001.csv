@@ -60,13 +60,11 @@ Amp.Upsell.Title.RequestSent,تم إرسال الطلب
 Authentication.AccountSwitch.Action.SwitchAccount,تبديل الحسابات
 Authentication.AccountSwitch.Header.SwitchAccountSentenceCase,
 Authentication.CrossDevice.Heading.QuickLogin,تسجيل دخول سريع
-Authentication.Login.Action.Leave,مغادرة
 Authentication.Login.Action.QuickSignIn,
 Authentication.Login.Action.Save,حفظ
 Authentication.Login.Button.CloseAndSwitchPlatformAccount,يجب الخروج من منصة Roblox للتبديل إلى الحساب على منصة {platformAccountName}
 Authentication.Login.Button.UseDifferentRobloxAccount,استخدِم حساب Roblox مختلف
 Authentication.Login.Button.XboxAccountSwitcher,تبديل حساب Xbox
-Authentication.Login.Description.LeaveAccountSetup,إذا غادرت الآن، فلن يتم إعداد حسابك على Roblox.
 Authentication.Login.Error.PasskeyOnlyAccount,تم إعداد حسابك لتسجيل الدخول باستخدام مفتاح مرور فقط. جرِّب تسجيل الدخول باستخدام مفتاح المرور أو استعادة حسابك.
 Authentication.Login.Error.PlatformAccountConnectionFailure,يتعذّر التحقق من حساب المنصة. يُرجى إعادة المحاولة لاحقًا.
 Authentication.Login.Heading.IncompatibleAccounts,حسابات غير متوافقة
@@ -899,7 +897,7 @@ CoreScripts.InGameMenu.ConfirmLeaveGame,هل تريد حقًّا المغادر�
 CoreScripts.InGameMenu.ControllerBar.Back,
 CoreScripts.InGameMenu.ControllerBar.Cancel,
 CoreScripts.InGameMenu.ControllerBar.CloseMoreMenu,إغلاق قائمة المزيد
-CoreScripts.InGameMenu.ControllerBar.Leave,
+CoreScripts.InGameMenu.ControllerBar.Leave,مغادرة
 CoreScripts.InGameMenu.ControllerBar.OpenMoreMenu,فتح قائمة المزيد
 CoreScripts.InGameMenu.ControllerBar.Respawn,Respawn
 CoreScripts.InGameMenu.ControllerBar.RespawnCharacter,استرجاع الشخصية
@@ -2062,11 +2060,8 @@ Feature.AvatarSwitcher.Message.UnknownSupport,لا يزال بإمكانك تب�
 Feature.AvatarSwitcher.Message.Unsupported,تستخدم هذه التجربة أفاتارًا مخصصًا ولا تدعم أفاتارات منصة Roblox.
 Feature.AvatarWorkshop.Action.EditAvatar,تحرير الأفاتار
 Feature.AvatarWorkshop.Action.TryAgain,
-Feature.AvatarWorkshop.Description.AddAvatar,هل تريد إضافة هذا الأفاتار إلى أفاتاراتك؟
-Feature.AvatarWorkshop.Heading.AddAvatar,إضافة الأفاتار؟
 Feature.AvatarWorkshop.Heading.Customize,
 Feature.AvatarWorkshop.Heading.YourAvatars,أفاتاراتك
-Feature.AvatarWorkshop.Label.DefaultAvatarName,
 Feature.AvatarWorkshop.Message.LoadItemsError,حدث خطأ ما أثناء تحميل عناصرك.
 Feature.AvatarWorkshop.Message.LoadMoreItemsError,تعذَّر تحميل المزيد من العناصر.
 Feature.AvatarWorkshop.Message.NoItemsOwned,لا تملك أي عناصر هنا حتى الآن.
@@ -2339,8 +2334,6 @@ Feature.Build.Label.AdvancedModel,
 Feature.Build.Label.All,
 Feature.Build.Label.AllGames,كل الألعاب
 Feature.Build.Label.AmountAvailable,الاستخدام المتاح: {AMOUNT}
-Feature.Build.Label.AttachmentCountPlural,{count} من المرفقات
-Feature.Build.Label.AttachmentCountSingular,1 مرفق
 Feature.Build.Label.Autosaved,تم الحفظ تلقائيًا
 Feature.Build.Label.Available,المتاح
 Feature.Build.Label.AvailableForPurchase,متاح للشراء
@@ -2360,7 +2353,6 @@ Feature.Build.Label.DefaultDeveloperProductName,منتج المطوّر
 Feature.Build.Label.DefaultModel,افتراضي
 Feature.Build.Label.Deleted,تم الحذف
 Feature.Build.Label.DescribeIdea,صِف فكرتك
-Feature.Build.Label.DescribeIdeaOrPick,صِف فكرتك أو اختر واحدة مما يلي
 Feature.Build.Label.Description,
 Feature.Build.Label.DeveloperProductDescription,الوصف: {DESCRIPTION}
 Feature.Build.Label.DeveloperProductName,الاسم: {NAME}
@@ -3248,7 +3240,6 @@ Feature.Chat.Label.SearchFriends,البحث عن أصدقاء
 Feature.Chat.Label.SearchWord,
 Feature.Chat.Label.SelectToRemove,اضغط للإزالة
 Feature.Chat.Label.SnoozePartyNotifications,كتم إشعارات الفرقة داخل التجربة لمدة:
-Feature.Chat.Label.StartChatting,ابدأ الدردشة
 Feature.Chat.Label.SwipeToReplyTooltip,اسحب للرد
 Feature.Chat.Label.TapToRemove,
 Feature.Chat.Label.TimestampDaysAbbreviatedPlural,{num_days}ي
@@ -3515,7 +3506,6 @@ Feature.Friends.Button.GotIt,
 Feature.Friends.Description.ContactsModal,"جهات اتصالك على Roblox! أنشئ صداقة لمعاينة أفاتارهم وملفاتهم الشخصية. انتقل إلى صفحة ""إضافة أصدقاء"" لمعاينة المزيد من الأشخاص الذين قد تعرفهم."
 Feature.Friends.Description.DoMoreWithTrustedConnections,استمتِع بالمزيد على منصّة Roblox مع جهات التواصل الموثوقة. أضِف الأشخاص الذين تعرفهم وتثق بهم فقط.
 Feature.Friends.Description.DoMoreWithTrustedFriends,استمتع بالمزيد على منصّة Roblox مع الأصدقاء الموثوقين. أضِف الأشخاص الذين تعرفهم وتثق بهم فقط.
-Feature.Friends.Description.FoundFromContactImporter,أرسلت من مستورد جهات الاتصال
 Feature.Friends.Description.FromContacts,من جهات الاتصال
 Feature.Friends.Description.FromContactsV2,{contactName} من جهات الاتصال
 Feature.Friends.Description.FromQrCode,من كود QR
@@ -3606,7 +3596,6 @@ Feature.Friends.Label.SentFromWithContext,أرسلت من {gameName}
 Feature.Friends.Label.SingularMutualFriend,صديق مشترك
 Feature.Friends.Label.Suggested,مقترح
 Feature.Friends.Label.Unfollowed,تم إلغاء المتابعة
-Feature.Friends.Label.YouAreFollowing,أنت تتابع
 Feature.Friends.Label.YourLinkedParent,أحد حساب الوالدين المرتبط بحسابك
 Feature.Friends.LinkText.LearnMore,
 Feature.Friends.Message.DiscoverableSettings,هل تريد أن نوصي بك لمستخدمي Roblox الذين لديهم رقم هاتفك؟
@@ -3651,7 +3640,6 @@ Feature.FriendsActivityFeed.Label.ViewRecentActivity,عرض النشاط الأ�
 Feature.FriendsMenu.Label.SelectedFriendsCount,تم تحديد {numerator}/{denominator} من الأصدقاء
 Feature.FriendsMenu.Label.SelectedFriendsCountNoLimit,تم تحديد {selectedCount} من الأصدقاء
 Feature.GameBadges.Label.Experience,
-Feature.GameDetails.Action.Continue,
 Feature.GameDetails.Action.GameDetails,
 Feature.GameDetails.Action.GiveFeedback,تقديم الملاحظات
 Feature.GameDetails.Action.NotInterested,غير مهتم
@@ -3683,12 +3671,9 @@ Feature.GameDetails.Label.WhyThisAd,
 Feature.GameDetails.Label.Yes,
 Feature.GameDetails.Message.AdPreferences,تفضيلات الإعلانات
 Feature.GameDetails.Message.AnonymousFeedbackTermsOfUse,تتم مشاركة الردود دون الكشف عن هوية أصحابها، ويتم تصنيفها ضمن فئة الملاحظات وفقًا {underlineStart}لشروط الخدمة في منصّة Roblox{underlineEnd}.
-Feature.GameDetails.Message.ExternalLinkWarning,"بالضغط على ""متابعة""، ستتم إعادة توجيهك إلى موقع إلكتروني لا تملكه ولا تديره منصّة Roblox. قد تكون لدى هذا الموقع شروط وسياسات خصوصية مختلفة."
 Feature.GameDetails.Message.HelpImproveExperience,ساعدنا في تحسين تجربتك
 Feature.GameDetails.Message.HidingExperienceQuestion,لماذا تخفي هذه التجربة؟
-Feature.GameDetails.Message.LeavingRobloxTitle,مغادرة Roblox
 Feature.GameDetails.Message.PurchaseGameV2,التمكن من الوصول إلى {gameName} بمبلغ {X} Robux؟
-Feature.GameDetails.Message.RobloxWebsiteSignedInWarning,"بالنقر على ""متابعة""، سيُفتح موقع roblox.com في متصفح الويب وسيتم تسجيل دخولك إلى حسابك على Roblox."
 Feature.GameDetails.Message.SponsoredDisclosure.Error,تعذّر عرض معلومات الإعلان بسبب خطأ مؤقت.
 Feature.GameDetails.Message.SponsoredDisclosure.O18NonPersonalizedNoLink,"يظهر لك هذا المحتوى المُموَّل استنادًا إلى عوامل غير مُخصَّصة مثل معلومات الجهاز والموقع والعمر لتقديم محتوى مناسب لك. مُصمِّم التجربة: {CreatorName}. مموِّل هذا الإعلان: {PayerName}. لمعرفة المزيد، يُرجى زيارة صفحة ""الخصوصية وحساسية المحتوى"" ضمن الإعدادات في حسابك من هنا:"
 Feature.GameDetails.Message.SponsoredDisclosure.O18PersonalizedNoLink,"يظهر لك هذا المحتوى المُموَّل بناءً على عوامل مختلفة مثل موقعك الجغرافي ومعلومات الجهاز والعمر وسلوكك على المنصّة، بهدف عرض محتوى ملائم لك. مُصمِّم التجربة: {CreatorName}. مُموِّل هذا الإعلان: {PayerName}. لمعرفة المزيد، يُرجى زيارة صفحة ""الخصوصية وحساسية المحتوى"" ضمن الإعدادات في حسابك من هنا:"
@@ -3707,12 +3692,9 @@ Feature.GameFollows.TooltipTurnedOnNotifications,تم تشغيل الإشعار�
 Feature.GameJoin.Description.DifferentServer,ستبدأ في خادم مختلف
 Feature.GameJoin.Label.PlayTogether,يمكنكما اللعب معًا
 Feature.GameJoin.Label.PlayTogetherSoon,يمكنكما اللعب معًا قريبًا
-Feature.GameJoin.Label.Played,تم اللعب
-Feature.GameJoin.Label.RecentCoplay,لعبتما معًا مؤخرًا
 Feature.GamePage.Action.BackToTop,العودة إلى الأعلى
 Feature.GamePage.Label.Ad,
 Feature.GamePage.Label.Sponsored,برعاية
-Feature.GamePage.LabelCancelField,
 Feature.GamePage.QuickLaunch.LaunchError.ContextualPlayabilityUnverifiedSeventeenPlusUser,هذه التجربة غير متوفرة بسبب حالة التحقق من عمرك.
 Feature.GamePage.QuickLaunch.LaunchError.GuestProhibited,لا يستطيع الضيوف الانضمام إلى هذه التجربة.
 Feature.GamePage.QuickLaunch.LaunchError.PurchaseRequired,تتطلب هذه التجربة إجراء عملية شراء لتتمكن من زيارتها.
@@ -3943,7 +3925,6 @@ Feature.Moments.Action.Hide,إخفاء التفاصيل
 Feature.Moments.Action.HowToCapture,عرض كيفية الالتقاط
 Feature.Moments.Action.KeepEditing,متابعة التحرير
 Feature.Moments.Action.Leave,
-Feature.Moments.Action.LoadMore,
 Feature.Moments.Action.Minimize,تصغير
 Feature.Moments.Action.Ok,
 Feature.Moments.Action.Play,
@@ -4246,7 +4227,7 @@ Feature.PlayerSearchResults.Label.NewUsername,اسم مستخدم جديد
 Feature.PlayerSearchResults.Label.Previously,سابقًا
 Feature.PlayerSearchResults.Label.ThisIsYou,هذا أنت
 Feature.PlayerSearchResults.Label.You,أنت
-Feature.PlayerSearchResults.Label.YouAreFollowing,
+Feature.PlayerSearchResults.Label.YouAreFollowing,أنت تتابع
 Feature.PlayerSearchResults.Label.YouAreFriends,صرت صديقًا
 Feature.PrivateServers.Action.CreatePrivateServer,إنشاء خادم خاص
 Feature.PrivateServers.Action.FreeWithBlackbird,مجانًا مع Plus
@@ -4970,6 +4951,7 @@ Feature.UniversalShareSheet.Response.SharedCustomMessage,{CUSTOM_MESSAGE} + شخ
 Feature.UniversalShareSheet.Response.SharedMessage,تم إرسال الرسالة
 Feature.UniversalShareSheet.Response.SharedMultipleMessages,تم إرسال الرسائل
 Feature.UniversalShareSheet.SharedCustomMultipleMessages,{CUSTOM_MESSAGE} + {N} من الأشخاص الآخرين
+Feature.UserLibrary.Label.MyLibrary,مكتبتي
 Feature.VIPServer.Message.TooManyFreeServersOnGame,لا يمكنك امتلاك المزيد من الخوادم الخاصة المجانية في هذه اللعبة.
 Feature.VIPServer.Message.TooManyTotalActiveFreeServers,لا يمكنك الحصول على خوادم خاصة نشطة مجانية أكثر مما لديك. يرجى إلغاء تنشيط بعض الخوادم الأخرى أولاً.
 Feature.VerificationUpsell.Action.AddPhone,إضافة هاتف
@@ -5140,8 +5122,8 @@ IAPExperience.InsufficientRobux.Text.YouNeed,تحتاج إلى {robux} إضاف�
 IAPExperience.InsufficientRobux.Title.InsufficientRobux,
 IAPExperience.LeaveRoblox.Action.Cancel,
 IAPExperience.LeaveRoblox.Action.Continue,
-IAPExperience.LeaveRoblox.Text.ExternalWebsiteWarning,
-IAPExperience.LeaveRoblox.Title.LeavingRoblox,
+IAPExperience.LeaveRoblox.Text.ExternalWebsiteWarning,"بالضغط على ""متابعة""، ستتم إعادة توجيهك إلى موقع إلكتروني لا تملكه ولا تديره منصّة Roblox. قد تكون لدى هذا الموقع شروط وسياسات خصوصية مختلفة."
+IAPExperience.LeaveRoblox.Title.LeavingRoblox,مغادرة Roblox
 IAPExperience.Loading.Text.PurchasingItem,جاري شراء العنصر...
 IAPExperience.Loading.Text.PurchasingRobux,شراء Robux...
 IAPExperience.Loading.Text.WaitingForPurchase,في انتظار الشراء...

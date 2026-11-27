@@ -5,12 +5,13 @@ local HeaderBar = DependenciesModule.UIBlox.App.Bar.HeaderBar
 local UseDesignTokensFunction = require(Parent.Style).useDesignTokens
 local GetFFlagFixConnectTabSearchBarHeightFunction = DependenciesModule.GetFFlagFixConnectTabSearchBarHeight
 local ReactModule = require(Parent.React)
+local FFlagAppThemeHalloween2026FriendsBackground = require(Parent.SharedFlags).FFlagAppThemeHalloween2026FriendsBackground
 local UseThemeBackgroundFunction = require(Parent.ThemeBackground).useThemeBackground
 
 return function(p1)
-	-- upvalues: UseDesignTokensFunction (copy), UseThemeBackgroundFunction (copy), ReactModule (copy), HeaderBar (copy), GetFFlagFixConnectTabSearchBarHeightFunction (copy)
+	-- upvalues: UseDesignTokensFunction (copy), FFlagAppThemeHalloween2026FriendsBackground (copy), UseThemeBackgroundFunction (copy), ReactModule (copy), HeaderBar (copy), GetFFlagFixConnectTabSearchBarHeightFunction (copy)
 	local Size2400 = UseDesignTokensFunction().Size.Size_2400
-	local HasUseThemeBackgroundResult = UseThemeBackgroundFunction() ~= nil
+	local HasUseThemeBackgroundResult: boolean = if FFlagAppThemeHalloween2026FriendsBackground then UseThemeBackgroundFunction() ~= nil else false
 	
 	return ReactModule.createElement("Frame", {
 		BackgroundTransparency = 1,

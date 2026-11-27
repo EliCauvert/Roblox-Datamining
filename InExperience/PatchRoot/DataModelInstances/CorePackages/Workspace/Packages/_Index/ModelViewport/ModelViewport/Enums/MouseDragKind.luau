@@ -1,1 +1,0 @@
-﻿return { Rotate = "Rotate", Pan = "Pan" }

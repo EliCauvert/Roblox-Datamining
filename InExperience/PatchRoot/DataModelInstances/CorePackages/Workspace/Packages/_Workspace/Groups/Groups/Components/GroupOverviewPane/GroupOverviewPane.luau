@@ -10,7 +10,6 @@ local FFlagGroupSduiPublishContainerWidth = require(Parent.SharedFlags).FFlagGro
 local UseGroupsWrapperContextModule = require(Groups.Contexts.useGroupsWrapperContext)
 local GetGroupSduiPageConfigModule = require(Groups.Common.getGroupSduiPageConfig)
 local FetchGroupSduiPageModule = require(Groups.Common.fetchGroupSduiPage)
-local RegisterOverviewPaneActionsModule = require(Groups.Common.registerOverviewPaneActions)
 local View = FoundationModule.View
 local SduiPageEntryPoint = SduiSharedUtilitiesModule.SduiPageEntryPoint
 local SduiPageNavigationHeader = SduiSharedUtilitiesModule.SduiPageNavigationHeader
@@ -62,7 +61,7 @@ local function ContainerWidthFrame(p1)
 end
 
 local function GroupOverviewPaneContent(p1)
-	-- upvalues: NavigationModule (copy), UsePageScopeRefFunction (copy), ReactModule (copy), createPageTimer (copy), RegisterOverviewPaneActionsModule (copy), FetchGroupSduiPageModule (copy), useFinishPageTimerWhenEmpty (copy), SduiPageEntryPoint (copy), AppPage (copy), FFlagGroupSduiPublishContainerWidth (copy), ContainerWidthFrame (copy)
+	-- upvalues: NavigationModule (copy), UsePageScopeRefFunction (copy), ReactModule (copy), createPageTimer (copy), FetchGroupSduiPageModule (copy), useFinishPageTimerWhenEmpty (copy), SduiPageEntryPoint (copy), AppPage (copy), FFlagGroupSduiPublishContainerWidth (copy), ContainerWidthFrame (copy)
 	local Config = p1.config
 	local UseRouteNameResult = NavigationModule.useRouteName()
 	UsePageScopeRefFunction(Config.configKey)
@@ -73,8 +72,7 @@ local function GroupOverviewPaneContent(p1)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(nil)
 	local UseStateResult1 = UseStateResult or UseMemoResult
 	ReactModule.useEffect(function()
-		-- upvalues: RegisterOverviewPaneActionsModule (upval), FetchGroupSduiPageModule (upval), Config (copy), UseMemoResult (copy)
-		RegisterOverviewPaneActionsModule()
+		-- upvalues: FetchGroupSduiPageModule (upval), Config (copy), UseMemoResult (copy)
 		FetchGroupSduiPageModule(Config, UseMemoResult)
 	end, { Config, UseMemoResult })
 	local UseResult = ReactModule.useCallback(function()
@@ -95,7 +93,7 @@ local function GroupOverviewPaneContent(p1)
 		refresh = UseResult,
 		additionalAnalyticsData = ReactModule.useMemo(function()
 			-- upvalues: p1 (copy)
-			return { channel = "communityOverview", source = p1.source }
+			return { source = p1.source }
 		end, { p1.source })
 	})
 	

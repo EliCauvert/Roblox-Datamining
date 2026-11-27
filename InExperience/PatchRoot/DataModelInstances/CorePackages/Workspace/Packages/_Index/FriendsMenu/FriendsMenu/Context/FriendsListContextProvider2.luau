@@ -22,7 +22,6 @@ local UseFriendsListOrderedByPresenceFunction = require(Parent2.FriendsCommon).H
 local GenerateDummyFriendsModule = require(Parent1.utils.generateDummyFriends)
 local FFlagFilterOutDeletedAccountsGameInvitesModule = require(Parent1.Flags.FFlagFilterOutDeletedAccountsGameInvites)
 local FFlagGameInviteOpenModalWithoutBlockingOnCanPrompt = require(Parent2.SharedFlags).FFlagGameInviteOpenModalWithoutBlockingOnCanPrompt
-local FFlagGameInviteHidePresenceOnLegacyList = require(Parent2.SharedFlags).FFlagGameInviteHidePresenceOnLegacyList
 local UserModel = UserLibModule.Models.UserModel
 local config = {
 	InviteAvatarThumbnailType = Constants.RbxAvatarThumbnailTypesFromEnum.HeadShot,
@@ -36,7 +35,7 @@ config.ThumbnailRequest = {
 }
 
 return function(p1)
-	-- upvalues: SortInvitesByScoreIXPModule (copy), NetworkImpl (copy), Players (copy), UseDispatchFunction (copy), ReactModule (copy), GenerateDummyFriendsModule (copy), UseFriendsListOrderedByPresenceFunction (copy), UserProfilesModule (copy), PreloadUsersThumbnailFunction (copy), config (copy), UserModel (copy), PresenceType (copy), FFlagGameInviteHidePresenceOnLegacyList (copy), FFlagFilterOutDeletedAccountsGameInvitesModule (copy), ConstantsModule (copy), SortFriendsByCorrectedPresenceAndRank (copy), CryoModule (copy), GetFriendsSearchModule (copy), FFlagGameInviteOpenModalWithoutBlockingOnCanPrompt (copy), FriendsListContextModule (copy)
+	-- upvalues: SortInvitesByScoreIXPModule (copy), NetworkImpl (copy), Players (copy), UseDispatchFunction (copy), ReactModule (copy), GenerateDummyFriendsModule (copy), UseFriendsListOrderedByPresenceFunction (copy), UserProfilesModule (copy), PreloadUsersThumbnailFunction (copy), config (copy), UserModel (copy), PresenceType (copy), FFlagFilterOutDeletedAccountsGameInvitesModule (copy), ConstantsModule (copy), SortFriendsByCorrectedPresenceAndRank (copy), CryoModule (copy), GetFriendsSearchModule (copy), FFlagGameInviteOpenModalWithoutBlockingOnCanPrompt (copy), FriendsListContextModule (copy)
 	local UseSortInvitesByScoreExperimentResult = if SortInvitesByScoreIXPModule.FFlagEnableSortInvitesByScoreExperiment then SortInvitesByScoreIXPModule.useSortInvitesByScoreExperiment() else nil
 	local NetworkImplOverride = nil
 	NetworkImplOverride = if p1.networkImplOverride then p1.networkImplOverride else NetworkImpl
@@ -56,21 +55,19 @@ return function(p1)
 		query = UserProfilesModule.Queries.userProfilesCombinedNameAndUsernameByUserIds
 	})
 	
-	local function v38(Ids, p2)
-		-- upvalues: UseDispatchResult (copy), PreloadUsersThumbnailFunction (upval), config (upval), UseUserProfilesFetchResult (copy), p1 (copy), UserModel (upval), UseFriendsListOrderedByPresenceResult (copy), PresenceType (upval), FFlagGameInviteHidePresenceOnLegacyList (upval), FFlagFilterOutDeletedAccountsGameInvitesModule (upval), ConstantsModule (upval), UseSortInvitesByScoreExperimentResult (copy), SortInvitesByScoreIXPModule (upval), SortFriendsByCorrectedPresenceAndRank (upval), UseStateResult2_2 (copy), UseStateResult2_1 (copy), UseMemoResult (ref), CryoModule (upval)
+	local function v37(Ids, p2)
+		-- upvalues: UseDispatchResult (copy), PreloadUsersThumbnailFunction (upval), config (upval), UseUserProfilesFetchResult (copy), p1 (copy), UserModel (upval), UseFriendsListOrderedByPresenceResult (copy), PresenceType (upval), FFlagFilterOutDeletedAccountsGameInvitesModule (upval), ConstantsModule (upval), UseSortInvitesByScoreExperimentResult (copy), SortInvitesByScoreIXPModule (upval), SortFriendsByCorrectedPresenceAndRank (upval), UseStateResult2_2 (copy), UseStateResult2_1 (copy), UseMemoResult (ref), CryoModule (upval)
 		UseDispatchResult(PreloadUsersThumbnailFunction(Ids, config.ThumbnailRequest.InviteToGame, nil))
 		UseUserProfilesFetchResult:fetchMore({ variables = { userIds = Ids } }):andThen(function(Result)
-			-- upvalues: Ids (copy), p1 (upval), UserModel (upval), UseFriendsListOrderedByPresenceResult (upval), PresenceType (upval), FFlagGameInviteHidePresenceOnLegacyList (upval), FFlagFilterOutDeletedAccountsGameInvitesModule (upval), ConstantsModule (upval), UseSortInvitesByScoreExperimentResult (upval), SortInvitesByScoreIXPModule (upval), p2 (copy), SortFriendsByCorrectedPresenceAndRank (upval), UseStateResult2_2 (upval), UseStateResult2_1 (upval)
+			-- upvalues: Ids (copy), p1 (upval), UserModel (upval), UseFriendsListOrderedByPresenceResult (upval), PresenceType (upval), FFlagFilterOutDeletedAccountsGameInvitesModule (upval), ConstantsModule (upval), UseSortInvitesByScoreExperimentResult (upval), SortInvitesByScoreIXPModule (upval), p2 (copy), SortFriendsByCorrectedPresenceAndRank (upval), UseStateResult2_2 (upval), UseStateResult2_1 (upval)
 			local List = {}
 			local LastLocation = nil
 			local OFFLINE = nil
-			local UniverseId = nil
 			
 			for _, id in Ids do
 				if not p1.excludedFriendsSet or not p1.excludedFriendsSet[id] then
 					OFFLINE = UserModel.PresenceType.OFFLINE
 					LastLocation = nil
-					UniverseId = nil
 					
 					for _, onlineFriend in UseFriendsListOrderedByPresenceResult.onlineFriends do
 						if id == onlineFriend.id then
@@ -85,10 +82,6 @@ return function(p1)
 								OFFLINE = UserModel.PresenceType.IN_STUDIO
 							end
 							LastLocation = onlineFriend.presence.lastLocation
-							
-							if not FFlagGameInviteHidePresenceOnLegacyList then break end
-							local UniverseId1 = onlineFriend.presence.universeId
-							UniverseId = if UniverseId1 == nil then nil else tostring(UniverseId1)
 							break
 						else
 							continue
@@ -100,7 +93,6 @@ return function(p1)
 								id = id,
 								presence = OFFLINE,
 								lastLocation = LastLocation,
-								universeId = UniverseId,
 								displayName = userProfile.names.combinedName,
 								name = userProfile.names.username,
 								friendRank = if UseSortInvitesByScoreExperimentResult or SortInvitesByScoreIXPModule.FFlagSortInvitesByScoreEnabledForAll then p2 and p2[id] else nil
@@ -123,7 +115,7 @@ return function(p1)
 	end
 	
 	UseMemoResult = ReactModule.useMemo(function()
-		-- upvalues: UseStateResult (copy), GetFriendsSearchModule (upval), NetworkImplOverride (ref), Text (copy), UseSortInvitesByScoreExperimentResult (copy), SortInvitesByScoreIXPModule (upval), CryoModule (upval), v38 (copy), UseFriendsListOrderedByPresenceResult (copy), UseMemoResult (ref), FFlagGameInviteOpenModalWithoutBlockingOnCanPrompt (upval), UseStateResult2_2 (copy), UseStateResult2_1 (copy)
+		-- upvalues: UseStateResult (copy), GetFriendsSearchModule (upval), NetworkImplOverride (ref), Text (copy), UseSortInvitesByScoreExperimentResult (copy), SortInvitesByScoreIXPModule (upval), CryoModule (upval), v37 (copy), UseFriendsListOrderedByPresenceResult (copy), UseMemoResult (ref), FFlagGameInviteOpenModalWithoutBlockingOnCanPrompt (upval), UseStateResult2_2 (copy), UseStateResult2_1 (copy)
 		if UseStateResult == "" then
 			if UseFriendsListOrderedByPresenceResult.onlineFriends and UseFriendsListOrderedByPresenceResult.offlineFriends then
 				local Ids = {}
@@ -138,7 +130,7 @@ return function(p1)
 					end
 				end
 				if not FFlagGameInviteOpenModalWithoutBlockingOnCanPrompt or #Ids ~= 0 then
-					return (v38(Ids, T))
+					return (v37(Ids, T))
 				elseif UseFriendsListOrderedByPresenceResult.isLoading then
 					return {}
 				else
@@ -150,10 +142,10 @@ return function(p1)
 			end
 		else
 			GetFriendsSearchModule(NetworkImplOverride, Text, UseStateResult, 20):andThen(function(Result)
-				-- upvalues: UseSortInvitesByScoreExperimentResult (upval), SortInvitesByScoreIXPModule (upval), CryoModule (upval), v38 (upval)
+				-- upvalues: UseSortInvitesByScoreExperimentResult (upval), SortInvitesByScoreIXPModule (upval), CryoModule (upval), v37 (upval)
 				local T = if UseSortInvitesByScoreExperimentResult or SortInvitesByScoreIXPModule.FFlagSortInvitesByScoreEnabledForAll then {} else nil
 				
-				return (v38(CryoModule.List.map(Result.responseBody.PageItems, function(p3, p4): string
+				return (v37(CryoModule.List.map(Result.responseBody.PageItems, function(p3, p4): string
 					-- upvalues: UseSortInvitesByScoreExperimentResult (upval), SortInvitesByScoreIXPModule (upval), T (copy)
 					if UseSortInvitesByScoreExperimentResult or SortInvitesByScoreIXPModule.FFlagSortInvitesByScoreEnabledForAll then
 						T[p3.id] = p4

@@ -12,6 +12,7 @@ local FFlagShopUseMockUserOwnsGamePassModule = require(InExperienceShop.Flags.FF
 local FFlagSkipPaymentSessionForPlainRobuxModule = require(InExperienceShop.Flags.FFlagSkipPaymentSessionForPlainRobux)
 local FFlagHideBonusInShopWhenNotClaimableModule = require(InExperienceShop.Flags.FFlagHideBonusInShopWhenNotClaimable)
 local FFlagEnableBonusJwtInShop = require(Parent.SharedFlags).FFlagEnableBonusJwtInShop
+local FFlagShopListenNativePurchaseFinishedModule = require(InExperienceShop.Flags.FFlagShopListenNativePurchaseFinished)
 local FFlagShopRobuxPurchaseCompletionModalModule = require(InExperienceShop.Flags.FFlagShopRobuxPurchaseCompletionModal)
 local FFlagRefetchRobuxWidgetAfterPurchaseModule = require(InExperienceShop.Flags.FFlagRefetchRobuxWidgetAfterPurchase)
 local FFlagEnableShopRobuxBuyTelemetryModule = require(InExperienceShop.Flags.FFlagEnableShopRobuxBuyTelemetry)
@@ -32,7 +33,7 @@ local function _(p1): boolean
 end
 
 return ReactModule.memo(function(Frame)
-	-- upvalues: ReactModule (copy), SignalsReactModule (copy), GetInExperienceShopStoreModule (copy), PromoteBonusRobuxPackageToTopPicksModule (copy), FFlagEnableBonusJwtInShop (copy), GetRobuxPackageBonusPresentationModule (copy), FFlagHideBonusInShopWhenNotClaimableModule (copy), Parent (copy), ToUnifiedCategoryIdModule (copy), FFlagEnableCategoryLoggingInShopModule (copy), SessionService (copy), ShopDebugLoggerModule (copy), FFlagShopUseMockUserOwnsGamePassModule (copy), MockUserOwnsGamePassModule (copy), UserOwnsGamePassHttpModule (copy), FIntShopOwnershipFetchMaxAttemptsModule (copy), FFlagRefetchRobuxWidgetAfterPurchaseModule (copy), FFlagSkipPaymentSessionForPlainRobuxModule (copy), FFlagShopRobuxPurchaseCompletionModalModule (copy), PurchasePromptModule (copy), FFlagEnableShopRobuxBuyTelemetryModule (copy), InExperienceShop (copy), RedeemBonusTokenModule (copy), PromiseModule (copy), GetBlockRobuxTileClickInShopModule (copy), View (copy), RobuxPackageTileModule (copy)
+	-- upvalues: ReactModule (copy), SignalsReactModule (copy), GetInExperienceShopStoreModule (copy), PromoteBonusRobuxPackageToTopPicksModule (copy), FFlagEnableBonusJwtInShop (copy), GetRobuxPackageBonusPresentationModule (copy), FFlagHideBonusInShopWhenNotClaimableModule (copy), Parent (copy), ToUnifiedCategoryIdModule (copy), FFlagEnableCategoryLoggingInShopModule (copy), SessionService (copy), ShopDebugLoggerModule (copy), FFlagShopUseMockUserOwnsGamePassModule (copy), MockUserOwnsGamePassModule (copy), UserOwnsGamePassHttpModule (copy), FIntShopOwnershipFetchMaxAttemptsModule (copy), FFlagRefetchRobuxWidgetAfterPurchaseModule (copy), FFlagSkipPaymentSessionForPlainRobuxModule (copy), FFlagShopListenNativePurchaseFinishedModule (copy), FFlagShopRobuxPurchaseCompletionModalModule (copy), PurchasePromptModule (copy), FFlagEnableShopRobuxBuyTelemetryModule (copy), InExperienceShop (copy), RedeemBonusTokenModule (copy), PromiseModule (copy), GetBlockRobuxTileClickInShopModule (copy), View (copy), RobuxPackageTileModule (copy)
 	local Pkg = Frame.pkg
 	local UseRefResult = ReactModule.useRef(nil)
 	local UseSignalStateResult = SignalsReactModule.useSignalState(GetInExperienceShopStoreModule)
@@ -125,7 +126,7 @@ return ReactModule.memo(function(Frame)
 			UseSignalStateResult.refreshRobuxWidgetsAfterPurchase()
 		end
 	end, { BonusGamePassId, UseSignalStateResult })
-	local UseResult1 = ReactModule.useCallback(function()
+	local UseResult1 = if FFlagShopListenNativePurchaseFinishedModule then ReactModule.useCallback(function()
 		-- upvalues: MobileProductId (copy), ShopDebugLoggerModule (upval), FFlagRefetchRobuxWidgetAfterPurchaseModule (upval), FFlagShopRobuxPurchaseCompletionModalModule (upval), BonusGamePassId (copy), UseSignalStateResult (copy), Pkg (copy)
 		if MobileProductId == nil or MobileProductId == "" then
 			ShopDebugLoggerModule.log("onNativePurchaseLaunched: skip, no store SKU")
@@ -154,7 +155,7 @@ return ReactModule.memo(function(Frame)
 		MobileProductId,
 		Pkg.robuxAmount,
 		UseSignalStateResult
-	})
+	}) else nil
 	local BonusItemDetails = Pkg.bonusItemDetails
 	local OnBonusItemActivatedFunction = Frame.onBonusItemActivated
 	
@@ -186,7 +187,7 @@ return ReactModule.memo(function(Frame)
 				OnBonusItemActivatedFunction
 			}),
 			onBuyActivated = ReactModule.useCallback(function()
-				-- upvalues: PurchasePromptModule (upval), ShopDebugLoggerModule (upval), FFlagEnableBonusJwtInShop (upval), UseRefResult1 (ref), FFlagEnableShopRobuxBuyTelemetryModule (upval), UseRefResult (copy), InExperienceShop (upval), Frame (copy), PaymentSessionId (copy), FFlagSkipPaymentSessionForPlainRobuxModule (upval), HasBonusItem (copy), MobileProductId (copy), ProductId (copy), BonusGamePassId (copy), UseResult (copy), UseResult1 (copy), BonusJwt (copy), FFlagRefetchRobuxWidgetAfterPurchaseModule (upval), RedeemBonusTokenModule (upval), PromiseModule (upval), UseSignalStateResult (copy), UseRefResult3 (ref), Callback (ref), UseRefResult2 (ref)
+				-- upvalues: PurchasePromptModule (upval), ShopDebugLoggerModule (upval), FFlagEnableBonusJwtInShop (upval), UseRefResult1 (ref), FFlagEnableShopRobuxBuyTelemetryModule (upval), UseRefResult (copy), InExperienceShop (upval), Frame (copy), PaymentSessionId (copy), FFlagSkipPaymentSessionForPlainRobuxModule (upval), HasBonusItem (copy), MobileProductId (copy), ProductId (copy), BonusGamePassId (copy), UseResult (copy), FFlagShopListenNativePurchaseFinishedModule (upval), UseResult1 (ref), BonusJwt (copy), FFlagRefetchRobuxWidgetAfterPurchaseModule (upval), RedeemBonusTokenModule (upval), PromiseModule (upval), UseSignalStateResult (copy), UseRefResult3 (ref), Callback (ref), UseRefResult2 (ref)
 				local LaunchRobuxPackagePurchaseFunction = PurchasePromptModule.launchRobuxPackagePurchase
 				
 				if LaunchRobuxPackagePurchaseFunction == nil then
@@ -207,10 +208,12 @@ return ReactModule.memo(function(Frame)
 					mobileProductId = MobileProductId or "",
 					productId = ProductId,
 					paymentSessionId = PaymentSessionId1,
-					onWebViewClosed = UseResult,
-					onNativePurchaseLaunched = UseResult1
+					onWebViewClosed = UseResult
 				}
 				
+				if FFlagShopListenNativePurchaseFinishedModule then
+					config.onNativePurchaseLaunched = UseResult1
+				end
 				if not FFlagEnableBonusJwtInShop then
 					LaunchRobuxPackagePurchaseFunction(config)
 					

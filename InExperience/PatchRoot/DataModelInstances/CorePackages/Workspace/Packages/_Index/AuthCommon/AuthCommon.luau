@@ -1,6 +1,4 @@
-﻿local _ = require(script.Utils.getPasskeyAssertion)
-
-return {
+﻿return {
 	["jest.config"] = script["jest.config"],
 	Components = require(script.Components),
 	Common = require(script.Common),

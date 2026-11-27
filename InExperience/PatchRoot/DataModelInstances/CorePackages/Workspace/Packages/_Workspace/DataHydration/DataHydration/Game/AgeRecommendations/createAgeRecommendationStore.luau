@@ -1,5 +1,6 @@
 ﻿local DataHydration = script:FindFirstAncestor("DataHydration")
-local DiscoveryUtilsModule = require(DataHydration.Parent.DiscoveryUtils)
+local Parent = DataHydration.Parent
+local DiscoveryUtilsModule = require(Parent.DiscoveryUtils)
 local LogResponseErrorFunction = DiscoveryUtilsModule.logResponseError
 local DiscoveryEventErrorLogger = DiscoveryUtilsModule.DiscoveryEventErrorLogger
 local CreateDataCacheModule = require(DataHydration.createDataCache)
@@ -7,9 +8,10 @@ local CreateDataResolverModule = require(DataHydration.createDataResolver)
 local _ = require(DataHydration.DataHydrationTypes)
 local FetchAgeRecommendationModule = require(script.Parent.fetchAgeRecommendation)
 local AgeRecommendationStoreTypesModule = require(script.Parent.AgeRecommendationStoreTypes)
+local FFlagShowGameAgeRating = require(Parent.SharedFlags).FFlagShowGameAgeRating
 
 return function()
-	-- upvalues: CreateDataCacheModule (copy), CreateDataResolverModule (copy), LogResponseErrorFunction (copy), DiscoveryEventErrorLogger (copy), FetchAgeRecommendationModule (copy), AgeRecommendationStoreTypesModule (copy)
+	-- upvalues: CreateDataCacheModule (copy), CreateDataResolverModule (copy), LogResponseErrorFunction (copy), DiscoveryEventErrorLogger (copy), FetchAgeRecommendationModule (copy), AgeRecommendationStoreTypesModule (copy), FFlagShowGameAgeRating (copy)
 	local DataCacheModule = CreateDataCacheModule()
 	local DataResolverModule = CreateDataResolverModule({
 		requestBatchSize = 1,
@@ -30,7 +32,7 @@ return function()
 			end
 		end,
 		fetchFn = function(p1)
-			-- upvalues: FetchAgeRecommendationModule (upval), AgeRecommendationStoreTypesModule (upval)
+			-- upvalues: FetchAgeRecommendationModule (upval), AgeRecommendationStoreTypesModule (upval), FFlagShowGameAgeRating (upval)
 			local NextEntry = next(p1)
 			
 			if not NextEntry then
@@ -41,7 +43,7 @@ return function()
 				})
 			end
 			return FetchAgeRecommendationModule(NextEntry):andThen(function(Result)
-				-- upvalues: NextEntry (copy), AgeRecommendationStoreTypesModule (upval)
+				-- upvalues: NextEntry (copy), AgeRecommendationStoreTypesModule (upval), FFlagShowGameAgeRating (upval)
 				if not Result or not Result.responseBody then
 					error({
 						errorType = "FetchAgeRecommendationResponseError",
@@ -63,18 +65,18 @@ return function()
 				local t = {}
 				local AgeRecommendation = Result.responseBody.ageRecommendationDetails.summary.ageRecommendation
 				
-				if AgeRecommendation then
-					t[NextEntry] = {
-						displayName = AgeRecommendation.displayName,
-						displayNameWithHeaderShort = AgeRecommendation.displayNameWithHeaderShort,
-						minimumAgeDisplay = AgeRecommendation.minimumAgeDisplay,
-						igrsRating = AgeRecommendation.igrsRating,
-						igrsRatingDisplayMessage = AgeRecommendation.igrsRatingDisplayMessage
-					}
+				if FFlagShowGameAgeRating and not AgeRecommendation then
+					t[NextEntry] = {}
 					
 					return t
 				else
-					t[NextEntry] = {}
+					t[NextEntry] = {
+						displayName = AgeRecommendation.displayName,
+						displayNameWithHeaderShort = AgeRecommendation.displayNameWithHeaderShort,
+						minimumAgeDisplay = if FFlagShowGameAgeRating then AgeRecommendation.minimumAgeDisplay else nil,
+						igrsRating = AgeRecommendation.igrsRating,
+						igrsRatingDisplayMessage = AgeRecommendation.igrsRatingDisplayMessage
+					}
 					
 					return t
 				end

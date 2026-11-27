@@ -6,8 +6,5 @@
 	VRHub = require(script.VRHub),
 	FIntSafetyBubbleRadius = require(script.FIntSafetyBubbleRadius),
 	FIntSafetyBubbleTransparencyPercent = require(script.FIntSafetyBubbleTransparencyPercent),
-	getWebTask = function()
-		return require(script.webtask)
-	end,
 	["jest.config"] = script["jest.config"]
 }

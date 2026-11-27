@@ -86,6 +86,7 @@ if EnabledResult then
 end
 local TopBarAppModule = if FFlagTopBarRefactor then require(script.ComponentsV2.TopBarApp) else require(script.Components.TopBarApp)
 local ReducerModule = require(script.Reducer)
+local TopBarAppPolicyModule = require(script.TopBarAppPolicy)
 local SetSmallTouchDeviceModule = require(script.Actions.SetSmallTouchDevice)
 local SetInspectMenuOpenModule = require(script.Actions.SetInspectMenuOpen)
 local SetGamepadMenuOpenModule = require(script.Actions.SetGamepadMenuOpen)
@@ -97,6 +98,7 @@ local RegisterSetCoresModule = require(script.registerSetCores)
 local GlobalConfigModule = require(script.GlobalConfig)
 local RoactAppExperimentModule = require(CorePackages.Packages.RoactAppExperiment)
 local FFlagAddMenuNavigationToggleDialog = SharedFlagsModule.FFlagAddMenuNavigationToggleDialog
+local FFlagShowGameAgeRating = SharedFlagsModule.FFlagShowGameAgeRating
 local FFlagGamepadNavigationDialogABTestModule = require(script.Flags.FFlagGamepadNavigationDialogABTest)
 local GetFFlagEnableCrossExpVoiceFunction = SharedFlagsModule.GetFFlagEnableCrossExpVoice
 local Component = CrossExperienceVoiceModule.Component
@@ -134,7 +136,7 @@ if FFlagBuildExperienceInGameShell then
 	Module._disposeGlobalGuiInsetEffect = Effect
 end
 function Module.new()
-	-- upvalues: Module (copy), GlobalConfigModule (copy), RoactModule (copy), TenFootInterfaceModule (copy), EnabledResult (copy), GuiService (copy), ConstantsModule (copy), FFlagEnablePlaytestModeUnibar (copy), RoduxModule (copy), ReducerModule (copy), FFlagTopBarSignalizeSetCores (copy), RegisterSetCoresModule (copy), FFlagTopBarDeprecateChatRoduxModule (copy), GetCanChatModule (copy), FFlagTopBarDeprecateGameInfoRoduxModule (copy), GetGameNameModule (copy), GetFFlagDebugEnableVRFTUXExperienceInStudioModule (copy), IsRunningInStudioFunction (copy), FTUXModule (copy), PlatformEnumModule (copy), GetFFlagEnableVRFTUXExperienceModule (copy), IsFTUXExperienceModule (copy), IsNewInGameMenuEnabledModule (copy), RobloxGui (copy), FFlagTopBarDeprecateDisplayOptionsRoduxModule (copy), SetSmallTouchDeviceModule (copy), UtilityModule (copy), ColorMode (copy), Constants (copy), UiModeStyleProvider (copy), FFlagStudioDeviceSimVRSwitchFixes (copy), SpatialRemountGate (copy), TopBarAppModule (copy), FFlagAddMenuNavigationToggleDialog (copy), FFlagGamepadNavigationDialogABTestModule (copy), DesignTokenProvider (copy), MenuNavigationPromptTokenMapperModule (copy), ServiceModule (ref), FFlagAddTopBarScrimModule (copy), ReactModule (copy), TopBarScrimModule (ref), RoactRoduxModule (copy), RoactAppPolicy (copy), AppFeaturePolicies (copy), LocalizationProvider (copy), Localization (copy), LocalizationService (copy), RoactAppExperimentModule (copy), IXPService (copy), GetFFlagEnableCrossExpVoiceFunction (copy), Component (copy), ReactSceneUnderstandingModule (copy), VoiceStateContextModule (copy), FFlagCoreScriptsReactTreeCrashCounter (copy), CoreScriptsErrorBoundary (copy), Surfaces (copy), CorePackages (copy), CoreGui (copy), ShouldSkipHistoricalMessageFunction (copy), UpdateUnreadMessagesBadgeModule (copy), FFlagTopBarDeprecateGamepadNavigationDialogRoduxModule (copy)
+	-- upvalues: Module (copy), GlobalConfigModule (copy), RoactModule (copy), TenFootInterfaceModule (copy), EnabledResult (copy), GuiService (copy), ConstantsModule (copy), FFlagEnablePlaytestModeUnibar (copy), RoduxModule (copy), ReducerModule (copy), FFlagTopBarSignalizeSetCores (copy), RegisterSetCoresModule (copy), FFlagTopBarDeprecateChatRoduxModule (copy), GetCanChatModule (copy), FFlagTopBarDeprecateGameInfoRoduxModule (copy), GetGameNameModule (copy), GetFFlagDebugEnableVRFTUXExperienceInStudioModule (copy), IsRunningInStudioFunction (copy), FTUXModule (copy), PlatformEnumModule (copy), GetFFlagEnableVRFTUXExperienceModule (copy), IsFTUXExperienceModule (copy), IsNewInGameMenuEnabledModule (copy), RobloxGui (copy), FFlagTopBarDeprecateDisplayOptionsRoduxModule (copy), SetSmallTouchDeviceModule (copy), UtilityModule (copy), ColorMode (copy), Constants (copy), UiModeStyleProvider (copy), FFlagStudioDeviceSimVRSwitchFixes (copy), SpatialRemountGate (copy), TopBarAppModule (copy), FFlagAddMenuNavigationToggleDialog (copy), FFlagGamepadNavigationDialogABTestModule (copy), DesignTokenProvider (copy), MenuNavigationPromptTokenMapperModule (copy), ServiceModule (ref), FFlagAddTopBarScrimModule (copy), ReactModule (copy), TopBarScrimModule (ref), RoactRoduxModule (copy), FFlagTopBarRefactor (copy), FFlagShowGameAgeRating (copy), RoactAppPolicy (copy), TopBarAppPolicyModule (copy), AppFeaturePolicies (copy), LocalizationProvider (copy), Localization (copy), LocalizationService (copy), RoactAppExperimentModule (copy), IXPService (copy), GetFFlagEnableCrossExpVoiceFunction (copy), Component (copy), ReactSceneUnderstandingModule (copy), VoiceStateContextModule (copy), FFlagCoreScriptsReactTreeCrashCounter (copy), CoreScriptsErrorBoundary (copy), Surfaces (copy), CorePackages (copy), CoreGui (copy), ShouldSkipHistoricalMessageFunction (copy), UpdateUnreadMessagesBadgeModule (copy), FFlagTopBarDeprecateGamepadNavigationDialogRoduxModule (copy)
 	local self = setmetatable({}, Module)
 	
 	if GlobalConfigModule.propValidation then
@@ -197,7 +199,9 @@ function Module.new()
 		}, { TopBarApp = Element })
 	end
 	self.root = RoactModule.createElement(RoactRoduxModule.StoreProvider, { store = self.store }, {
-		PolicyProvider = RoactModule.createElement(RoactAppPolicy.Provider, { policy = { AppFeaturePolicies } }, (wrapWithUiModeStyleProvider({
+		PolicyProvider = RoactModule.createElement(if FFlagTopBarRefactor or FFlagShowGameAgeRating then RoactAppPolicy.Provider else TopBarAppPolicyModule.Provider, {
+			policy = if FFlagTopBarRefactor or FFlagShowGameAgeRating then { AppFeaturePolicies } else { TopBarAppPolicyModule.Mapper }
+		}, (wrapWithUiModeStyleProvider({
 			LocalizationProvider = RoactModule.createElement(LocalizationProvider, {
 				localization = Localization.new(LocalizationService.RobloxLocaleId)
 			}, {

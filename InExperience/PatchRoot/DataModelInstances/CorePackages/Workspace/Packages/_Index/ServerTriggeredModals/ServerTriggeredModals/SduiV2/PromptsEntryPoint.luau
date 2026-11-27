@@ -5,6 +5,5 @@
 	ExperienceDetailsPageSessionEnd = "ExperienceDetailsPageSessionEnd",
 	ExperienceDetailsPageOpen = "ExperienceDetailsPageOpen",
 	ChatLandingOpen = "ChatLandingOpen",
-	NotificationStreamOpen = "NotificationStreamOpen",
-	AppEventRsvpGoing = "AppEventRsvpGoing"
+	NotificationStreamOpen = "NotificationStreamOpen"
 }

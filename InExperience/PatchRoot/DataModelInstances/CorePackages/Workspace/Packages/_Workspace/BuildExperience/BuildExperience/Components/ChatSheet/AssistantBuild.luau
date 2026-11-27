@@ -1,7 +1,6 @@
 ﻿local BuildExperience = script:FindFirstAncestor("BuildExperience")
 local Parent = BuildExperience.Parent
 local FFlagBuildExperienceInGameShell = require(Parent.SharedFlags).FFlagBuildExperienceInGameShell
-local FFlagBuildExperienceInGameShellComposer = require(Parent.SharedFlags).FFlagBuildExperienceInGameShellComposer
 local FoundationModule = require(Parent.Foundation)
 local ReactModule = require(Parent.React)
 local SignalsReactModule = require(Parent.SignalsReact)
@@ -18,7 +17,7 @@ local PopoverSide = FoundationModule.Enums.PopoverSide
 local View = FoundationModule.View
 
 return ReactModule.memo(function(p1)
-	-- upvalues: UseLocalizationFunction (copy), LocalizationStringsModule (copy), GetAssistantBuildStoreModule (copy), GetPlayButtonStoreModule (copy), SignalsReactModule (copy), FFlagBuildExperienceInGameShell (copy), ReactModule (copy), IconButton (copy), FFlagBuildExperienceInGameShellComposer (copy), IconName (copy), FoundationModule (copy), InputSize (copy), View (copy), EducationalTooltip (copy), PopoverAlign (copy), PopoverSide (copy)
+	-- upvalues: UseLocalizationFunction (copy), LocalizationStringsModule (copy), GetAssistantBuildStoreModule (copy), GetPlayButtonStoreModule (copy), SignalsReactModule (copy), FFlagBuildExperienceInGameShell (copy), ReactModule (copy), IconButton (copy), IconName (copy), InputSize (copy), View (copy), EducationalTooltip (copy), PopoverAlign (copy), PopoverSide (copy)
 	local UseLocalizationResult = UseLocalizationFunction({
 		disabledTitle = LocalizationStringsModule.CHAT_ASSISTANT_DISABLED,
 		portraitRequired = LocalizationStringsModule.CHAT_PORTRAIT_REQUIRED
@@ -65,10 +64,7 @@ return ReactModule.memo(function(p1)
 	local Element = ReactModule.createElement(IconButton, {
 		isCircular = true,
 		testId = "build-header-play-button",
-		icon = if FFlagBuildExperienceInGameShellComposer then {
-			name = IconName.Nebula,
-			variant = if UseSignalStateResult2 then FoundationModule.Enums.IconVariant.Filled else FoundationModule.Enums.IconVariant.Regular
-		} elseif FFlagBuildExperienceInGameShell then if UseSignalStateResult2 then IconName.TwoArrowsFromCenter else IconName.TwoArrowsToCenter else IconName.Nebula,
+		icon = if FFlagBuildExperienceInGameShell then if UseSignalStateResult2 then IconName.TwoArrowsFromCenter else IconName.TwoArrowsToCenter else IconName.Nebula,
 		variant = p1.variant,
 		size = InputSize.Medium,
 		isDisabled = UseSignalStateResult,

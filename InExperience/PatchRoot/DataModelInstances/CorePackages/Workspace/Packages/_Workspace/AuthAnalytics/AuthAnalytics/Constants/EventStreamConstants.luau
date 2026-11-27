@@ -90,10 +90,7 @@
 		SignUpExitModalCancel = "signUpExitModalCancel",
 		SubmitEmail = "submitEmail",
 		SetupLaterCornerButton = "setupLaterCornerButton",
-		SetupLaterRowButton = "setupLaterRowButton",
-		Select = "select",
-		CreateAccount = "createAccount",
-		SystemBack = "systemBack"
+		SetupLaterRowButton = "setupLaterRowButton"
 	},
 	Field = {
 		Birthday = "birthday",
@@ -131,13 +128,7 @@
 		LoginV2OtherSignInOptionsModal = "loginV2OtherSignInOptionsModal",
 		LoginOtherSignInOptionsModal = "loginOtherSignInOptionsModal",
 		MarketingEmailConsent = "marketingEmailConsent",
-		MarketingEmailAutoOptIn = "marketingEmailAutoOptIn",
-		Toast = "toast",
-		Select = "select",
-		Passkey = "passkey",
-		EmailOtp = "emailOtp",
-		TwoStep = "twoStep",
-		CreateAccount = "createAccount"
+		MarketingEmailAutoOptIn = "marketingEmailAutoOptIn"
 	},
 	Context = {
 		AccountPickerLandingScreen = "accountPickerLandingScreen",
@@ -233,12 +224,7 @@
 		PlatformRestrictedPage = "platformRestrictedPage",
 		KISAU14Signup = "kisaU14Signup",
 		BirthdayComplianceUnblockWait = "birthdayComplianceUnblockWait",
-		SsoAccessCheckBeforeRoute = "ssoAccessCheckBeforeRoute",
-		SsoAccountLink = "ssoAccountLink",
-		SsoAccountLinkStepUp = "ssoAccountLinkStepUp",
-		SsoAccountLinkEmailOtp = "ssoAccountLinkEmailOtp",
-		SsoAccountLinkTwoStep = "ssoAccountLinkTwoStep",
-		SsoAccountLinkCloseWarning = "ssoAccountLinkCloseWarning"
+		SsoAccessCheckBeforeRoute = "ssoAccessCheckBeforeRoute"
 	},
 	ActionType = {
 		Submit = "submit",
@@ -327,16 +313,7 @@
 		FetchAccessStatusError = "fetchAccessStatusError",
 		BirthdayComplianceFound = "birthdayComplianceFound",
 		BirthdayComplianceNotFound = "birthdayComplianceNotFound",
-		AccessCheckTimeout = "accessCheckTimeout",
-		SsoLinkSuccess = "linkSuccess",
-		SsoCreateSuccess = "createSuccess",
-		SsoLinkFailure = "linkFailure",
-		SsoLinkEmailCodeSent = "sent",
-		SsoLinkTwoStepRenderInitiated = "renderInitiated",
-		SsoLinkTwoStepCompleted = "completed",
-		SsoLinkTwoStepAbandoned = "abandoned",
-		SsoLinkTwoStepInvalidated = "invalidated"
+		AccessCheckTimeout = "accessCheckTimeout"
 	},
-	SsoAccountLinkErrorCode = { Network = "network", PasskeyFailed = "passkeyFailed" },
 	EventTimingKeys = { OsClock = "os_clock", OsTime = "os_time" }
 }

@@ -20,12 +20,7 @@ local FFlagBuildExperienceStepListModule = require(BuildExperience.Flags.FFlagBu
 local FFlagBuildExperienceTurnWorkTelemetryModule = require(BuildExperience.Flags.FFlagBuildExperienceTurnWorkTelemetry)
 local FFlagBuildExperienceTurnWorkTelemetryModule1 = FFlagBuildExperienceStepListModule and FFlagBuildExperienceTurnWorkTelemetryModule
 local TurnStepListContainerModule = if FFlagBuildExperienceStepListModule then require(script.Parent.TurnStepListContainer) else nil
-local FFlagBuildExperienceTurnWorkAnimationModule = require(BuildExperience.Flags.FFlagBuildExperienceTurnWorkAnimation)
-local FFlagBuildExperienceTurnWorkAnimationModule1 = FFlagBuildExperienceStepListModule and FFlagBuildExperienceTurnWorkAnimationModule
-local HeightRevealModule = if FFlagBuildExperienceTurnWorkAnimationModule1 then require(script.Parent.HeightReveal) else nil
 local TurnWorkHeaderContainerModule = if FFlagBuildExperienceStepListModule then require(script.Parent.TurnWorkHeaderContainer) else nil
-local TurnNamedStepModule = if FFlagBuildExperienceStepListModule then require(script.Parent.TurnNamedStep) else nil
-local UseStepRowsModule = if FFlagBuildExperienceStepListModule then require(script.Parent.useStepRows) else nil
 local TurnStepCounterModule = if FFlagBuildExperienceTurnWorkTelemetryModule1 then require(script.Parent.TurnStepCounter) else nil
 local UseTurnWorkTelemetryModule = if FFlagBuildExperienceTurnWorkTelemetryModule1 then require(script.Parent.useTurnWorkTelemetry) else nil
 local TurnWorkTelemetryContextModule = require(BuildExperience.Chat.TurnWorkTelemetryContext)
@@ -35,12 +30,12 @@ local FFlagBuildExperienceChatAccordionScrollAnchorModule = require(BuildExperie
 local FFlagBuildExperienceManageDevProductModule = require(BuildExperience.Flags.FFlagBuildExperienceManageDevProduct)
 local FFlagBuildAgentAdCampaignCardModule = require(BuildExperience.Flags.FFlagBuildAgentAdCampaignCard)
 local FFlagBuildAgentAdCampaignRefreshEligibilityModule = require(BuildExperience.Flags.FFlagBuildAgentAdCampaignRefreshEligibility)
+local FFlagBuildEventsUpdate1Module = require(BuildExperience.Flags.FFlagBuildEventsUpdate1)
 local FFlagBuildExperiencePlaytestCardPublishCtaModule = require(BuildExperience.Flags.FFlagBuildExperiencePlaytestCardPublishCta)
 local FFlagBuildExperienceAdsAndRobuxTelemetryModule = require(BuildExperience.Flags.FFlagBuildExperienceAdsAndRobuxTelemetry)
 local SendBuildExperienceEventModule = require(BuildExperience.Telemetry.sendBuildExperienceEvent)
 local ReportTurnActivityGapModule = require(BuildExperience.Telemetry.reportTurnActivityGap)
 local GetMarkdownRendererPropsModule = require(BuildExperience.utils.getMarkdownRendererProps)
-local FFlagBuildExperienceMarkdownCommonMarkProfileModule = require(BuildExperience.Flags.FFlagBuildExperienceMarkdownCommonMarkProfile)
 local AgentPlanCardModule = require(BuildExperience.Components.AgentCard.AgentPlanCard)
 local AgentDevProductCardModule = if FFlagBuildExperienceManageDevProductModule then require(BuildExperience.Components.AgentCard.AgentDevProductCard) else nil
 local AnswerStackModule = require(BuildExperience.Components.AnswerStack.AnswerStack)
@@ -185,7 +180,7 @@ local function AnswerStackSection(Frame)
 end
 
 local function PlanProposalSection(Frame: Frame)
-	-- upvalues: FFlagBuildCheckGamePermissionsModule (copy), ReactModule (copy), ChatPermissionsContextModule (copy), FFlagBuildExperienceStepListModule (copy), ChatUserMessageModule (copy), AgentPlanCardModule (copy), View (copy)
+	-- upvalues: FFlagBuildCheckGamePermissionsModule (copy), ReactModule (copy), ChatPermissionsContextModule (copy), AgentPlanCardModule (copy), View (copy), ChatUserMessageModule (copy)
 	local NoCanEditOnBuild = nil
 	if FFlagBuildCheckGamePermissionsModule then
 		local UseContextResult = ReactModule.useContext(ChatPermissionsContextModule)
@@ -194,42 +189,33 @@ local function PlanProposalSection(Frame: Frame)
 		NoCanEditOnBuild = false
 	end
 	local PlanProposal = Frame.planProposal
-	local NoFeedbackText: boolean = PlanProposal.isAccepted ~= true and PlanProposal.feedbackText == nil
+	local Element = ReactModule.createElement(AgentPlanCardModule, {
+		layoutOrder = 1,
+		testId = "ChatTurnBlock.PlanProposal",
+		title = PlanProposal.title,
+		textContent = PlanProposal.textContent,
+		summary = PlanProposal.summary,
+		onBuild = Frame.onPlanAccepted or function() end,
+		isBuildDisabled = not (PlanProposal.isAccepted ~= true and PlanProposal.feedbackText == nil) or NoCanEditOnBuild
+	})
 	
-	if FFlagBuildExperienceStepListModule and not NoFeedbackText then
-		return if PlanProposal.feedbackText == nil then nil else ReactModule.createElement(ChatUserMessageModule, {
-			LayoutOrder = Frame.LayoutOrder,
+	return if PlanProposal.feedbackText == nil then ReactModule.createElement(View, {
+		tag = "col gap-medium size-full-0 auto-y",
+		LayoutOrder = Frame.LayoutOrder
+	}, { Plan = Element }) else ReactModule.createElement(View, {
+		tag = "col gap-medium size-full-0 auto-y",
+		LayoutOrder = Frame.LayoutOrder
+	}, {
+		Plan = Element,
+		Feedback = ReactModule.createElement(ChatUserMessageModule, {
+			LayoutOrder = 2,
 			message = { kind = "user_message", text = PlanProposal.feedbackText }
 		})
-	else
-		local Element = ReactModule.createElement(AgentPlanCardModule, {
-			layoutOrder = 1,
-			testId = "ChatTurnBlock.PlanProposal",
-			title = PlanProposal.title,
-			textContent = PlanProposal.textContent,
-			summary = PlanProposal.summary,
-			onBuild = Frame.onPlanAccepted or function() end,
-			isBuildDisabled = not NoFeedbackText or NoCanEditOnBuild
-		})
-		
-		return if PlanProposal.feedbackText == nil then ReactModule.createElement(View, {
-			tag = "col gap-medium size-full-0 auto-y",
-			LayoutOrder = Frame.LayoutOrder
-		}, { Plan = Element }) else ReactModule.createElement(View, {
-			tag = "col gap-medium size-full-0 auto-y",
-			LayoutOrder = Frame.LayoutOrder
-		}, {
-			Plan = Element,
-			Feedback = ReactModule.createElement(ChatUserMessageModule, {
-				LayoutOrder = 2,
-				message = { kind = "user_message", text = PlanProposal.feedbackText }
-			})
-		})
-	end
+	})
 end
 
 local function AgentMessageSegment(Frame: Frame)
-	-- upvalues: useReactiveValue (copy), UseLocalizationFunction (copy), LocalizationStringsModule (copy), ReactModule (copy), LocalizationRoactContext (copy), FoundationModule (copy), GetMarkdownRendererPropsModule (copy), View (copy), Icon (copy), IconName (copy), IconVariant (copy), IconSize (copy), Text (copy), MarkdownViewer (copy), FFlagBuildExperienceMarkdownCommonMarkProfileModule (copy)
+	-- upvalues: useReactiveValue (copy), UseLocalizationFunction (copy), LocalizationStringsModule (copy), ReactModule (copy), LocalizationRoactContext (copy), FoundationModule (copy), GetMarkdownRendererPropsModule (copy), View (copy), Icon (copy), IconName (copy), IconVariant (copy), IconSize (copy), Text (copy), MarkdownViewer (copy)
 	local UseReactiveValueResult = useReactiveValue(Frame.segment.text)
 	local UseLocalizationResult = UseLocalizationFunction({
 		assistantResponseFailed = LocalizationStringsModule.CHAT_ASSISTANT_RESPONSE_FAILED,
@@ -274,8 +260,7 @@ local function AgentMessageSegment(Frame: Frame)
 			tag = "size-full-0 auto-y text-body-medium content-emphasis",
 			LayoutOrder = Frame.LayoutOrder
 		},
-		MarkdownRendererProps = UseMemoResult,
-		ParserProfile = if FFlagBuildExperienceMarkdownCommonMarkProfileModule then "CommonMark" else nil
+		MarkdownRendererProps = UseMemoResult
 	})
 end
 
@@ -367,10 +352,7 @@ local function renderWorkSegment(Segment, LayoutOrder, MarkdownTextStyle, ClockB
 		isLastList = p1 == nil or p1.isLastList,
 		onRowCount = if p1 == nil then nil else p1.onRowCount,
 		openRows = if p1 == nil then nil else p1.openRows,
-		autoOpenRowId = if p1 == nil then nil else p1.autoOpenRowId,
-		loadingRowId = if p1 == nil then nil else p1.loadingRowId,
-		onToggleRow = if p1 == nil then nil else p1.onToggleRow,
-		onNewestSummary = if p1 == nil then nil else p1.onNewestSummary
+		onToggleRow = if p1 == nil then nil else p1.onToggleRow
 	}) else ReactModule.createElement(TurnActivitySummaryModule, {
 		LayoutOrder = LayoutOrder,
 		segment = Segment,
@@ -390,62 +372,23 @@ local function renderStepCounters(List)
 	return ReactModule.createElement(ReactModule.Fragment, nil, Elements)
 end
 
-local function renderNamedSteps(List, OnNamedStep)
-	-- upvalues: ReactModule (copy), TurnNamedStepModule (copy)
-	local Elements = {}
-	
-	for _, Segment in List do
-		if Segment.kind == "activity_summary" then
-			Elements[Segment.key] = ReactModule.createElement(TurnNamedStepModule, { segment = Segment, onNamedStep = OnNamedStep })
-		end
-	end
-	return ReactModule.createElement(ReactModule.Fragment, nil, Elements)
-end
-
-local function useStepListState(List, WasDone)
-	-- upvalues: ReactModule (copy), useReactiveValue (copy), t1 (copy), StepSentencesModule (copy), UseStepRowsModule (copy)
+local function useStepListState(List)
+	-- upvalues: ReactModule (copy), useReactiveValue (copy), t1 (copy), StepSentencesModule (copy), FFlagBuildExperienceTurnWorkTelemetryModule1 (copy)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(nil)
-	local IsOpen = if UseStateResult == nil or UseStateResult.wasDone ~= WasDone then nil else UseStateResult.isOpen
-	local UseResult = ReactModule.useCallback(function(IsOpen)
-		-- upvalues: UseStateResult2 (copy), WasDone (copy)
-		UseStateResult2({ isOpen = IsOpen, wasDone = WasDone })
-	end, { WasDone })
 	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(false)
 	local UseStateResult3, UseStateResult2_2 = ReactModule.useState({})
 	local UseStateResult4, UseStateResult2_3 = ReactModule.useState({})
-	local UseStateResult5, UseStateResult2_4 = ReactModule.useState({})
-	local UseStateResult6, UseStateResult2_5 = ReactModule.useState({})
-	local UseResult1 = ReactModule.useCallback(function(p1, p2)
-		-- upvalues: UseStateResult2_4 (copy)
-		UseStateResult2_4(function(Tbl)
-			-- upvalues: p1 (copy), p2 (copy)
+	local UseResult = ReactModule.useCallback(function(p1)
+		-- upvalues: UseStateResult2_3 (copy)
+		UseStateResult2_3(function(Tbl)
+			-- upvalues: p1 (copy)
 			local Copy = table.clone(Tbl)
-			Copy[p1] = p2
+			Copy[p1] = Tbl[p1] ~= true
 			
 			return Copy
 		end)
 	end, {})
-	local UseResult2 = ReactModule.useCallback(function(p1, p2)
-		-- upvalues: UseStateResult2_5 (copy)
-		UseStateResult2_5(function(Tbl)
-			-- upvalues: p1 (copy), p2 (copy)
-			if Tbl[p1] == p2 then
-				return Tbl
-			end
-			local Copy = table.clone(Tbl)
-			
-			if p2 == nil then
-				Copy[p1] = nil
-				
-				return Copy
-			else
-				Copy[p1] = p2
-				
-				return Copy
-			end
-		end)
-	end, {})
-	local UseResult3 = ReactModule.useCallback(function(p1, p2)
+	local UseResult1 = ReactModule.useCallback(function(p1, p2)
 		-- upvalues: UseStateResult2_2 (copy)
 		UseStateResult2_2(function(Tbl)
 			-- upvalues: p1 (copy), p2 (copy)
@@ -459,37 +402,12 @@ local function useStepListState(List, WasDone)
 			end
 		end)
 	end, {})
-	local UseResult4 = ReactModule.useCallback(function(p1, p2)
-		-- upvalues: UseStateResult2_3 (copy)
-		UseStateResult2_3(function(Tbl)
-			-- upvalues: p1 (copy), p2 (copy)
-			local Entry = Tbl[p1]
-			
-			if Entry == p2 or Entry ~= nil and p2 ~= nil and Entry.key == p2.key and Entry.title == p2.title and Entry.isRunning == p2.isRunning and Entry.isFailed == p2.isFailed then
-				return Tbl
-			end
-			local Copy = table.clone(Tbl)
-			
-			if p2 == nil then
-				Copy[p1] = nil
-				
-				return Copy
-			else
-				Copy[p1] = p2
-				
-				return Copy
-			end
-		end)
-	end, {})
 	local HeaderSegment = nil
 	local Count = 0
 	local AgentMessagesBeforeHeader = 0
 	local v1 = false
-	local OtherStep = nil
-	local v2 = nil
 	local StartIndexByKey = {}
 	local Key = nil
-	local AutoOpenRowId: string? = nil
 	local Total = 0
 	
 	for _, value in List do
@@ -499,115 +417,41 @@ local function useStepListState(List, WasDone)
 			HeaderSegment = value
 			AgentMessagesBeforeHeader = Count
 			v1 = v1 or value.summaryKind == "completed"
-			OtherStep = v2
-			local UseStateResultEntry = UseStateResult4[value.key]
-			
-			if UseStateResultEntry ~= nil and (UseStateResultEntry.isRunning or v2 == nil or not v2.isRunning) then
-				v2 = UseStateResultEntry
-			end
 			StartIndexByKey[value.key] = Total
-			local UseStateResultEntry1 = UseStateResult6[value.key]
+			local UseStateResultEntry = UseStateResult3[value.key] or 0
 			
-			if UseStateResultEntry1 ~= nil then
-				AutoOpenRowId = `{value.key}:{UseStateResultEntry1}`
-			end
-			local UseStateResultEntry2 = UseStateResult3[value.key] or 0
-			
-			if UseStateResultEntry2 > 0 then
-				Total += UseStateResultEntry2
+			if UseStateResultEntry > 0 then
+				Total += UseStateResultEntry
 				Key = value.key
 			end
 		end
 	end
 	local UseReactiveValueResult = useReactiveValue(if HeaderSegment == nil then t1 else HeaderSegment.activityItems)
-	local V134 = v1 or StepSentencesModule.hasSteps(UseReactiveValueResult)
+	local V116 = v1 or StepSentencesModule.hasSteps(UseReactiveValueResult)
 	ReactModule.useLayoutEffect(function()
-		-- upvalues: V134 (copy), UseStateResult2_1 (copy)
-		if V134 then
+		-- upvalues: V116 (copy), UseStateResult2_1 (copy)
+		if V116 then
 			UseStateResult2_1(true)
 		end
 		return nil
-	end, { V134 })
-	local UseReactiveValueResult1 = useReactiveValue(HeaderSegment ~= nil and (HeaderSegment.isLoading or false))
-	local LoadingRowId: string? = nil
+	end, { V116 })
 	
-	if HeaderSegment ~= nil and not WasDone then
-		local HeaderStep = UseStepRowsModule.getHeaderStep(HeaderSegment, UseReactiveValueResult1, UseStateResult4[HeaderSegment.key], OtherStep)
-		
-		if HeaderStep ~= nil then
-			LoadingRowId = `{HeaderStep.segmentKey}:{HeaderStep.key}`
-		end
-	end
-	if WasDone then
-		AutoOpenRowId = nil
-	end
 	return {
 		headerSegment = HeaderSegment,
 		agentMessagesBeforeHeader = AgentMessagesBeforeHeader,
-		otherStep = OtherStep,
-		onNamedStep = UseResult4,
-		userChoice = IsOpen,
-		setUserChoice = UseResult,
-		isExpanded = if IsOpen == nil then not WasDone and UseStateResult1 else IsOpen,
-		onRowCount = UseResult3,
+		userChoice = UseStateResult,
+		setUserChoice = UseStateResult2,
+		isExpanded = if UseStateResult1 then if UseStateResult == nil then UseStateResult1 else UseStateResult elseif UseStateResult == nil then FFlagBuildExperienceTurnWorkTelemetryModule1 and V116 else UseStateResult,
+		onRowCount = UseResult1,
 		startIndexByKey = StartIndexByKey,
 		lastListKey = Key,
-		openRows = UseStateResult5,
-		autoOpenRowId = AutoOpenRowId,
-		loadingRowId = LoadingRowId,
-		onToggleRow = UseResult1,
-		onNewestSummary = UseResult2
-	}
-end
-
-local function buildWorkChildren(List, IsDone, p1, Frame)
-	-- upvalues: renderWorkSegment (copy), FFlagBuildExperienceChatCardEmphasisModule (copy), ReactModule (copy), ChatCardEmphasisPositionProviderModule (copy)
-	local Elements = {}
-	local ChildOrder = 1
-	
-	for _, value in List do
-		local IsNotClientTool: boolean = IsDone and (value.kind ~= "client_tool" or not value.isActive)
-		local RenderWorkSegmentResult = nil
-		
-		if not IsNotClientTool then
-			RenderWorkSegmentResult = renderWorkSegment(value, ChildOrder, Frame.markdownTextStyle, Frame.clockBinding, Frame.localToolActions, if p1 == nil then nil else {
-				startIndex = p1.startIndexByKey[value.key] or 0,
-				isLastList = value.key == p1.lastListKey,
-				onRowCount = p1.onRowCount,
-				openRows = p1.openRows,
-				autoOpenRowId = p1.autoOpenRowId,
-				loadingRowId = p1.loadingRowId,
-				onToggleRow = p1.onToggleRow,
-				onNewestSummary = p1.onNewestSummary
-			})
-			IsNotClientTool = RenderWorkSegmentResult == nil
-		end
-		if not IsNotClientTool then
-			if FFlagBuildExperienceChatCardEmphasisModule then
-				RenderWorkSegmentResult = ReactModule.createElement(ChatCardEmphasisPositionProviderModule, { childOrder = ChildOrder }, RenderWorkSegmentResult)
-			end
-			Elements[value.key] = RenderWorkSegmentResult
-			ChildOrder += 1
-		end
-	end
-	return Elements
-end
-
-local function renderWorkColumn(p2, p3)
-	-- upvalues: ReactModule (copy), View (copy)
-	return {
-		Work = ReactModule.createElement(View, {
-			testId = "ChatTurnBlock.TurnWork.Content",
-			tag = {
-				["col gap-xlarge size-full-0 auto-y"] = true,
-				["padding-top-small"] = p3
-			}
-		}, p2)
+		openRows = UseStateResult4,
+		onToggleRow = UseResult
 	}
 end
 
 local function TurnWorkSegment(Frame)
-	-- upvalues: useReactiveValue (copy), UseLocalizationFunction (copy), LocalizationStringsModule (copy), ReactModule (copy), FFlagBuildExperienceChatAccordionScrollAnchorModule (copy), ChatScrollAnchorContextModule (copy), FoundationModule (copy), FFlagBuildExperienceStepListModule (copy), useStepListState (copy), FFlagBuildExperienceTurnWorkTelemetryModule1 (copy), TurnWorkTelemetryContextModule (copy), FFlagBuildExperienceTurnWorkAnimationModule1 (copy), buildWorkChildren (copy), View (copy), StateLayerAffordance (copy), Icon (copy), IconName (copy), IconSize (copy), Text (copy), TurnWorkHeaderContainerModule (copy), HeightRevealModule (copy), renderWorkColumn (copy), renderNamedSteps (copy), renderStepCounters (copy)
+	-- upvalues: useReactiveValue (copy), UseLocalizationFunction (copy), LocalizationStringsModule (copy), ReactModule (copy), FFlagBuildExperienceChatAccordionScrollAnchorModule (copy), ChatScrollAnchorContextModule (copy), FoundationModule (copy), FFlagBuildExperienceStepListModule (copy), useStepListState (copy), FFlagBuildExperienceTurnWorkTelemetryModule1 (copy), TurnWorkTelemetryContextModule (copy), renderWorkSegment (copy), FFlagBuildExperienceChatCardEmphasisModule (copy), ChatCardEmphasisPositionProviderModule (copy), View (copy), StateLayerAffordance (copy), Icon (copy), IconName (copy), IconSize (copy), Text (copy), TurnWorkHeaderContainerModule (copy), renderStepCounters (copy)
 	local UseReactiveValueResult = useReactiveValue(Frame.segment.label or "")
 	local WorkedDurationSeconds: number = Frame.segment.workedDurationSeconds
 	local Largest = if WorkedDurationSeconds == nil then nil else math.max(0, (math.floor(WorkedDurationSeconds + 0.5)))
@@ -637,7 +481,7 @@ local function TurnWorkSegment(Frame)
 		Callback = ReactModule.useContext(ChatScrollAnchorContextModule)
 	end
 	local UseTokensResult = FoundationModule.Hooks.useTokens()
-	local UseStepListStateResult = if FFlagBuildExperienceStepListModule then useStepListState(UseReactiveValueResult1, Frame.isDone) else nil
+	local UseStepListStateResult = if FFlagBuildExperienceStepListModule then useStepListState(UseReactiveValueResult1) else nil
 	local HeaderSegment = if UseStepListStateResult == nil then nil else UseStepListStateResult.headerSegment
 	local IsDone = UseStepListStateResult ~= nil and (HeaderSegment ~= nil and (not UseStepListStateResult.isExpanded and (Frame.isDone or UseStepListStateResult.userChoice ~= nil)))
 	local NoIsDone = not IsDone
@@ -651,8 +495,8 @@ local function TurnWorkSegment(Frame)
 			Callback(UseRefResult.current)
 		end
 		if SetUserChoice == nil then
-			UseStateResult2(function(p2): boolean
-				return not p2
+			UseStateResult2(function(p1): boolean
+				return not p1
 			end)
 			
 			return
@@ -670,45 +514,45 @@ local function TurnWorkSegment(Frame)
 	
 	if FFlagBuildExperienceTurnWorkTelemetryModule1 then
 		ReactModule.useEffect(function()
-			-- upvalues: UseContextResult (copy), Frame (copy), HeaderSegment (copy), NoIsDone (copy)
-			if UseContextResult ~= nil and not Frame.isDone then
+			-- upvalues: UseContextResult (copy), HeaderSegment (copy), NoIsDone (copy)
+			if UseContextResult ~= nil then
 				UseContextResult.setHeaderExpanded(HeaderSegment ~= nil and NoIsDone)
 			end
 			return nil
-		end, {
-			UseContextResult,
-			HeaderSegment ~= nil,
-			NoIsDone,
-			Frame.isDone
-		})
-		local NoIsDone2: boolean = HeaderSegment ~= nil and NoIsDone
-		ReactModule.useEffect(function()
-			-- upvalues: UseContextResult (copy), NoIsDone2 (copy)
-			if UseContextResult == nil or not NoIsDone2 then
-				return nil
-			else
-				UseContextResult.openHeaderSpan()
-				
-				return function()
-					-- upvalues: UseContextResult (upval)
-					UseContextResult.closeHeaderSpan()
-				end
-			end
-		end, { UseContextResult, NoIsDone2 })
+		end, { UseContextResult, HeaderSegment ~= nil, NoIsDone })
 	end
-	local T = if FFlagBuildExperienceTurnWorkAnimationModule1 or not NoIsDone1 then {} else buildWorkChildren(UseReactiveValueResult1, IsDone, UseStepListStateResult, Frame)
-	local WorkChildren = if FFlagBuildExperienceTurnWorkAnimationModule1 then buildWorkChildren(UseReactiveValueResult1, false, UseStepListStateResult, Frame) else nil
-	local WorkChildren1 = if FFlagBuildExperienceTurnWorkAnimationModule1 then buildWorkChildren(UseReactiveValueResult1, true, UseStepListStateResult, Frame) else nil
-	local HasNextEntry: boolean = if FFlagBuildExperienceTurnWorkAnimationModule1 then next(WorkChildren1) ~= nil else false
+	local Elements = {}
 	
+	if NoIsDone1 then
+		local ChildOrder = 1
+		
+		for _, value in UseReactiveValueResult1 do
+			local IsNotClientTool: boolean = IsDone and (value.kind ~= "client_tool" or not value.isActive)
+			local RenderWorkSegmentResult = nil
+			
+			if not IsNotClientTool then
+				RenderWorkSegmentResult = renderWorkSegment(value, ChildOrder, Frame.markdownTextStyle, Frame.clockBinding, Frame.localToolActions, if UseStepListStateResult == nil then nil else {
+					startIndex = UseStepListStateResult.startIndexByKey[value.key] or 0,
+					isLastList = value.key == UseStepListStateResult.lastListKey,
+					onRowCount = UseStepListStateResult.onRowCount,
+					openRows = UseStepListStateResult.openRows,
+					onToggleRow = UseStepListStateResult.onToggleRow
+				})
+				IsNotClientTool = RenderWorkSegmentResult == nil
+			end
+			if not IsNotClientTool then
+				if FFlagBuildExperienceChatCardEmphasisModule then
+					RenderWorkSegmentResult = ReactModule.createElement(ChatCardEmphasisPositionProviderModule, { childOrder = ChildOrder }, RenderWorkSegmentResult)
+				end
+				Elements[value.key] = RenderWorkSegmentResult
+				ChildOrder += 1
+			end
+		end
+	end
 	return ReactModule.createElement(View, {
 		testId = "ChatTurnBlock.TurnWork",
 		LayoutOrder = Frame.LayoutOrder,
-		tag = {
-			["col size-full-0 auto-y"] = true,
-			["gap-small"] = FFlagBuildExperienceStepListModule and not FFlagBuildExperienceTurnWorkAnimationModule1,
-			["gap-medium"] = not FFlagBuildExperienceStepListModule
-		}
+		tag = if FFlagBuildExperienceStepListModule then "col gap-small size-full-0 auto-y" else "col gap-medium size-full-0 auto-y"
 	}, {
 		Summary = if NoFFlagBuildExperienceStepListModule then ReactModule.createElement(View, {
 			LayoutOrder = 1,
@@ -736,33 +580,25 @@ local function TurnWorkSegment(Frame)
 			isDone = Frame.isDone,
 			doneText = TurnActivity,
 			agentMessageCount = if UseStepListStateResult == nil then 0 else UseStepListStateResult.agentMessagesBeforeHeader,
-			otherStep = if UseStepListStateResult == nil then nil else UseStepListStateResult.otherStep,
 			isExpanded = NoIsDone,
 			onActivated = UseResult,
 			summaryRef = UseRefResult,
 			clockBinding = Frame.clockBinding
 		}),
-		AnimatedWork = if FFlagBuildExperienceTurnWorkAnimationModule1 then ReactModule.createElement(HeightRevealModule, {
-			testId = "ChatTurnBlock.TurnWork.Reveal",
-			LayoutOrder = if HeaderSegment == nil then 1 else 2,
-			isOpen = not IsDone,
-			isHeldOpen = HasNextEntry
-		}, (renderWorkColumn(if IsDone and HasNextEntry then WorkChildren1 else WorkChildren, HeaderSegment ~= nil))) else nil,
-		Work = if FFlagBuildExperienceTurnWorkAnimationModule1 or not NoIsDone1 or IsDone and next(T) == nil then nil else ReactModule.createElement(View, {
+		Work = if NoIsDone1 and (not IsDone or next(Elements) ~= nil) then ReactModule.createElement(View, {
 			testId = "ChatTurnBlock.TurnWork.Content",
 			LayoutOrder = if NoFFlagBuildExperienceStepListModule or HeaderSegment ~= nil then 2 else 1,
 			tag = {
 				["col gap-xlarge size-full-0 auto-y padding-left-large"] = NoFFlagBuildExperienceStepListModule,
 				["col gap-xlarge size-full-0 auto-y"] = not NoFFlagBuildExperienceStepListModule
 			}
-		}, T),
-		NamedSteps = if FFlagBuildExperienceStepListModule and UseStepListStateResult ~= nil and not Frame.isDone then renderNamedSteps(UseReactiveValueResult1, UseStepListStateResult.onNamedStep) else nil,
+		}, Elements) else nil,
 		StepCounters = if UseContextResult == nil then nil else renderStepCounters(UseReactiveValueResult1)
 	})
 end
 
 return ReactModule.memo(function(Frame: Frame)
-	-- upvalues: ReactModule (copy), TurnProjectionModule (copy), ReportTurnActivityGapModule (copy), useReactiveValue (copy), t (copy), FFlagBuildAgentAdCampaignCardModule (copy), UseAgentAdCampaignTurnCardsModule (copy), config (copy), FoundationModule (copy), FFlagBuildCheckGamePermissionsModule (copy), ChatPermissionsContextModule (copy), SendBuildExperienceEventModule (copy), FFlagBuildExperienceTurnWorkTelemetryModule1 (copy), UseTurnWorkTelemetryModule (copy), renderWorkSegment (copy), TurnWorkSegment (copy), FFlagBuildExperiencePlaytestCardPublishCtaModule (copy), PlaytestCardSection (copy), PlaytestCompletedCardModule (copy), FFlagBuildAgentAdCampaignRefreshEligibilityModule (copy), FFlagBuildExperienceAdsAndRobuxTelemetryModule (copy), AdCampaignIsActiveCardModule (copy), AdUpsellCardModule (copy), FFlagBuildExperienceChatCardEmphasisModule (copy), ChatCardEmphasisPositionProviderModule (copy), View (copy), AgentTurnFeedbackModule (copy), TurnWorkTelemetryContextModule (copy)
+	-- upvalues: ReactModule (copy), TurnProjectionModule (copy), ReportTurnActivityGapModule (copy), useReactiveValue (copy), t (copy), FFlagBuildAgentAdCampaignCardModule (copy), UseAgentAdCampaignTurnCardsModule (copy), config (copy), FoundationModule (copy), FFlagBuildCheckGamePermissionsModule (copy), ChatPermissionsContextModule (copy), SendBuildExperienceEventModule (copy), FFlagBuildEventsUpdate1Module (copy), FFlagBuildExperienceTurnWorkTelemetryModule1 (copy), UseTurnWorkTelemetryModule (copy), renderWorkSegment (copy), TurnWorkSegment (copy), FFlagBuildExperiencePlaytestCardPublishCtaModule (copy), PlaytestCardSection (copy), PlaytestCompletedCardModule (copy), FFlagBuildAgentAdCampaignRefreshEligibilityModule (copy), FFlagBuildExperienceAdsAndRobuxTelemetryModule (copy), AdCampaignIsActiveCardModule (copy), AdUpsellCardModule (copy), FFlagBuildExperienceChatCardEmphasisModule (copy), ChatCardEmphasisPositionProviderModule (copy), View (copy), AgentTurnFeedbackModule (copy), TurnWorkTelemetryContextModule (copy)
 	local Turn = Frame.turn
 	local TurnState = Turn.turnState
 	local TurnKey = Turn.turnKey
@@ -821,13 +657,13 @@ return ReactModule.memo(function(Frame: Frame)
 	local NoCanPublish: boolean = UseContextResult ~= nil and not UseContextResult.canPublish
 	local OnPlaytestFunction = Frame.onPlaytest
 	local UseResult = ReactModule.useCallback(function()
-		-- upvalues: SendBuildExperienceEventModule (upval), UseReactiveValueResult (copy), OnPlaytestFunction (copy)
+		-- upvalues: SendBuildExperienceEventModule (upval), UseReactiveValueResult (copy), FFlagBuildEventsUpdate1Module (upval), OnPlaytestFunction (copy)
 		SendBuildExperienceEventModule("PLAYTEST_CLICK", {
 			universeId = UseReactiveValueResult.universeId,
 			placeId = UseReactiveValueResult.placeId,
 			conversationId = UseReactiveValueResult.sessionId,
 			messageId = UseReactiveValueResult.sequenceId
-		}, { context = "chat_widget" })
+		}, if FFlagBuildEventsUpdate1Module then { context = "chat_widget" } else nil)
 		
 		if OnPlaytestFunction ~= nil then
 			OnPlaytestFunction()
@@ -861,13 +697,13 @@ return ReactModule.memo(function(Frame: Frame)
 		OnPlaytestFunction,
 		UseReactiveValueResult
 	})
-	local v3: string? = nil
+	local v2: string? = nil
 	
 	if FFlagBuildExperienceTurnWorkTelemetryModule1 and TurnState ~= nil then
 		if TurnState.status == "failed" or TurnState.stopReason == "error" then
-			v3 = "failed"
+			v2 = "failed"
 		elseif TurnState.status == "cancelled" or TurnState.stopReason == "cancelled" then
-			v3 = "stopped"
+			v2 = "stopped"
 		end
 	end
 	local UseTurnWorkTelemetryModuleResult = if FFlagBuildExperienceTurnWorkTelemetryModule1 then UseTurnWorkTelemetryModule(IsDone, TurnState ~= nil and not IsDone, {
@@ -876,7 +712,7 @@ return ReactModule.memo(function(Frame: Frame)
 		conversationId = UseReactiveValueResult.sessionId,
 		messageId = UseReactiveValueResult.sequenceId,
 		turnId = UseReactiveValueResult.turnId
-	}, v3) else nil
+	}, v2) else nil
 	
 	if FFlagBuildExperienceTurnWorkTelemetryModule1 then
 		local Flag = false
@@ -951,7 +787,6 @@ return ReactModule.memo(function(Frame: Frame)
 			else
 				local Config = if FFlagBuildExperienceAdsAndRobuxTelemetryModule then {
 					context = "agent_card",
-					isInExperience = if game.GameId == 0 then "false" else "true",
 					toolCallId = Segment.toolCallId,
 					state = State1.variant or "active"
 				} else nil

@@ -3,6 +3,8 @@ local RunService = game:GetService("RunService")
 local ReactSchedulingTracker: number = game:DefineFastInt("ReactSchedulingTracker", 0)
 local ReactSchedulingTrackerPeriodMs = game:DefineFastInt("ReactSchedulingTrackerPeriodMs", 30000)
 local TelemetryServiceMemoryCPUInfoEnabledEngineFeature = game:GetEngineFeature("TelemetryServiceMemoryCPUInfoEnabled")
+local DisableReactSchedulingTimePctStats = game:DefineFastFlag("DisableReactSchedulingTimePctStats", false)
+local DisableReactSchedulingAvgMaxMsStats = game:DefineFastFlag("DisableReactSchedulingAvgMaxMsStats", false)
 local FStringReactSchedulingContext = require(CorePackages.Workspace.Packages.SharedFlags).FStringReactSchedulingContext
 local ReactSchedulingPercentiles: string = game:DefineFastString("ReactSchedulingPercentiles", "10,50,95,99")
 local ReactSchedulingKllSketchMaxSize = game:DefineFastInt("ReactSchedulingKllSketchMaxSize", 200)
@@ -258,11 +260,25 @@ local config4 = {
 	lastUpdated = { 2025, 2, 18 },
 	throttlingPercentage = game:DefineFastInt("ReactRootSummaryEventThrottleHunderedthsPercent2", 0)
 }
+local Config1 = if DisableReactSchedulingTimePctStats then nil else {
+	eventName = "ReactRootPeriod",
+	description = "Stats for React performance for a root over a period",
+	links = "https://roblox.atlassian.net/wiki/spaces/APEX/pages/3321660204/React+Profiler+Metric+Issues+and+Path+Forward#New-Metrics-%E2%9C%A8",
+	backends = { "RobloxTelemetryStat" },
+	lastUpdated = { 2025, 2, 18 }
+}
 local config5 = {
 	eventName = "ReactRootTaskCount",
 	description = "Task counts for React performance for a root over a period",
 	links = "https://roblox.atlassian.net/wiki/spaces/APEX/pages/3321660204/React+Profiler+Metric+Issues+and+Path+Forward#New-Metrics-%E2%9C%A8",
 	backends = { "RobloxTelemetryCounter" },
+	lastUpdated = { 2025, 2, 18 }
+}
+local Config2 = if DisableReactSchedulingAvgMaxMsStats then nil else {
+	eventName = "ReactRootPeriodTask",
+	description = "Task stats for React performance for a root over a period",
+	links = "https://roblox.atlassian.net/wiki/spaces/APEX/pages/3321660204/React+Profiler+Metric+Issues+and+Path+Forward#New-Metrics-%E2%9C%A8",
+	backends = { "RobloxTelemetryStat" },
 	lastUpdated = { 2025, 2, 18 }
 }
 local config6 = {
@@ -648,7 +664,7 @@ function Module1:processFrame(p2: number)
 end
 
 function Module1:reportPeriod()
-	-- upvalues: TelemetryService (copy), config1 (copy), List (ref), config2 (copy), DeviceMemoryTier (copy), ScriptPlusExecutionTimeEnabledEngineFeature (copy), EnableCorescriptExecutionTime (copy), config3 (copy), ReactSchedulingTrackerLayoutEffects (copy), ReactSchedulingTrackerDataModelUpdate (copy), config4 (copy), config5 (copy)
+	-- upvalues: TelemetryService (copy), config1 (copy), List (ref), config2 (copy), DeviceMemoryTier (copy), ScriptPlusExecutionTimeEnabledEngineFeature (copy), EnableCorescriptExecutionTime (copy), config3 (copy), ReactSchedulingTrackerLayoutEffects (copy), ReactSchedulingTrackerDataModelUpdate (copy), config4 (copy), DisableReactSchedulingTimePctStats (copy), Config1 (ref), config5 (copy), DisableReactSchedulingAvgMaxMsStats (copy), Config2 (ref)
 	local FrameMetrics = self.frameMetrics
 	local ClockTimeDelta = os.clock() * 1000 - self.periodStartMs
 	local CustomFields = {
@@ -762,6 +778,17 @@ function Module1:reportPeriod()
 		rootsMetric.avg_passive_effects_time_ms = rootsMetric.passive_effects_total_time_ms / rootsMetric.passive_effects_count
 		rootsMetric.avg_time_to_update_ms = rootsMetric.total_time_to_update_ms / rootsMetric.update_count
 		TelemetryService:LogEvent(config4, { standardizedFields = List, customFields = rootsMetric })
+		
+		if not DisableReactSchedulingTimePctStats then
+			TelemetryService:LogStat(Config1, {
+				customFields = {
+					stat = "TotalTimePct",
+					rootName = rootsMetric.root_name,
+					deviceTier = DeviceMemoryTier,
+					context = self.context
+				}
+			}, rootsMetric.total_time_pct)
+		end
 		TelemetryService:LogCounter(config5, {
 			customFields = {
 				task = "RenderAndCommit",
@@ -789,6 +816,129 @@ function Module1:reportPeriod()
 				context = self.context
 			}
 		}, rootsMetric.passive_effects_count)
+		
+		if not DisableReactSchedulingAvgMaxMsStats then
+			TelemetryService:LogStat(Config2, {
+				customFields = {
+					task = "RenderAndCommit",
+					stat = "AvgMs",
+					rootName = rootsMetric.root_name,
+					deviceTier = DeviceMemoryTier,
+					context = self.context
+				}
+			}, rootsMetric.avg_update_time_ms)
+			TelemetryService:LogStat(Config2, {
+				customFields = {
+					task = "Commit",
+					stat = "AvgMs",
+					rootName = rootsMetric.root_name,
+					deviceTier = DeviceMemoryTier,
+					context = self.context
+				}
+			}, rootsMetric.avg_commit_time_ms)
+			
+			if ReactSchedulingTrackerLayoutEffects then
+				TelemetryService:LogStat(Config2, {
+					customFields = {
+						task = "LayoutEffects",
+						stat = "AvgMs",
+						rootName = rootsMetric.root_name,
+						deviceTier = DeviceMemoryTier,
+						context = self.context
+					}
+				}, rootsMetric.avg_layout_effects_time_ms)
+				
+				if ReactSchedulingTrackerDataModelUpdate then
+					TelemetryService:LogStat(Config2, {
+						customFields = {
+							task = "DataModelUpdate",
+							stat = "AvgMs",
+							rootName = rootsMetric.root_name,
+							deviceTier = DeviceMemoryTier,
+							context = self.context
+						}
+					}, rootsMetric.avg_data_model_update_time_ms)
+				end
+			end
+			TelemetryService:LogStat(Config2, {
+				customFields = {
+					task = "TimeToUpdateMs",
+					stat = "AvgMs",
+					rootName = rootsMetric.root_name,
+					deviceTier = DeviceMemoryTier,
+					context = self.context
+				}
+			}, rootsMetric.avg_time_to_update_ms)
+			TelemetryService:LogStat(Config2, {
+				customFields = {
+					task = "PassiveEffects",
+					stat = "AvgMs",
+					rootName = rootsMetric.root_name,
+					deviceTier = DeviceMemoryTier,
+					context = self.context
+				}
+			}, rootsMetric.avg_passive_effects_time_ms)
+			TelemetryService:LogStat(Config2, {
+				customFields = {
+					task = "RenderAndCommit",
+					stat = "MaxMs",
+					rootName = rootsMetric.root_name,
+					deviceTier = DeviceMemoryTier,
+					context = self.context
+				}
+			}, rootsMetric.max_update_time_ms)
+			TelemetryService:LogStat(Config2, {
+				customFields = {
+					task = "Commit",
+					stat = "MaxMs",
+					rootName = rootsMetric.root_name,
+					deviceTier = DeviceMemoryTier,
+					context = self.context
+				}
+			}, rootsMetric.max_commit_time_ms)
+			
+			if ReactSchedulingTrackerLayoutEffects then
+				TelemetryService:LogStat(Config2, {
+					customFields = {
+						task = "LayoutEffects",
+						stat = "MaxMs",
+						rootName = rootsMetric.root_name,
+						deviceTier = DeviceMemoryTier,
+						context = self.context
+					}
+				}, rootsMetric.max_layout_effects_time_ms)
+				
+				if ReactSchedulingTrackerDataModelUpdate then
+					TelemetryService:LogStat(Config2, {
+						customFields = {
+							task = "DataModelUpdate",
+							stat = "MaxMs",
+							rootName = rootsMetric.root_name,
+							deviceTier = DeviceMemoryTier,
+							context = self.context
+						}
+					}, rootsMetric.max_data_model_update_time_ms)
+				end
+			end
+			TelemetryService:LogStat(Config2, {
+				customFields = {
+					task = "TimeToUpdateMs",
+					stat = "MaxMs",
+					rootName = rootsMetric.root_name,
+					deviceTier = DeviceMemoryTier,
+					context = self.context
+				}
+			}, rootsMetric.max_time_to_update_ms)
+			TelemetryService:LogStat(Config2, {
+				customFields = {
+					task = "PassiveEffects",
+					stat = "MaxMs",
+					rootName = rootsMetric.root_name,
+					deviceTier = DeviceMemoryTier,
+					context = self.context
+				}
+			}, rootsMetric.max_passive_effects_time_ms)
+		end
 	end
 end
 

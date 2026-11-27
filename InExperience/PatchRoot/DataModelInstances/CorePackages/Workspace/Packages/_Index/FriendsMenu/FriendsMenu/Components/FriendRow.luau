@@ -8,7 +8,6 @@ local CryoModule = require(Parent.Cryo)
 local SharedFlagsModule = require(Parent.SharedFlags)
 local GetFFlagEnableCommonFriendsMenuFunction = SharedFlagsModule.GetFFlagEnableCommonFriendsMenu
 local GetFFlagFriendsMenuDummyLoadingFriendsFixFunction = SharedFlagsModule.GetFFlagFriendsMenuDummyLoadingFriendsFix
-local FFlagGameInviteLegacyListJoin = SharedFlagsModule.FFlagGameInviteLegacyListJoin
 local FoundationModule = require(Parent.Foundation)
 local UseCursorFunction = FoundationModule.Hooks.useCursor
 local FriendThumbnailModule = require(Components.FriendThumbnail)
@@ -23,7 +22,7 @@ local _ = require(FriendsMenu.friendsMenuModalType)
 local _UDim2 = UDim2.new(1, 0, 0.5, 0)
 local _Vector2 = Vector2.new(1, 0.5)
 
-local function v20() end
+local function v19() end
 
 local config = {
 	sidePadding = 24,
@@ -32,7 +31,7 @@ local config = {
 }
 
 return function(p1)
-	-- upvalues: CryoModule (copy), config (copy), ReactModule (copy), UseStyleFunction (copy), InviteCallbackContextModule (copy), SelectedUsersContextModule (copy), UseCursorFunction (copy), FoundationModule (copy), GetFFlagFriendsMenuDummyLoadingFriendsFixFunction (copy), FriendMenuTypeModule (copy), v20 (copy), FriendThumbnailModule (copy), FFlagGameInviteLegacyListJoin (copy), FriendInfoModule (copy), FriendsMenuCheckboxModule (copy), _UDim2 (copy), _Vector2 (copy), FriendsMenuButtonModule (copy)
+	-- upvalues: CryoModule (copy), config (copy), ReactModule (copy), UseStyleFunction (copy), InviteCallbackContextModule (copy), SelectedUsersContextModule (copy), UseCursorFunction (copy), FoundationModule (copy), GetFFlagFriendsMenuDummyLoadingFriendsFixFunction (copy), FriendMenuTypeModule (copy), v19 (copy), FriendThumbnailModule (copy), FriendInfoModule (copy), FriendsMenuCheckboxModule (copy), _UDim2 (copy), _Vector2 (copy), FriendsMenuButtonModule (copy)
 	local JoinResult = CryoModule.Dictionary.join(config, p1)
 	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
 	local Theme = UseStyleFunction().Theme
@@ -106,7 +105,7 @@ return function(p1)
 			-- upvalues: UseStateResult2 (copy)
 			UseStateResult2(false)
 		end,
-		[ReactModule.Event.Activated] = if GetFFlagFriendsMenuDummyLoadingFriendsFixFunction() and Friend.isLoadingPlaceholder then v20 elseif NoIsFetchingFriends then UseResult2 else v20,
+		[ReactModule.Event.Activated] = if GetFFlagFriendsMenuDummyLoadingFriendsFixFunction() and Friend.isLoadingPlaceholder then v19 elseif NoIsFetchingFriends then UseResult2 else v19,
 		AutoButtonColor = NoIsFetchingFriends
 	}, {
 		UIListLayout = ReactModule.createElement("UIListLayout", {
@@ -130,27 +129,7 @@ return function(p1)
 			anchorPoint = Vector2.new(0, 0.5),
 			isFetchingFriends = JoinResult.isFetchingFriends
 		}),
-		UserInfo = if FFlagGameInviteLegacyListJoin and JoinResult.renderJoinButton then ReactModule.createElement("Frame", {
-			BackgroundTransparency = 1,
-			LayoutOrder = 2,
-			Size = UDim2.new(1, -134, 0, 0),
-			AutomaticSize = Enum.AutomaticSize.Y
-		}, {
-			UIListLayout = ReactModule.createElement("UIListLayout", {
-				VerticalAlignment = Enum.VerticalAlignment.Center,
-				SortOrder = Enum.SortOrder.LayoutOrder,
-				FillDirection = Enum.FillDirection.Horizontal,
-				Padding = UDim.new(0, 12)
-			}),
-			FriendInfo = ReactModule.createElement(FriendInfoModule, {
-				LayoutOrder = 1,
-				position = UDim2.new(0, 0, 0, 0),
-				size = UDim2.fromScale(1, 0),
-				friend = Friend,
-				isFetchingFriendsNames = JoinResult.isFetchingFriendsNames
-			}),
-			JoinButton = JoinResult.renderJoinButton(Friend, 2)
-		}) else ReactModule.createElement(FriendInfoModule, {
+		UserInfo = ReactModule.createElement(FriendInfoModule, {
 			LayoutOrder = 2,
 			position = UDim2.new(0, 56, 0, 0),
 			size = UDim2.new(1, -134, 0, 0),

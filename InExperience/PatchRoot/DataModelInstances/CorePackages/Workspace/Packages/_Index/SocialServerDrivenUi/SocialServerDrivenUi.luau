@@ -1,4 +1,5 @@
 ﻿return {
+	SduiSocialRegister = require(script.System.SduiSocialRegister),
 	OpenProfileQRCodePageBridge = require(script.System.OpenProfileQRCodePageBridge),
 	PymkNavigationBridge = require(script.System.PymkNavigationBridge),
 	SocialSduiComponentWrapper = require(script.Components.SocialSduiComponentWrapper.SocialSduiComponentWrapper),

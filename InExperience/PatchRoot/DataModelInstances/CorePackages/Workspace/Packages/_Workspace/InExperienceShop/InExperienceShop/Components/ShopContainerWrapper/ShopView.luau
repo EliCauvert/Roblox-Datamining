@@ -28,13 +28,14 @@ local FindSectionModule = require(InExperienceShop.Utils.findSection)
 local OfferDialogStateModule = require(InExperienceShop.Components.OfferDialogs.OfferDialogState)
 local _ = require(InExperienceShop.Hooks.useShopOfferChip)
 local FFlagEnableCreatorEarlyAccessBannerInShopModule = require(InExperienceShop.Flags.FFlagEnableCreatorEarlyAccessBannerInShop)
+local FFlagRemoveBottomPaddingInExperienceShopModule = require(InExperienceShop.Flags.FFlagRemoveBottomPaddingInExperienceShop)
 local FFlagShopBlockClickPassThroughModule = require(InExperienceShop.Flags.FFlagShopBlockClickPassThrough)
 local FFlagShowLargerOfferBannerOnDesktop2Module = require(InExperienceShop.Flags.FFlagShowLargerOfferBannerOnDesktop2)
 local FFlagLuaAppEnableGamePassFreeTrialsModule = require(InExperienceShop.Flags.FFlagLuaAppEnableGamePassFreeTrials)
 local _ = require(InExperienceShop.Hooks.useShopReportOverflow)
 
 return function(p1)
-	-- upvalues: FFlagHideHeaderForBuyRobuxInExperienceShop (copy), FindSectionModule (copy), FFlagShowLargerOfferBannerOnDesktop2Module (copy), IsSubjectToDesktopPoliciesFunction (copy), ReactModule (copy), View (copy), SearchInputContainerModule (copy), TopBarModule (copy), DesktopOfferBannerModule (copy), FFlagShopBlockClickPassThroughModule (copy), UseTokensFunction (copy), FFlagEnableCreatorEarlyAccessBannerInShopModule (copy), CreatorEarlyAccessBannerModule (copy), Tabs (copy), FillBehavior (copy), SearchResultsContainerModule (copy), ShopHomePageContainerModule (copy), CategoryPageContainerModule (copy), ItemDetailsContainerModule (copy), FFlagShopRobuxPurchaseCompletionModalModule (copy), UnifiedPurchaseCompletionModal (copy), ShopAbuseReportOverlayModule (copy), OfferDialogStateModule (copy), OfferDetailsDialogModule (copy), OfferTermsDialogModule (copy), FFlagLuaAppEnableGamePassFreeTrialsModule (copy), TrialRedemptionErrorDialogContainerModule (copy)
+	-- upvalues: FFlagHideHeaderForBuyRobuxInExperienceShop (copy), FindSectionModule (copy), FFlagShowLargerOfferBannerOnDesktop2Module (copy), IsSubjectToDesktopPoliciesFunction (copy), ReactModule (copy), View (copy), SearchInputContainerModule (copy), TopBarModule (copy), DesktopOfferBannerModule (copy), FFlagRemoveBottomPaddingInExperienceShopModule (copy), FFlagShopBlockClickPassThroughModule (copy), UseTokensFunction (copy), FFlagEnableCreatorEarlyAccessBannerInShopModule (copy), CreatorEarlyAccessBannerModule (copy), Tabs (copy), FillBehavior (copy), SearchResultsContainerModule (copy), ShopHomePageContainerModule (copy), CategoryPageContainerModule (copy), ItemDetailsContainerModule (copy), FFlagShopRobuxPurchaseCompletionModalModule (copy), UnifiedPurchaseCompletionModal (copy), ShopAbuseReportOverlayModule (copy), OfferDialogStateModule (copy), OfferDetailsDialogModule (copy), OfferTermsDialogModule (copy), FFlagLuaAppEnableGamePassFreeTrialsModule (copy), TrialRedemptionErrorDialogContainerModule (copy)
 	local IsSearchOpen = p1.isSearchOpen
 	local NoHideTabs: boolean = not IsSearchOpen and #p1.tabs > 0
 	
@@ -85,6 +86,7 @@ return function(p1)
 			}
 		})
 	}) else nil
+	local FFlagRemoveBottomPaddingInExperienceShopModuleResult = FFlagRemoveBottomPaddingInExperienceShopModule()
 	local FFlagShopBlockClickPassThroughModuleResult = FFlagShopBlockClickPassThroughModule()
 	local UseTokensResult = if FFlagShopBlockClickPassThroughModuleResult then UseTokensFunction() else nil
 	
@@ -92,7 +94,8 @@ return function(p1)
 		tag = {
 			["data-testid=ShopView"] = true,
 			["size-full"] = true,
-			["padding-x-large padding-top-medium"] = p1.fullScreen
+			["padding-x-large padding-top-medium"] = p1.fullScreen and FFlagRemoveBottomPaddingInExperienceShopModuleResult,
+			["padding-x-large padding-bottom-xlarge padding-top-medium"] = p1.fullScreen and not FFlagRemoveBottomPaddingInExperienceShopModuleResult
 		}
 	}, {
 		Content = ReactModule.createElement(if FFlagShopBlockClickPassThroughModuleResult then "Frame" else View, if FFlagShopBlockClickPassThroughModuleResult then {
@@ -182,7 +185,7 @@ return function(p1)
 			onViewTerms = p1.offer.onOfferViewTerms,
 			onClose = p1.offer.onOfferDetailsClose
 		}) else nil,
-		OfferTerms = if p1.offer.offerDialog == OfferDialogStateModule.Terms and (p1.offer.offerModal ~= nil and p1.offer.offerModal.termsAndConditions ~= nil) then ReactModule.createElement(OfferTermsDialogModule, {
+		OfferTerms = if p1.offer.offerDialog == OfferDialogStateModule.Terms and p1.offer.offerModal ~= nil and p1.offer.offerModal.termsAndConditions ~= nil then ReactModule.createElement(OfferTermsDialogModule, {
 			terms = p1.offer.offerModal.termsAndConditions,
 			onClose = p1.offer.onOfferTermsClose
 		}) else nil,

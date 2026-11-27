@@ -1,1 +1,0 @@
-﻿return game:DefineFastFlag("SocialTabsPageDockedPanelSafeArea2", false)

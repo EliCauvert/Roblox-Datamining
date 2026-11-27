@@ -8,7 +8,7 @@ local RoactUtilsModule = require(Parent.RoactUtils)
 local SignalsModule = require(Parent.Signals)
 local UseSignalStateFunction = require(Parent.SignalsReact).useSignalState
 local FFlagGameInviteInExpJoinCtaModule = require(GameInvite.Flags.FFlagGameInviteInExpJoinCta)
-local IsGameInviteJoinForPioneerEnabled = NotificationsCommonModule.isGameInviteJoinForPioneerEnabled
+local IsGameInviteJoinForPioneerEnabledFunction = require(Parent.NotificationsCommon).isGameInviteJoinForPioneerEnabled
 local GameInviteConstantsModule = require(GameInvite.GameInviteConstants)
 local FFlagUseSignalsForGameInvitesStatus = require(Parent.SharedFlags).FFlagUseSignalsForGameInvitesStatus
 local GetGameInvitesStatusStore = if FFlagUseSignalsForGameInvitesStatus then NotificationsCommonModule.GetGameInvitesStatusStore else nil
@@ -33,7 +33,7 @@ local config = {
 }
 
 return function(p1)
-	-- upvalues: ReactModule (copy), FriendsMenuModule (copy), FFlagUseSignalsForGameInvitesStatus (copy), SignalsModule (copy), GetGameInvitesStatusStore (copy), UseSignalStateFunction (copy), UseSelectorFunction (copy), GetLocalizedStringsFunction (copy), config (copy), FFlagGameInviteInExpJoinCtaModule (copy), IsGameInviteJoinForPioneerEnabled (copy), InviteStatus (copy), Button (copy), ButtonVariant (copy), InputSize (copy), FillBehavior (copy), Text (copy), View (copy), SizeConstraint (copy)
+	-- upvalues: ReactModule (copy), FriendsMenuModule (copy), FFlagUseSignalsForGameInvitesStatus (copy), SignalsModule (copy), GetGameInvitesStatusStore (copy), UseSignalStateFunction (copy), UseSelectorFunction (copy), GetLocalizedStringsFunction (copy), config (copy), FFlagGameInviteInExpJoinCtaModule (copy), IsGameInviteJoinForPioneerEnabledFunction (copy), InviteStatus (copy), Button (copy), ButtonVariant (copy), InputSize (copy), FillBehavior (copy), Text (copy), View (copy), SizeConstraint (copy)
 	local UserId = p1.userId
 	local RowNumber = p1.rowNumber
 	local IsFetchingFriends = ReactModule.useContext(FriendsMenuModule.FriendsListContext).isFetchingFriends
@@ -55,7 +55,7 @@ return function(p1)
 	end)
 	local LocalizedStrings = GetLocalizedStringsFunction(config)
 	
-	return if FFlagGameInviteInExpJoinCtaModule or IsGameInviteJoinForPioneerEnabled then ReactModule.createElement(View, {
+	return if FFlagGameInviteInExpJoinCtaModule or IsGameInviteJoinForPioneerEnabledFunction() then ReactModule.createElement(View, {
 		tag = "row align-x-center align-y-center auto-xy",
 		sizeConstraint = SizeConstraint,
 		LayoutOrder = p1.layoutOrder

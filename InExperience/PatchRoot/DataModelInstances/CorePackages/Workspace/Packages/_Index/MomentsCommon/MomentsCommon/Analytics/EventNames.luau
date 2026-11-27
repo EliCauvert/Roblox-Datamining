@@ -14,7 +14,6 @@
 	FeedMinimizeButtonPressed = "FeedMinimizeButtonPressed",
 	FeedOverflowButtonPressed = "FeedOverflowButtonPressed",
 	FeedAnalyticsButtonPressed = "FeedAnalyticsButtonPressed",
-	FeedReactionCountPressed = "FeedReactionCountPressed",
 	FeedPersonalizedRecommendationsButtonPressed = "FeedPersonalizedRecommendationsButtonPressed",
 	PostInsightsPageImpression = "PostInsightsPageImpression",
 	PostInsightsBackButtonPressed = "PostInsightsBackButtonPressed",

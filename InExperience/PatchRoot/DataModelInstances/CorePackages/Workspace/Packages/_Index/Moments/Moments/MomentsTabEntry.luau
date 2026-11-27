@@ -20,8 +20,6 @@ local UseMomentsTabIsVisibleModule = require(Moments.Hooks.useMomentsTabIsVisibl
 local ConsumeEntrySourceModule = require(Moments.Utils.consumeEntrySource)
 local LogMomentsLayerExposureFunction = MomentsCommonModule.Utils.logMomentsLayerExposure
 local InnerNavigatorModule = require(Moments.Navigation.InnerNavigator)
-local MomentSearchProviderModule = require(Moments.Components.MomentSearch.MomentSearchProvider)
-local FFlagMomentsSearchInterfaceModule = require(Moments.Flags.FFlagMomentsSearchInterface)
 local MomentsHostShellModule = require(Moments.Components.MomentsHostShell)
 local _ = require(Moments.MomentsHostContext)
 local UseResetTeleportingOnGameLeaveModule = require(Moments.Hooks.useResetTeleportingOnGameLeave)
@@ -286,7 +284,7 @@ local _ = function(p3, p4, p5, p6)
 end
 
 local function MomentsTabEntry(Current)
-	-- upvalues: ReactModule (copy), CreateMomentsStoreModule (copy), UseResetTeleportingOnGameLeaveModule (copy), getDeepLinkRequest (copy), GetDeepLinkStoreModule (copy), FFlagMomentsCommentDeepLinks (copy), RobloxAppEventsModule (copy), AppPage (copy), ConsumeEntrySourceModule (copy), LogMomentsLayerExposureFunction (copy), FStringMomentsExperienceJoinActionTextIxpLayerModule (copy), Moments (copy), FFlagMomentsEmojiSetsApiModule (copy), MomentsGetMomentsReactionsStoreModule (copy), FireAnalyticsEventFunction (copy), EventNames (copy), Analytics (copy), MomentsSessionHeartbeats (copy), SessionManager (copy), FunnelEventNames (copy), FireFunnelAnalyticsEventFunction (copy), MomentsSurfaceLoadManager (copy), GetExperienceDetailsSheetStoreModule (copy), GetImmersiveChromeStoreModule (copy), RoactNavigationModule (copy), FFlagMomentsFixDeepLinkRefocusStaleNavigationModule (copy), UseMomentsTabIsVisibleModule (copy), FFlagMomentsCreateAvatarPosts (copy), FFlagMomentsAvatarLookTryOn (copy), UseMomentsGatingFunction (copy), CanRenderNativeMomentsFunction (copy), MomentsHostShellModule (copy), FFlagMomentsSearchInterfaceModule (copy), MomentSearchProviderModule (copy), InnerNavigatorModule (copy)
+	-- upvalues: ReactModule (copy), CreateMomentsStoreModule (copy), UseResetTeleportingOnGameLeaveModule (copy), getDeepLinkRequest (copy), GetDeepLinkStoreModule (copy), FFlagMomentsCommentDeepLinks (copy), RobloxAppEventsModule (copy), AppPage (copy), ConsumeEntrySourceModule (copy), LogMomentsLayerExposureFunction (copy), FStringMomentsExperienceJoinActionTextIxpLayerModule (copy), Moments (copy), FFlagMomentsEmojiSetsApiModule (copy), MomentsGetMomentsReactionsStoreModule (copy), FireAnalyticsEventFunction (copy), EventNames (copy), Analytics (copy), MomentsSessionHeartbeats (copy), SessionManager (copy), FunnelEventNames (copy), FireFunnelAnalyticsEventFunction (copy), MomentsSurfaceLoadManager (copy), GetExperienceDetailsSheetStoreModule (copy), GetImmersiveChromeStoreModule (copy), RoactNavigationModule (copy), FFlagMomentsFixDeepLinkRefocusStaleNavigationModule (copy), UseMomentsTabIsVisibleModule (copy), FFlagMomentsCreateAvatarPosts (copy), FFlagMomentsAvatarLookTryOn (copy), UseMomentsGatingFunction (copy), CanRenderNativeMomentsFunction (copy), MomentsHostShellModule (copy), InnerNavigatorModule (copy)
 	local UseRefResult = ReactModule.useRef(Current)
 	UseRefResult.current = Current
 	local UseRefResult1 = ReactModule.useRef(false)
@@ -463,9 +461,7 @@ local function MomentsTabEntry(Current)
 		openAvatarLookTryOn = if FFlagMomentsAvatarLookTryOn then UseMemoResult.openAvatarLookTryOn else nil,
 		openMomentCommentReport = UseMemoResult.openMomentCommentReport,
 		openBlockUser = UseMemoResult.openBlockUser
-	}, if FFlagMomentsSearchInterfaceModule and Current.searchProvider ~= nil then ReactModule.createElement(MomentSearchProviderModule.Provider, { value = Current.searchProvider }, {
-		Navigator = ReactModule.createElement(InnerNavigatorModule, { navigation = Current.navigation })
-	}) else ReactModule.createElement(InnerNavigatorModule, { navigation = Current.navigation })) else nil
+	}, ReactModule.createElement(InnerNavigatorModule, { navigation = Current.navigation })) else nil
 end
 
 local MomentsTabEntryScreen = ReactModule.Component:extend("MomentsTabEntryScreen")

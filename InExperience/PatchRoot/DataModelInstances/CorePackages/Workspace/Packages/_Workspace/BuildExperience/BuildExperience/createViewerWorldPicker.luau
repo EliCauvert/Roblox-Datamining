@@ -1,6 +1,4 @@
-﻿local FFlagBuildExperienceWorldJoystick = require(script:FindFirstAncestor("BuildExperience").Parent.SharedFlags).FFlagBuildExperienceWorldJoystick
-
-local function toScreenPoint(Input): Vector2
+﻿local function toScreenPoint(Input): Vector2
 	return Vector2.new(Input.Position.X, Input.Position.Y)
 end
 
@@ -35,7 +33,7 @@ local function raycast(Camera: Camera, World, Vector)
 end
 
 return function(p1)
-	-- upvalues: raycast (copy), toScreenPoint (copy), FFlagBuildExperienceWorldJoystick (copy)
+	-- upvalues: raycast (copy), toScreenPoint (copy)
 	local Tbl = {}
 	
 	local function _(p2)
@@ -54,10 +52,9 @@ return function(p1)
 	
 	local Connections = {
 		p1.userInputService.InputBegan:Connect(function(Input, GameProcessed)
-			-- upvalues: p1 (copy), raycast (upval), toScreenPoint (upval), FFlagBuildExperienceWorldJoystick (upval), Tbl (copy)
+			-- upvalues: p1 (copy), raycast (upval), toScreenPoint (upval), Tbl (copy)
 			if Input.UserInputType ~= Enum.UserInputType.MouseButton1 then
 				if Input.UserInputType == Enum.UserInputType.Touch then
-					if FFlagBuildExperienceWorldJoystick and GameProcessed then return end
 					local GameProcessed1 = GameProcessed or (p1.isBlocked() or next(Tbl) ~= nil)
 					for _, value in Tbl do
 						value.isGesture = true

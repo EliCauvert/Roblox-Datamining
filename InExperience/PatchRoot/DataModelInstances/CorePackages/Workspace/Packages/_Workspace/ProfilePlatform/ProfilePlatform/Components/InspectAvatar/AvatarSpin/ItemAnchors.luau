@@ -106,40 +106,6 @@ local config5 = {
 	leftFoot = { "LeftFoot", "Left Leg" },
 	rightFoot = { "RightFoot", "Right Leg" }
 }
-local config6 = {
-	torso = {
-		UpperTorso = true,
-		LowerTorso = true,
-		LeftUpperArm = true,
-		LeftLowerArm = true,
-		LeftHand = true,
-		RightUpperArm = true,
-		RightLowerArm = true,
-		RightHand = true,
-		Torso = true,
-		["Left Arm"] = true,
-		["Right Arm"] = true
-	},
-	legs = {
-		LowerTorso = true,
-		LeftUpperLeg = true,
-		LeftLowerLeg = true,
-		LeftFoot = true,
-		RightUpperLeg = true,
-		RightLowerLeg = true,
-		RightFoot = true,
-		["Left Leg"] = true,
-		["Right Leg"] = true
-	}
-}
-local config7 = { UpperTorso = true, Torso = true }
-
-local _ = function(List)
-	for _, value in List do
-		value.frontOnly = true
-	end
-	return List
-end
 
 local function findBodyPart(Object, p1)
 	-- upvalues: config5 (copy)
@@ -154,7 +120,7 @@ local function findBodyPart(Object, p1)
 	return nil
 end
 
-local function surfaceAnchors(Part, List, Head, Head1)
+local function surfaceAnchors(Part, List, Torso)
 	local List1 = {}
 	
 	for _, value in List do
@@ -166,21 +132,20 @@ local function surfaceAnchors(Part, List, Head, Head1)
 			fullDegrees = value.fullDegrees,
 			zeroDegrees = value.zeroDegrees,
 			weight = value.weight,
-			target = Head,
-			covers = Head1
+			target = Torso
 		})
 	end
 	return List1
 end
 
-local _ = function(p2, p3, p4, p5, p6)
-	-- upvalues: findBodyPart (copy), surfaceAnchors (copy), config6 (copy)
+local _ = function(p2, p3, p4, p5)
+	-- upvalues: findBodyPart (copy), surfaceAnchors (copy)
 	local BodyPart = findBodyPart(p2, p3)
 	
-	return if BodyPart then surfaceAnchors(BodyPart, p4, p5 or BodyPart, p6 or config6[p3]) else {}
+	return if BodyPart then surfaceAnchors(BodyPart, p4, p5 or BodyPart) else {}
 end
 
-local config8 = {
+local config6 = {
 	[Enum.AccessoryType.Jacket] = "torso",
 	[Enum.AccessoryType.Sweater] = "torso",
 	[Enum.AccessoryType.TShirt] = "torso",
@@ -193,40 +158,22 @@ local config8 = {
 	[Enum.AccessoryType.Eyebrow] = "head",
 	[Enum.AccessoryType.Eyelash] = "head"
 }
-local config9 = {
-	[Enum.AccessoryType.TShirt] = {
-		UpperTorso = true,
-		LowerTorso = true,
-		LeftUpperArm = true,
-		RightUpperArm = true
-	}
-}
 
 local function accessoryAnchors(p2, Accessory: Accessory)
-	-- upvalues: config8 (copy), config (copy), findBodyPart (copy), surfaceAnchors (copy), config6 (copy), config9 (copy), config1 (copy), config3 (copy), config2 (copy)
+	-- upvalues: config6 (copy), config (copy), config1 (copy), findBodyPart (copy), surfaceAnchors (copy), config3 (copy), config2 (copy)
 	local Handle = Accessory:FindFirstChild("Handle")
 	
 	if not Handle or not Handle:IsA("BasePart") then
 		return {}
 	end
 	if Handle:FindFirstChildWhichIsA("WrapLayer") and Accessory:IsA("Accessory") then
-		local Entry = config8[Accessory.AccessoryType]
+		local Entry = config6[Accessory.AccessoryType]
 		
 		if Entry then
-			if Entry ~= "head" then
-				local Entry1 = config9[Accessory.AccessoryType]
-				local list = { config, config1 }
-				local BodyPart = findBodyPart(p2, Entry)
-				
-				return if BodyPart then surfaceAnchors(BodyPart, list, Accessory or BodyPart, Entry1 or config6[Entry]) else {}
-			end
-			local list = { config }
+			local List1 = if Entry == "head" then { config } else { config, config1 }
 			local BodyPart = findBodyPart(p2, Entry)
-			local SurfaceAnchorsResult = if BodyPart then surfaceAnchors(BodyPart, list, Accessory or BodyPart, config6[Entry]) else {}
-			for _, value in SurfaceAnchorsResult do
-				value.frontOnly = true
-			end
-			return SurfaceAnchorsResult
+			
+			return if BodyPart then surfaceAnchors(BodyPart, List1, Accessory or BodyPart) else {}
 		end
 	end
 	local Attachment = Handle:FindFirstChildWhichIsA("Attachment")
@@ -234,14 +181,14 @@ local function accessoryAnchors(p2, Accessory: Accessory)
 	local Offset = if SpecialMesh then SpecialMesh.Offset else vector.create(0, 0, 0)
 	local List = {}
 	
-	for _, value1 in (if Attachment then config3[Attachment.Name] else nil) or { config2 } do
+	for _, value in (if Attachment then config3[Attachment.Name] else nil) or { config2 } do
 		table.insert(List, {
 			part = Handle,
 			offset = Offset,
-			normal = value1.normal,
-			fullDegrees = value1.fullDegrees,
-			zeroDegrees = value1.zeroDegrees,
-			weight = value1.weight,
+			normal = value.normal,
+			fullDegrees = value.fullDegrees,
+			zeroDegrees = value.zeroDegrees,
+			weight = value.weight,
 			target = Accessory
 		})
 	end
@@ -275,7 +222,7 @@ local ItemAnchorsModule = {
 }
 
 local function anchorsForAsset(Object, Number, Number1, Callback)
-	-- upvalues: accessoryAnchors (copy), Character (copy), config (copy), config1 (copy), findBodyPart (copy), surfaceAnchors (copy), config6 (copy), config7 (copy), config2 (copy)
+	-- upvalues: accessoryAnchors (copy), Character (copy), config (copy), config1 (copy), findBodyPart (copy), surfaceAnchors (copy), config2 (copy)
 	local CallbackResult = Callback(Number)
 	
 	if CallbackResult then
@@ -285,59 +232,45 @@ local function anchorsForAsset(Object, Number, Number1, Callback)
 		local list = { config, config1 }
 		local Torso = findBodyPart(Object, "torso")
 		
-		return if Torso then surfaceAnchors(Torso, list, Torso, config6.torso) else {}
+		return if Torso then surfaceAnchors(Torso, list, Torso) else {}
 	end
 	if Number1 == Character.TShirt then
 		local list = { config }
 		local Torso = findBodyPart(Object, "torso")
-		local SurfaceAnchorsResult = if Torso then surfaceAnchors(Torso, list, Torso, config7 or config6.torso) else {}
-		for _, value in SurfaceAnchorsResult do
-			value.frontOnly = true
-		end
-		return SurfaceAnchorsResult
-	else
-		if Number1 == Character.Pants then
-			local list = { config, config1 }
-			local Legs = findBodyPart(Object, "legs")
-			
-			return if Legs then surfaceAnchors(Legs, list, Legs, config6.legs) else {}
-		end
-		if Number1 == Character.Face then
-			local list = { config }
-			local Head = findBodyPart(Object, "head")
-			local SurfaceAnchorsResult = if Head then surfaceAnchors(Head, list, Head, config6.head) else {}
-			for _, value1 in SurfaceAnchorsResult do
-				value1.frontOnly = true
-			end
-			return SurfaceAnchorsResult
-		else
-			if Number1 == Character.Head or Number1 == Character.DynamicHead then
-				local list = { config }
-				local Head = findBodyPart(Object, "head")
-				
-				return if Head then surfaceAnchors(Head, list, Head, config6.head) else {}
-			end
-			if Number1 == Character.Gear then
-				local Tool = Object:FindFirstChildOfClass("Tool")
-				local Handle = Tool and Tool:FindFirstChild("Handle")
-				
-				if Tool and Handle and Handle:IsA("BasePart") then
-					return {
-						{
-							offset = vector.create(0, 0, 0),
-							normal = nil,
-							weight = 1,
-							part = Handle,
-							fullDegrees = config2.fullDegrees,
-							zeroDegrees = config2.zeroDegrees,
-							target = Tool
-						}
-					}
-				end
-			end
-			return {}
+		
+		return if Torso then surfaceAnchors(Torso, list, Torso) else {}
+	end
+	if Number1 == Character.Pants then
+		local list = { config, config1 }
+		local Legs = findBodyPart(Object, "legs")
+		
+		return if Legs then surfaceAnchors(Legs, list, Legs) else {}
+	end
+	if Number1 == Character.Face or Number1 == Character.Head or Number1 == Character.DynamicHead then
+		local list = { config }
+		local Head = findBodyPart(Object, "head")
+		
+		return if Head then surfaceAnchors(Head, list, Head) else {}
+	end
+	if Number1 == Character.Gear then
+		local Tool = Object:FindFirstChildOfClass("Tool")
+		local Handle = Tool and Tool:FindFirstChild("Handle")
+		
+		if Tool and Handle and Handle:IsA("BasePart") then
+			return {
+				{
+					offset = vector.create(0, 0, 0),
+					normal = nil,
+					weight = 1,
+					part = Handle,
+					fullDegrees = config2.fullDegrees,
+					zeroDegrees = config2.zeroDegrees,
+					target = Tool
+				}
+			}
 		end
 	end
+	return {}
 end
 
 local _ = function(Object, p3, p4): boolean
@@ -356,7 +289,7 @@ end
 
 function ItemAnchorsModule.resolve(Object, List, p3)
 	-- upvalues: ItemAnchorsModule (copy), config4 (copy), anchorsForAsset (copy)
-	local P28 = p3 or function(p4)
+	local P25 = p3 or function(p4)
 		-- upvalues: ItemAnchorsModule (upval), Object (copy)
 		return ItemAnchorsModule.findAppliedAccessory(Object, p4)
 	end
@@ -387,14 +320,14 @@ function ItemAnchorsModule.resolve(Object, List, p3)
 							v1 = true
 						end
 						if v1 then
-							for _, value2 in anchorsForAsset(Object, Number1, Number11, P28) do
+							for _, value2 in anchorsForAsset(Object, Number1, Number11, P25) do
 								table.insert(Anchors, value2)
 							end
 						end
 					end
 				end
 			else
-				Anchors = anchorsForAsset(Object, Number, tonumber(value.itemSubType), P28)
+				Anchors = anchorsForAsset(Object, Number, tonumber(value.itemSubType), P25)
 			end
 			if #Anchors > 0 then
 				table.insert(List1, { itemId = Id, anchors = Anchors })

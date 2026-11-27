@@ -33,9 +33,6 @@ local ViewportUtilModule = require(Chrome.ChromeShared.Service.ViewportUtil)
 local Size = SizingUtilsModule.getSize(ViewportUtilModule.screenSize:get(), false)
 local NewResult = require(Chrome.ChromeShared.Service.WindowSizeSignal).new(Size.X, Size.Y)
 local ConstantsModule1 = require(Chrome.ChromeShared.Unibar.Constants)
-local FFlagSelfieViewUseExtractedModulesModule = require(RobloxGui.Modules.Flags.FFlagSelfieViewUseExtractedModules)
-local GetSelfieViewAvailabilityModule = require(SelfieView.Utils.getSelfieViewAvailability)
-local GetSelfViewCornerPositionModule = require(SelfieView.Utils.getSelfViewCornerPosition)
 local NewResult1 = require(RobloxGui.Modules.SelfView.Analytics).new()
 local SELFIEVIEWID = ConstantsModule1.SELFIE_VIEW_ID
 local CloudClientService = if FFlagUseUIOverlayForCloudPlay and FFlagAllowGrayUnsupportedFeatures then InExperienceCloudPlayModule.getCloudClientService() else nil
@@ -104,30 +101,10 @@ ViewportUtilModule.screenSize:connect(function(p1)
 end, true)
 
 local function Callback()
-	-- upvalues: StarterGui (copy), FFlagSelfieViewUseExtractedModulesModule (copy), GetFFlagChromeSelfViewIgnoreCoreGuiModule (copy), FaceChatUtilsModule (copy), GetSelfieViewAvailabilityModule (copy), IsCloudClient (copy), RegisterResult (copy)
+	-- upvalues: StarterGui (copy), GetFFlagChromeSelfViewIgnoreCoreGuiModule (copy), FaceChatUtilsModule (copy), RegisterResult (copy), IsCloudClient (copy)
 	local CoreGuiEnabled = StarterGui:GetCoreGuiEnabled(Enum.CoreGuiType.SelfView)
 	
-	if FFlagSelfieViewUseExtractedModulesModule then
-		local FFlagChromeSelfViewIgnoreCoreGuiModule = GetFFlagChromeSelfViewIgnoreCoreGuiModule()
-		
-		if not FFlagChromeSelfViewIgnoreCoreGuiModule and not CoreGuiEnabled and FaceChatUtilsModule.isCameraOn() then
-			FaceChatUtilsModule.toggleVideoAnimation()
-		end
-		if GetSelfieViewAvailabilityModule({
-			coreGuiEnabled = CoreGuiEnabled,
-			ignoreCoreGui = FFlagChromeSelfViewIgnoreCoreGuiModule,
-			isUnsupportedInCloudPlay = IsCloudClient,
-			permissions = if FFlagChromeSelfViewIgnoreCoreGuiModule or CoreGuiEnabled then if IsCloudClient then nil else FaceChatUtilsModule.getPermissions() else nil
-		}) == "available" then
-			RegisterResult.availability:available()
-			
-			return
-		else
-			RegisterResult.availability:unavailable()
-			
-			return
-		end
-	elseif not GetFFlagChromeSelfViewIgnoreCoreGuiModule() and not CoreGuiEnabled then
+	if not GetFFlagChromeSelfViewIgnoreCoreGuiModule() and not CoreGuiEnabled then
 		if FaceChatUtilsModule.isCameraOn() then
 			FaceChatUtilsModule.toggleVideoAnimation()
 		end
@@ -187,24 +164,18 @@ if game:GetEngineFeature("EnableSelfViewToggleApi") then
 		Connection1:Disconnect()
 	end
 	local _ = SocialService.SelfViewVisible:Connect(function(SelfViewPosition)
-		-- upvalues: IsCloudClient (copy), ConstantsModule (copy), ServiceModule (copy), SELFIEVIEWID (copy), NewResult (copy), ViewportUtilModule (copy), FFlagSelfieViewUseExtractedModulesModule (copy), GetSelfViewCornerPositionModule (copy), ApplyDisplayScaleResult (copy), ConstantsModule1 (copy)
+		-- upvalues: IsCloudClient (copy), ConstantsModule (copy), ServiceModule (copy), SELFIEVIEWID (copy), NewResult (copy), ViewportUtilModule (copy), ConstantsModule1 (copy), ApplyDisplayScaleResult (copy)
 		if IsCloudClient then return end
 		local ApplyDisplayScaleResult1 = ConstantsModule.ApplyDisplayScale(ConstantsModule.ScreenSideOffset)
 		
 		if not ServiceModule:isWindowOpen(SELFIEVIEWID) then
 			local GetResult = NewResult:get()
 			local GetResult1 = ViewportUtilModule.screenSize:get()
-			local SelfViewCornerPositionModule = if FFlagSelfieViewUseExtractedModulesModule then GetSelfViewCornerPositionModule(SelfViewPosition, {
-				screenSize = GetResult1,
-				windowSize = GetResult,
-				topBarHeight = ApplyDisplayScaleResult,
-				screenSideOffset = ApplyDisplayScaleResult1,
-				windowPadding = ConstantsModule1.WINDOW_DEFAULT_PADDING
-			}) elseif SelfViewPosition == Enum.SelfViewPosition.TopLeft then UDim2.fromOffset(ApplyDisplayScaleResult1, ConstantsModule1.WINDOW_DEFAULT_PADDING) elseif SelfViewPosition == Enum.SelfViewPosition.TopRight then UDim2.fromOffset(GetResult1.X - (GetResult.X.Offset + ApplyDisplayScaleResult1), ConstantsModule1.WINDOW_DEFAULT_PADDING) elseif SelfViewPosition == Enum.SelfViewPosition.BottomLeft then UDim2.fromOffset(ApplyDisplayScaleResult1, GetResult1.Y - (ApplyDisplayScaleResult + GetResult.Y.Offset + ConstantsModule1.WINDOW_DEFAULT_PADDING)) elseif SelfViewPosition == Enum.SelfViewPosition.BottomRight then UDim2.fromOffset(GetResult1.X - (GetResult.X.Offset + ApplyDisplayScaleResult1), GetResult1.Y - (ApplyDisplayScaleResult + GetResult.Y.Offset + ConstantsModule1.WINDOW_DEFAULT_PADDING)) else nil
+			local _UDim2 = if SelfViewPosition == Enum.SelfViewPosition.TopLeft then UDim2.fromOffset(ApplyDisplayScaleResult1, ConstantsModule1.WINDOW_DEFAULT_PADDING) elseif SelfViewPosition == Enum.SelfViewPosition.TopRight then UDim2.fromOffset(GetResult1.X - (GetResult.X.Offset + ApplyDisplayScaleResult1), ConstantsModule1.WINDOW_DEFAULT_PADDING) elseif SelfViewPosition == Enum.SelfViewPosition.BottomLeft then UDim2.fromOffset(ApplyDisplayScaleResult1, GetResult1.Y - (ApplyDisplayScaleResult + GetResult.Y.Offset + ConstantsModule1.WINDOW_DEFAULT_PADDING)) elseif SelfViewPosition == Enum.SelfViewPosition.BottomRight then UDim2.fromOffset(GetResult1.X - (GetResult.X.Offset + ApplyDisplayScaleResult1), GetResult1.Y - (ApplyDisplayScaleResult + GetResult.Y.Offset + ConstantsModule1.WINDOW_DEFAULT_PADDING)) else nil
 			ServiceModule:toggleWindow(SELFIEVIEWID)
 			
-			if SelfViewCornerPositionModule then
-				ServiceModule:updateWindowPosition(SELFIEVIEWID, SelfViewCornerPositionModule)
+			if _UDim2 then
+				ServiceModule:updateWindowPosition(SELFIEVIEWID, _UDim2)
 			end
 		end
 	end)

@@ -1,16 +1,12 @@
-﻿local BuildExperience = script:FindFirstAncestor("BuildExperience")
-local Parent = BuildExperience.Parent
+﻿local Parent = script:FindFirstAncestor("BuildExperience").Parent
 local FoundationModule = require(Parent.Foundation)
 local ReactModule = require(Parent.React)
-local FFlagBuildExperienceUnreadServiceModule = require(BuildExperience.Flags.FFlagBuildExperienceUnreadService)
-local StatusIndicator = FoundationModule.StatusIndicator
 local Text = FoundationModule.Text
 local View = FoundationModule.View
-local StatusIndicatorVariant = FoundationModule.Enums.StatusIndicatorVariant
 local UseTokensFunction = FoundationModule.Hooks.useTokens
 
 return function(Frame)
-	-- upvalues: UseTokensFunction (copy), ReactModule (copy), Text (copy), FFlagBuildExperienceUnreadServiceModule (copy), View (copy), StatusIndicator (copy), StatusIndicatorVariant (copy)
+	-- upvalues: UseTokensFunction (copy), ReactModule (copy), View (copy), Text (copy)
 	local UseTokensResult = UseTokensFunction()
 	local TestId = Frame.testId or "BuildTabStrip"
 	local OnActivatedFunction = Frame.onActivated
@@ -37,20 +33,7 @@ return function(Frame)
 			testId = `{TestId}.Tab.{Id}`
 		}, {
 			Text = ReactModule.createElement(View, { tag = "size-full-full padding-x-medium padding-y-small" }, {
-				Label = if FFlagBuildExperienceUnreadServiceModule and tab.indicator ~= nil then ReactModule.createElement(View, {
-					tag = "row align-y-center gap-small position-center-center anchor-center-center auto-xy"
-				}, {
-					Text = ReactModule.createElement(Text, {
-						LayoutOrder = 1,
-						tag = "auto-xy text-label-medium content-emphasis",
-						Text = tab.text
-					}),
-					AttentionDot = ReactModule.createElement(StatusIndicator, {
-						LayoutOrder = 2,
-						variant = StatusIndicatorVariant.Emphasis,
-						testId = `{TestId}.Tab.{Id}.AttentionDot`
-					})
-				}) else ReactModule.createElement(Text, {
+				Label = ReactModule.createElement(Text, {
 					tag = "position-center-center anchor-center-center auto-xy text-label-medium content-emphasis",
 					Text = tab.text
 				})

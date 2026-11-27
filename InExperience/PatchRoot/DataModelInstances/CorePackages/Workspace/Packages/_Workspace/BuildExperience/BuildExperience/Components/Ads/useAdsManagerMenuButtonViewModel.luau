@@ -37,10 +37,7 @@ return function(p1)
 		UseStateResult2(false)
 		
 		if FFlagBuildExperienceAdsAndRobuxTelemetryModule then
-			SendBuildExperienceEventModule("ADS_MANAGER_OPEN_CLICK", { universeId = UniverseId }, {
-				context = "get_users_menu",
-				isInExperience = if game.GameId == 0 then "false" else "true"
-			})
+			SendBuildExperienceEventModule("ADS_MANAGER_OPEN_CLICK", { universeId = UniverseId }, { context = "get_users_menu" })
 		end
 		UseOpenWebViewWithResumeRefreshModuleResult()
 	end, {

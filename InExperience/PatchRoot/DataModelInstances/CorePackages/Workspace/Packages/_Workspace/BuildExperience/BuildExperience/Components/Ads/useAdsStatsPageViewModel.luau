@@ -362,7 +362,6 @@ return function(UniverseId, p1, p2, p3, p4, p5)
 			if FFlagBuildExperienceAdsAndRobuxTelemetryModule then
 				SendBuildExperienceEventModule("AD_CAMPAIGN_CREATE_ENTRY_CLICK", { universeId = UniverseId }, {
 					context = "get_users",
-					isInExperience = if game.GameId == 0 then "false" else "true",
 					destination = if CanCreateCampaign then "sheet" else "ads_manager"
 				})
 			end
@@ -398,7 +397,6 @@ return function(UniverseId, p1, p2, p3, p4, p5)
 			if FFlagBuildExperienceAdsAndRobuxTelemetryModule then
 				local config = {
 					context = "get_users",
-					isInExperience = if game.GameId == 0 then "false" else "true",
 					isRetry = if UseRefResult2 == nil or not UseRefResult2.current then "false" else "true"
 				}
 				

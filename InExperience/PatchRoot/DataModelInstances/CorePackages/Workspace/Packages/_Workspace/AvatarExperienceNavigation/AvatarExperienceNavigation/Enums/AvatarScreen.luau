@@ -4,7 +4,6 @@ local FFlagAXEditorSubcategoryFilters = AvatarExperienceFlagsModule.FFlagAXEdito
 local FFlagAXCatalogMakeupSupport = AvatarExperienceFlagsModule.FFlagAXCatalogMakeupSupport
 local FFlagAXMakeupReleaseFTUX = AvatarExperienceFlagsModule.FFlagAXMakeupReleaseFTUX
 local FFlagAXPhotoboothMomentsPage = AvatarExperienceFlagsModule.FFlagAXPhotoboothMomentsPage
-local FFlagAXEnableInventorySearch = AvatarExperienceFlagsModule.FFlagAXEnableInventorySearch
 
 return {
 	None = "None",
@@ -15,7 +14,6 @@ return {
 	Profile = if require(Parent.SharedFlags).FFlagAXEnableProfileTab then "Profile" else nil,
 	CatalogSearch = "CatalogSearch",
 	CatalogSearchLanding = "CatalogSearchLanding",
-	InventorySearchLanding = if FFlagAXEnableInventorySearch then "InventorySearchLanding" else nil,
 	ItemDetails = "ItemDetails",
 	OutfitDetails = "OutfitDetails",
 	SendGiftRecipientPicker = "SendGiftRecipientPicker",

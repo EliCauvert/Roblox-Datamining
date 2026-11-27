@@ -6,7 +6,6 @@ local FIntMyCreationsSessionListPollingIntervalSecondsModule = require(BuildExpe
 local FFlagBuildExperienceMyCreationsFindSessionsByUniverseModule = require(BuildExperience.Flags.FFlagBuildExperienceMyCreationsFindSessionsByUniverse)
 local FFlagBuildWithGroupsModule = require(BuildExperience.Flags.FFlagBuildWithGroups)
 local FFlagBuildExperienceCursorSearchPagesModule = require(BuildExperience.Flags.FFlagBuildExperienceCursorSearchPages)
-local FFlagBuildExperienceUnreadServiceModule = require(BuildExperience.Flags.FFlagBuildExperienceUnreadService)
 local FFlagBuildUpdatedSearchUXForGAModule = require(BuildExperience.Flags.FFlagBuildUpdatedSearchUXForGA)
 local LocalizationModule = require(Parent.Localization)
 local PromiseModule = require(Parent.Promise)
@@ -25,7 +24,6 @@ local ThumbForUniverseIdModule = require(BuildExperience.utils.thumbForUniverseI
 local UseActiveTabQueryModule = require(BuildExperience.utils.useActiveTabQuery)
 local UseCursorSearchPagesModule = require(BuildExperience.utils.useCursorSearchPages)
 local GetBuildExperienceRefreshStoreModule = require(BuildExperience.Stores.GetBuildExperienceRefreshStore)
-local GetCreatorAgentResumeStoreModule = require(BuildExperience.Stores.GetCreatorAgentResumeStore)
 local _ = require(BuildExperience.Stores.GetMyCreationsFilterStore)
 local GetSearchQueryStoreModule = require(BuildExperience.Stores.GetSearchQueryStore)
 local _ = require(BuildExperience.Stores.GetSearchQueryStore.createSearchQueryStore)
@@ -280,22 +278,6 @@ local function useUniverseSessions(p2, Current)
 	}
 end
 
-local function markUnreadRows(Items, Entries, UniverseId)
-	local t = {}
-	
-	for _, entry in Entries do
-		t[entry.universeId] = true
-	end
-	local Buffer = table.create(#Items)
-	
-	for i, item in Items do
-		local Copy = table.clone(item)
-		Copy.hasUnseenAttention = item.universeId ~= UniverseId and t[tostring(item.universeId)] == true
-		Buffer[i] = Copy
-	end
-	return Buffer
-end
-
 local function buildUniverseItems(Current, Entries, p4, p5, Callback)
 	-- upvalues: buildLatestSessionByUniverseId (copy), UniverseConfigurationModule (copy), PrivacyType (copy), ThumbForUniverseIdModule (copy), FFlagBuildWithGroupsModule (copy)
 	local LatestSessionByUniverseId = buildLatestSessionByUniverseId(Entries)
@@ -544,22 +526,22 @@ local function useUniverseSearchList(SearchStore, CreatorTargetId, Query, IsIsFo
 	end, { SearchStore, CreatorTargetId })
 	local UseResult2 = ReactModule.useCallback(function(p10)
 		-- upvalues: UseRefResult1 (copy), FFlagBuildWithGroupsModule (upval), UseRefResult2 (copy), UseStateResult2 (copy), PromiseModule (upval), UseResult1 (copy)
-		local P44 = p10 or UseRefResult1.current
+		local P41 = p10 or UseRefResult1.current
 		
 		if FFlagBuildWithGroupsModule then
 			local Current = UseRefResult2.current
 			UseStateResult2({
-				query = P44,
+				query = P41,
 				pageIndexes = { 0 },
 				creators = Current,
 				cursors = {}
 			})
 			
-			return if Current == nil then PromiseModule.resolve() else UseResult1(P44, 0, nil, nil, Current)
+			return if Current == nil then PromiseModule.resolve() else UseResult1(P41, 0, nil, nil, Current)
 		else
-			UseStateResult2({ query = P44, pageIndexes = { 0 } })
+			UseStateResult2({ query = P41, pageIndexes = { 0 } })
 			
-			return UseResult1(P44, 0)
+			return UseResult1(P41, 0)
 		end
 	end, { UseResult1 })
 	ReactModule.useEffect(function()
@@ -783,7 +765,7 @@ local function useBuildCreators(CreatorGroupsStore, CreatorTargetId, Filter)
 end
 
 return function(p10)
-	-- upvalues: UseLocalizationFunction (copy), LocalizationStringsModule (copy), ReactModule (copy), LocalizationRoactContext (copy), LocalizationModule (copy), CreatorAgentChatModule (copy), FFlagBuildExperienceUnreadServiceModule (copy), UniverseSearchModule (copy), GetSearchQueryStoreModule (copy), GetBuildExperienceRefreshStoreModule (copy), AppLifecycleObserverService (copy), FFlagBuildUpdatedSearchUXForGAModule (copy), UseActiveTabQueryModule (copy), UseSignalStateFunction (copy), FFlagBuildExperienceMyCreationsFindSessionsByUniverseModule (copy), Players (copy), FFlagBuildWithGroupsModule (copy), CreatorGroupsModule (copy), useBuildCreators (copy), config (copy), FFlagBuildExperienceCursorSearchPagesModule (copy), useCreatorSearchList (copy), useUniverseSearchList (copy), PromiseModule (copy), ignorePromiseRejection (copy), SignalsModule (copy), FIntMyCreationsSessionListPollingIntervalSecondsModule (copy), GetCreatorAgentResumeStoreModule (copy), markUnreadRows (copy), requestHandleToPromise (copy)
+	-- upvalues: UseLocalizationFunction (copy), LocalizationStringsModule (copy), ReactModule (copy), LocalizationRoactContext (copy), LocalizationModule (copy), CreatorAgentChatModule (copy), UniverseSearchModule (copy), GetSearchQueryStoreModule (copy), GetBuildExperienceRefreshStoreModule (copy), AppLifecycleObserverService (copy), FFlagBuildUpdatedSearchUXForGAModule (copy), UseActiveTabQueryModule (copy), UseSignalStateFunction (copy), FFlagBuildExperienceMyCreationsFindSessionsByUniverseModule (copy), Players (copy), FFlagBuildWithGroupsModule (copy), CreatorGroupsModule (copy), useBuildCreators (copy), config (copy), FFlagBuildExperienceCursorSearchPagesModule (copy), useCreatorSearchList (copy), useUniverseSearchList (copy), PromiseModule (copy), ignorePromiseRejection (copy), SignalsModule (copy), FIntMyCreationsSessionListPollingIntervalSecondsModule (copy), requestHandleToPromise (copy)
 	local UseLocalizationResult = UseLocalizationFunction({
 		building = LocalizationStringsModule.MY_CREATIONS_BUILDING,
 		inputNeeded = LocalizationStringsModule.MY_CREATIONS_INPUT_NEEDED,
@@ -833,7 +815,6 @@ return function(p10)
 		UseLocalizationResult.restricted
 	})
 	local CreatorAgentChatStore = p10.creatorAgentChatStore or CreatorAgentChatModule.getCreatorAgentChatStore()
-	local UnreadStore = if FFlagBuildExperienceUnreadServiceModule then p10.unreadStore or CreatorAgentChatModule.getUnreadStore(false) else nil
 	local SearchStore = p10.searchStore
 	
 	if SearchStore == nil then
@@ -866,7 +847,7 @@ return function(p10)
 		UseRefResult2.current = RefreshSessions
 	end
 	local UseResult1 = ReactModule.useCallback(function()
-		-- upvalues: SessionListStore (copy), PromiseModule (upval), FFlagBuildWithGroupsModule (upval), CreatorGroupsStore (copy), FFlagBuildExperienceUnreadServiceModule (upval), UnreadStore (copy), FFlagBuildExperienceMyCreationsFindSessionsByUniverseModule (upval), RefreshFunction (copy), UseRefResult2 (copy), ignorePromiseRejection (upval)
+		-- upvalues: SessionListStore (copy), PromiseModule (upval), FFlagBuildWithGroupsModule (upval), CreatorGroupsStore (copy), FFlagBuildExperienceMyCreationsFindSessionsByUniverseModule (upval), RefreshFunction (copy), UseRefResult2 (copy), ignorePromiseRejection (upval)
 		local RefreshResult = SessionListStore.refresh()
 		local NewPromise = PromiseModule.new(function(Callback, Callback1)
 			-- upvalues: RefreshResult (copy)
@@ -890,25 +871,16 @@ return function(p10)
 		if FFlagBuildWithGroupsModule then
 			CreatorGroupsStore.fetchGroups("Build")
 		end
-		if FFlagBuildExperienceUnreadServiceModule then
-			UnreadStore.refreshCategory("game")
-			UnreadStore.refreshSummary()
-		end
 		return if FFlagBuildExperienceMyCreationsFindSessionsByUniverseModule then PromiseModule.all({
 			RefreshFunction(),
 			NewPromise,
 			UseRefResult2.current():catch(ignorePromiseRejection)
 		}) else PromiseModule.all({ RefreshFunction(), NewPromise })
-	end, {
-		CreatorGroupsStore,
-		RefreshFunction,
-		SessionListStore,
-		UnreadStore or false
-	})
+	end, { CreatorGroupsStore, RefreshFunction, SessionListStore })
 	ReactModule.useEffect(function()
-		-- upvalues: AppLifecycleObserverService1 (copy), IsIsFocused (copy), RefreshFunction (copy), ignorePromiseRejection (upval), FFlagBuildExperienceMyCreationsFindSessionsByUniverseModule (upval), UseRefResult2 (copy), SessionListStore (copy), FFlagBuildExperienceUnreadServiceModule (upval), UnreadStore (copy)
+		-- upvalues: AppLifecycleObserverService1 (copy), IsIsFocused (copy), RefreshFunction (copy), ignorePromiseRejection (upval), FFlagBuildExperienceMyCreationsFindSessionsByUniverseModule (upval), UseRefResult2 (copy), SessionListStore (copy)
 		local OnUnhideConnection = AppLifecycleObserverService1.OnUnhide:Connect(function()
-			-- upvalues: IsIsFocused (upval), RefreshFunction (upval), ignorePromiseRejection (upval), FFlagBuildExperienceMyCreationsFindSessionsByUniverseModule (upval), UseRefResult2 (upval), SessionListStore (upval), FFlagBuildExperienceUnreadServiceModule (upval), UnreadStore (upval)
+			-- upvalues: IsIsFocused (upval), RefreshFunction (upval), ignorePromiseRejection (upval), FFlagBuildExperienceMyCreationsFindSessionsByUniverseModule (upval), UseRefResult2 (upval), SessionListStore (upval)
 			if IsIsFocused then
 				RefreshFunction():catch(ignorePromiseRejection)
 				
@@ -916,11 +888,6 @@ return function(p10)
 					UseRefResult2.current():catch(ignorePromiseRejection)
 				end
 				SessionListStore.refresh()
-				
-				if FFlagBuildExperienceUnreadServiceModule then
-					UnreadStore.refreshCategory("game")
-					UnreadStore.refreshSummary()
-				end
 			end
 		end)
 		
@@ -932,8 +899,7 @@ return function(p10)
 		AppLifecycleObserverService1,
 		IsIsFocused,
 		RefreshFunction,
-		SessionListStore,
-		UnreadStore or false
+		SessionListStore
 	})
 	ReactModule.useEffect(function()
 		-- upvalues: FFlagBuildExperienceMyCreationsFindSessionsByUniverseModule (upval), UseRefResult (copy), UseSignalStateResult (copy), IsIsFocused (copy), UseRefResult1 (copy), UseStateResult2 (copy), RefreshFunction (copy), ignorePromiseRejection (upval), UseRefResult2 (copy), SessionListStore (copy), SignalsModule (upval)
@@ -1004,43 +970,11 @@ return function(p10)
 		end
 	end, { IsIsFocused, Largest, SessionListStore })
 	local Items = UseCreatorSearchListResult.items
-	local Items1 = UseCreatorSearchListResult.items
-	local UseResult11 = nil
-	
-	if FFlagBuildExperienceUnreadServiceModule then
-		local UseActiveTargetResult = GetCreatorAgentResumeStoreModule().useActiveTarget()
-		local GameCategory = UnreadStore.getCategory("game")
-		local UseSignalStateResult5 = UseSignalStateFunction(GameCategory.data)
-		local UseSignalStateResult6 = UseSignalStateFunction(GameCategory.status)
-		ReactModule.useEffect(function()
-			-- upvalues: IsIsFocused (copy), UnreadStore (copy)
-			if IsIsFocused then
-				UnreadStore.refreshCategory("game")
-				UnreadStore.refreshSummary()
-			end
-		end, { UnreadStore, IsIsFocused })
-		local UniverseId = if UseActiveTargetResult == nil then nil else UseActiveTargetResult.universeId
-		local UseMemoResult2 = ReactModule.useMemo(function()
-			-- upvalues: UseSignalStateResult6 (copy), UseSignalStateResult5 (copy), markUnreadRows (upval), UseCreatorSearchListResult (copy), UniverseId (copy)
-			return (markUnreadRows(UseCreatorSearchListResult.items, if UseSignalStateResult6 == "Ready" and UseSignalStateResult5 ~= nil then UseSignalStateResult5.entries else {}, UniverseId))
-		end, {
-			UseCreatorSearchListResult.items,
-			UseSignalStateResult5,
-			UseSignalStateResult6,
-			UniverseId or false
-		})
-		Items = UseMemoResult2
-		Items1 = UseMemoResult2
-		UseResult11 = ReactModule.useCallback(function(p11)
-			-- upvalues: UnreadStore (copy)
-			UnreadStore.acknowledge({ kind = "game", universeId = tostring(p11) })
-		end, { UnreadStore })
-	end
 	local Status = UseCreatorSearchListResult.status
 	local SourceItemCount: number = UseCreatorSearchListResult.sourceItemCount
 	local IsReady: boolean = Status == "Ready" or SourceItemCount > 0
 	local IsPending = UseSignalStateResult4 == "pending"
-	local UseResult2 = ReactModule.useCallback(function()
+	local UseResult11 = ReactModule.useCallback(function()
 		-- upvalues: SessionListStore (copy), PromiseModule (upval), requestHandleToPromise (upval)
 		local More = SessionListStore.loadMore()
 		
@@ -1056,11 +990,11 @@ return function(p10)
 	
 	return {
 		hasPendingSummary = false,
-		displayedItems = Items,
-		items = Items1,
+		displayedItems = UseCreatorSearchListResult.items,
+		items = Items,
 		listStatus = Status,
 		hasDisplayedResult = IsReady,
-		isSettledNoResults = Query == UseActiveTabQueryModuleResult and (IsReady and #Items1 == 0),
+		isSettledNoResults = Query == UseActiveTabQueryModuleResult and (IsReady and #Items == 0),
 		query = Query,
 		sourceItemCount = SourceItemCount,
 		sessionCount = #UseSignalStateResult1,
@@ -1069,7 +1003,7 @@ return function(p10)
 		loadError = LoadError,
 		refresh = UseResult1,
 		loadMoreIfNeeded = ReactModule.useCallback(function(ScrollFrame)
-			-- upvalues: LoadMoreFunction (copy), UseSignalStateResult2 (copy), IsPending (copy), NotReady (copy), UseResult2 (copy)
+			-- upvalues: LoadMoreFunction (copy), UseSignalStateResult2 (copy), IsPending (copy), NotReady (copy), UseResult11 (copy)
 			local Y: number = ScrollFrame.AbsoluteCanvasSize.Y
 			
 			if ScrollFrame.CanvasPosition.Y <= 0 or Y <= 0 or ScrollFrame.AbsoluteWindowSize.Y <= 0 then return end
@@ -1077,19 +1011,18 @@ return function(p10)
 				LoadMoreFunction()
 				
 				if UseSignalStateResult2 ~= nil and not IsPending and NotReady == "Ready" then
-					UseResult2()
+					UseResult11()
 				end
 			end
 		end, {
 			IsPending,
-			UseResult2,
+			UseResult11,
 			LoadMoreFunction,
 			UseSignalStateResult2,
 			NotReady
 		}),
 		failedLoadMore = UseCreatorSearchListResult.failedLoadMore,
 		retryLoadMore = LoadMoreFunction,
-		isLoadingMore = UseCreatorSearchListResult.isLoadingMore,
-		acknowledgeGame = UseResult11
+		isLoadingMore = UseCreatorSearchListResult.isLoadingMore
 	}
 end

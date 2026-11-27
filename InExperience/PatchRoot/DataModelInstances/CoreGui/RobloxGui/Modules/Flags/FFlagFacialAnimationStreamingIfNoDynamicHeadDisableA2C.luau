@@ -1,1 +1,0 @@
-﻿return game:DefineFastFlag("FacialAnimationStreamingIfNoDynamicHeadDisableA2C", false)

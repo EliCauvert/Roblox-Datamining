@@ -13,6 +13,8 @@ local SetAccessoryInstanceModule = require(Parent.Actions.SetAccessoryInstance)
 local SetPriceInRobuxModule = require(Parent.Actions.SetPriceInRobux)
 local OpenValidationErrorModalModule = require(Parent.Actions.OpenValidationErrorModal)
 local PublishAssetAnalytics = require(game:GetService("CorePackages").Workspace.Packages.PurchasePrompt).PublishAssetAnalytics
+local GetFFlagUploadMakeupSupportModule = require(Parent.Flags.GetFFlagUploadMakeupSupport)
+local FFlagPublishAssetPromptItemDetailsTelemetryModule = require(Parent.Flags.FFlagPublishAssetPromptItemDetailsTelemetry)
 local PromptImportAnimationClipFromVideoAsyncEnabledEngineFeature = game:GetEngineFeature("PromptImportAnimationClipFromVideoAsyncEnabled")
 
 local function updateModelAttachmentsWithWrapDeformers(DeserializeAvatarModelResult)
@@ -57,15 +59,16 @@ local function setAnalyticsItemDetails(p1)
 end
 
 return function(p1)
-	-- upvalues: ExperienceAuthService (copy), PromptImportAnimationClipFromVideoAsyncEnabledEngineFeature (copy), setAnalyticsItemDetails (copy), OpenPublishAssetPromptModule (copy), AssetService (copy), OpenPublishAvatarPromptModule (copy), OpenPublishMakeupLookPromptModule (copy), OpenPublishAvatarAssetPromptModule (copy), OpenResultModalModule (copy), AvatarCreationService (copy), SetAccessoryInstanceModule (copy), SetPriceInRobuxModule (copy), updateModelAttachmentsWithWrapDeformers (copy), SetHumanoidModelModule (copy), OpenValidationErrorModalModule (copy)
+	-- upvalues: ExperienceAuthService (copy), PromptImportAnimationClipFromVideoAsyncEnabledEngineFeature (copy), FFlagPublishAssetPromptItemDetailsTelemetryModule (copy), setAnalyticsItemDetails (copy), OpenPublishAssetPromptModule (copy), AssetService (copy), OpenPublishAvatarPromptModule (copy), GetFFlagUploadMakeupSupportModule (copy), OpenPublishMakeupLookPromptModule (copy), OpenPublishAvatarAssetPromptModule (copy), OpenResultModalModule (copy), AvatarCreationService (copy), SetAccessoryInstanceModule (copy), SetPriceInRobuxModule (copy), updateModelAttachmentsWithWrapDeformers (copy), SetHumanoidModelModule (copy), OpenValidationErrorModalModule (copy)
 	local List = {}
 	table.insert(List, ExperienceAuthService.OpenAuthPrompt:Connect(function(Guid, Entry, Metadata)
-		-- upvalues: PromptImportAnimationClipFromVideoAsyncEnabledEngineFeature (upval), setAnalyticsItemDetails (upval), p1 (copy), OpenPublishAssetPromptModule (upval), AssetService (upval), OpenPublishAvatarPromptModule (upval), OpenPublishMakeupLookPromptModule (upval), OpenPublishAvatarAssetPromptModule (upval)
+		-- upvalues: PromptImportAnimationClipFromVideoAsyncEnabledEngineFeature (upval), FFlagPublishAssetPromptItemDetailsTelemetryModule (upval), setAnalyticsItemDetails (upval), p1 (copy), OpenPublishAssetPromptModule (upval), AssetService (upval), OpenPublishAvatarPromptModule (upval), GetFFlagUploadMakeupSupportModule (upval), OpenPublishMakeupLookPromptModule (upval), OpenPublishAvatarAssetPromptModule (upval)
 		local IsVideoToAnimationFlow = PromptImportAnimationClipFromVideoAsyncEnabledEngineFeature and Metadata.isVideoToAnimationFlow
 		
 		if #Entry == 1 and Entry[1] == Enum.ExperienceAuthScope.CreatorAssetsCreate and not IsVideoToAnimationFlow then
-			setAnalyticsItemDetails(Metadata)
-			
+			if FFlagPublishAssetPromptItemDetailsTelemetryModule then
+				setAnalyticsItemDetails(Metadata)
+			end
 			if Metadata.instanceToPublish then
 				p1:dispatch(OpenPublishAssetPromptModule(Metadata.instanceToPublish, Metadata.assetType, Guid, Entry))
 				
@@ -81,7 +84,7 @@ return function(p1)
 				
 				return
 			end
-			if Metadata.makeupLookToPublish then
+			if GetFFlagUploadMakeupSupportModule() and Metadata.makeupLookToPublish then
 				p1:dispatch(OpenPublishMakeupLookPromptModule(Guid, Entry, Metadata.makeupEntries))
 				
 				return
@@ -103,10 +106,10 @@ return function(p1)
 	
 	if pcall(checkNewEventsExist) then
 		table.insert(List, AvatarCreationService.UgcValidationSuccess:Connect(function(Guid, SerializedModel, Price)
-			-- upvalues: p1 (copy), AvatarCreationService (upval), SetAccessoryInstanceModule (upval), SetPriceInRobuxModule (upval), updateModelAttachmentsWithWrapDeformers (upval), SetHumanoidModelModule (upval)
+			-- upvalues: p1 (copy), GetFFlagUploadMakeupSupportModule (upval), AvatarCreationService (upval), SetAccessoryInstanceModule (upval), SetPriceInRobuxModule (upval), updateModelAttachmentsWithWrapDeformers (upval), SetHumanoidModelModule (upval)
 			local State = p1:getState()
 			
-			if State and (State.promptRequest.promptInfo.promptType == "PublishAvatarAsset" or State.promptRequest.promptInfo.promptType == "PublishMakeupLook") then
+			if State and (State.promptRequest.promptInfo.promptType == "PublishAvatarAsset" or GetFFlagUploadMakeupSupportModule() and State.promptRequest.promptInfo.promptType == "PublishMakeupLook") then
 				p1:dispatch(SetAccessoryInstanceModule((AvatarCreationService:DeserializeAvatarModel(SerializedModel))))
 				
 				if Price then

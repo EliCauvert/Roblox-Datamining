@@ -1,7 +1,6 @@
 ﻿local Parent = script.Parent.Parent
 local Parent1 = Parent.Parent
 local CaptureService = game:GetService("CaptureService")
-local LocalizationService = game:GetService("LocalizationService")
 local Default = require(Parent1.ExternalContentSharingProtocol).ExternalContentSharingProtocol.default
 local Localization = require(Parent1.RobloxAppLocales).Localization
 local SocialStopwatchModule = require(Parent1.SocialStopwatch)
@@ -16,22 +15,17 @@ local NetworkingModule = require(Parent.App.Networking)
 local _ = require(Parent.Types)
 local FFlagUseRbxstorageInGalleryModule = require(Parent.Flags.FFlagUseRbxstorageInGallery)
 local FFlagEnableCapturesGalleryRetrievalCoreScriptModule = require(Parent.Flags.FFlagEnableCapturesGalleryRetrievalCoreScript)
-local FFlagCapturesInExpMomentsToastShareButtonModule = require(Parent.Flags.FFlagCapturesInExpMomentsToastShareButton)
-
-if FFlagCapturesInExpMomentsToastShareButtonModule then
-	CaptureService = require(Parent.Services.CaptureService)
-end
 local ShareLinksNetworking = NetworkingModule.ShareLinksNetworking
 local LinkType = NetworkingModule.ShareLinksRodux.Enums.LinkType
-local NewLocalization = Localization.new(LocalizationService.RobloxLocaleId)
+local NewLocalization = Localization.new(game:GetService("LocalizationService").RobloxLocaleId)
 
-local function shareImage(PreCaptureSharedResult, Url)
+local function shareImage(Image, Url)
 	-- upvalues: Default (copy), ConstantsModule (copy), NewLocalization (copy)
 	if Default then
 		assert(Default ~= nil, "ExternalContentSharingProtocol is required")
 		Default:shareImage({
 			context = ConstantsModule.CapturesContext,
-			image = PreCaptureSharedResult,
+			image = Image,
 			shareSheetTitle = NewLocalization:Format("Feature.Captures.Action.ShareYourCapture"),
 			url = Url
 		})
@@ -40,7 +34,7 @@ local function shareImage(PreCaptureSharedResult, Url)
 	end
 end
 
-local function shareVideo(PreVideoCaptureSharedResult, Url)
+local function shareVideo(Video, Url)
 	-- upvalues: Default (copy), ConstantsModule (copy), NewLocalization (copy)
 	if Default then
 		assert(Default ~= nil, "ExternalContentSharingProtocol is required")
@@ -48,7 +42,7 @@ local function shareVideo(PreVideoCaptureSharedResult, Url)
 			context = ConstantsModule.CapturesContext,
 			shareSheetTitle = NewLocalization:Format("Feature.Captures.Action.ShareYourCapture"),
 			url = Url,
-			video = PreVideoCaptureSharedResult
+			video = Video
 		})
 		
 		return
@@ -56,39 +50,26 @@ local function shareVideo(PreVideoCaptureSharedResult, Url)
 end
 
 local function shareCapture(Capture, Url)
-	-- upvalues: FFlagCapturesInExpMomentsToastShareButtonModule (copy), FFlagEnableCapturesGalleryRetrievalCoreScriptModule (copy), CaptureService (ref), shareVideo (copy), shareImage (copy), FFlagUseRbxstorageInGalleryModule (copy), CaptureTypeModule (copy)
-	if not FFlagCapturesInExpMomentsToastShareButtonModule or FFlagEnableCapturesGalleryRetrievalCoreScriptModule or typeof(Capture) == "table" then
-		if FFlagEnableCapturesGalleryRetrievalCoreScriptModule and Capture.CaptureTime ~= nil then
-			local PreCaptureSharedResult = CaptureService:PreCaptureShared(Capture)
-			
-			if Capture.CaptureType == Enum.CaptureType.Video then
-				shareVideo(PreCaptureSharedResult, Url)
-			else
-				shareImage(PreCaptureSharedResult, Url)
-			end
-			CaptureService:OnCaptureObjectShared(Capture)
-			
-			return
-		elseif FFlagUseRbxstorageInGalleryModule and Capture.type == CaptureTypeModule.Video then
-			shareVideo(CaptureService:PreVideoCaptureShared(Capture.videoCapture), Url)
-			CaptureService:OnVideoCaptureShared(Capture.videoCapture)
-			
-			return
+	-- upvalues: FFlagEnableCapturesGalleryRetrievalCoreScriptModule (copy), CaptureService (copy), shareVideo (copy), shareImage (copy), FFlagUseRbxstorageInGalleryModule (copy), CaptureTypeModule (copy)
+	if FFlagEnableCapturesGalleryRetrievalCoreScriptModule and Capture.CaptureTime ~= nil then
+		local PreCaptureSharedResult = CaptureService:PreCaptureShared(Capture)
+		
+		if Capture.CaptureType == Enum.CaptureType.Video then
+			shareVideo(PreCaptureSharedResult, Url)
 		else
-			shareImage(Capture.filePath, Url)
-			CaptureService:OnCaptureShared(Capture.filePath)
-			
-			return
+			shareImage(PreCaptureSharedResult, Url)
 		end
-	elseif Capture.CaptureType == Enum.CaptureType.Video then
-		shareVideo(CaptureService:PreVideoCaptureShared(Capture), Url)
-		CaptureService:OnVideoCaptureShared(Capture)
+		CaptureService:OnCaptureObjectShared(Capture)
+		
+		return
+	elseif FFlagUseRbxstorageInGalleryModule and Capture.type == CaptureTypeModule.Video then
+		shareVideo(CaptureService:PreVideoCaptureShared(Capture.videoCapture), Url)
+		CaptureService:OnVideoCaptureShared(Capture.videoCapture)
 		
 		return
 	else
-		local PreCaptureSharedResult = CaptureService:PreCaptureShared(Capture)
-		shareImage(PreCaptureSharedResult, Url)
-		CaptureService:OnCaptureShared(PreCaptureSharedResult)
+		shareImage(Capture.filePath, Url)
+		CaptureService:OnCaptureShared(Capture.filePath)
 	end
 end
 
@@ -102,11 +83,10 @@ local function _(ExternalShareSource)
 end
 
 return function(Capture, ExternalShareSource, LaunchData)
-	-- upvalues: ServerTypeModule (copy), FFlagCapturesInExpMomentsToastShareButtonModule (copy), FFlagEnableCapturesGalleryRetrievalCoreScriptModule (copy), CaptureTypeModule (copy), shareCapture (copy), FireEventModule (copy), EventNamesModule (copy), SocialStopwatchModule (copy), GetPlaceIdFromCaptureModule (copy), LinkType (copy), ShareLinksNetworking (copy)
+	-- upvalues: ServerTypeModule (copy), FFlagEnableCapturesGalleryRetrievalCoreScriptModule (copy), CaptureTypeModule (copy), shareCapture (copy), FireEventModule (copy), EventNamesModule (copy), SocialStopwatchModule (copy), GetPlaceIdFromCaptureModule (copy), LinkType (copy), ShareLinksNetworking (copy)
 	return function(p1)
-		-- upvalues: ServerTypeModule (upval), FFlagCapturesInExpMomentsToastShareButtonModule (upval), FFlagEnableCapturesGalleryRetrievalCoreScriptModule (upval), Capture (copy), CaptureTypeModule (upval), shareCapture (upval), FireEventModule (upval), EventNamesModule (upval), ExternalShareSource (copy), SocialStopwatchModule (upval), GetPlaceIdFromCaptureModule (upval), LaunchData (copy), LinkType (upval), ShareLinksNetworking (upval)
-		local IsNotTable: boolean = FFlagCapturesInExpMomentsToastShareButtonModule and (not FFlagEnableCapturesGalleryRetrievalCoreScriptModule and typeof(Capture) ~= "table")
-		local IsCaptureTypeMatch: boolean = if FFlagEnableCapturesGalleryRetrievalCoreScriptModule or IsNotTable then Capture.CaptureType == Enum.CaptureType.Video else Capture.type == CaptureTypeModule.Video
+		-- upvalues: ServerTypeModule (upval), FFlagEnableCapturesGalleryRetrievalCoreScriptModule (upval), Capture (copy), CaptureTypeModule (upval), shareCapture (upval), FireEventModule (upval), EventNamesModule (upval), ExternalShareSource (copy), SocialStopwatchModule (upval), GetPlaceIdFromCaptureModule (upval), LaunchData (copy), LinkType (upval), ShareLinksNetworking (upval)
+		local IsCaptureTypeMatch: boolean = if FFlagEnableCapturesGalleryRetrievalCoreScriptModule then Capture.CaptureType == Enum.CaptureType.Video else Capture.type == CaptureTypeModule.Video
 		
 		if p1:getState().ServerType ~= ServerTypeModule.StandardServer then
 			shareCapture(Capture)
@@ -120,7 +100,7 @@ return function(Capture, ExternalShareSource, LaunchData)
 			return
 		end
 		local JobId = nil
-		local SourcePlaceId = if IsNotTable then Capture.SourcePlaceId elseif IsCaptureTypeMatch then if FFlagEnableCapturesGalleryRetrievalCoreScriptModule then Capture.SourcePlaceId else Capture.videoCapture.SourcePlaceId else GetPlaceIdFromCaptureModule(Capture)
+		local SourcePlaceId = if IsCaptureTypeMatch then if FFlagEnableCapturesGalleryRetrievalCoreScriptModule then Capture.SourcePlaceId else Capture.videoCapture.SourcePlaceId else GetPlaceIdFromCaptureModule(Capture)
 		
 		if game.PlaceId == SourcePlaceId then
 			JobId = game.JobId

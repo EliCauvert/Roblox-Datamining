@@ -23,7 +23,7 @@ local FFlagEnableRequestLocationTypeForSduiPurchaseModule = require(PurchaseProm
 local SharedFlagsModule = require(Parent.SharedFlags)
 local FFlagUseGetGamePassOwnershipApi = SharedFlagsModule.FFlagUseGetGamePassOwnershipApi
 local FFlagAXSupportRentalPurchaseInUnifiedProductPurchaseFlow = SharedFlagsModule.FFlagAXSupportRentalPurchaseInUnifiedProductPurchaseFlow
-local EngineFeatureEnablePurchasePayload = SharedFlagsModule.EngineFeatureEnablePurchasePayload
+local FFlagEnablePurchasePayloadInExperienceShop = SharedFlagsModule.FFlagEnablePurchasePayloadInExperienceShop
 local FFlagEnableMarketplacePurchaseDeepLinkAttribution = SharedFlagsModule.FFlagEnableMarketplacePurchaseDeepLinkAttribution
 local FFlagRefreshPriceOnRetryAfterUpsellModule = require(PurchasePrompt.Flags.FFlagRefreshPriceOnRetryAfterUpsell)
 local FFlagPurchasePromptFetchCartPricingForLooks = SharedFlagsModule.FFlagPurchasePromptFetchCartPricingForLooks
@@ -130,10 +130,10 @@ local function getPlayerOwns(Player, GamePassId, InfoType)
 end
 
 local function performPurchase(InfoType, ProductId, ExpectedPrice, RequestId, IsRobloxPurchase, CollectibleItemId, CollectibleProductId, IdempotencyKey, PurchaseAuthToken, TimedOptionsDays, PurchasePayload, PurchaseOptions)
-	-- upvalues: GetFFlagEnablePromptPurchaseRequestedV2Module (copy), GetFFlagEnablePromptPurchaseRequestedV2Take2Module (copy), FFlagAXSupportRentalPurchaseInUnifiedProductPurchaseFlow (copy), MarketplaceService (copy), EngineFeatureEnablePurchasePayload (copy), FFlagEnableMarketplacePurchaseDeepLinkAttribution (copy), IsGenericChallengeResponseModule (copy)
+	-- upvalues: GetFFlagEnablePromptPurchaseRequestedV2Module (copy), GetFFlagEnablePromptPurchaseRequestedV2Take2Module (copy), FFlagAXSupportRentalPurchaseInUnifiedProductPurchaseFlow (copy), MarketplaceService (copy), FFlagEnablePurchasePayloadInExperienceShop (copy), FFlagEnableMarketplacePurchaseDeepLinkAttribution (copy), IsGenericChallengeResponseModule (copy)
 	local Success, Result = pcall(function()
-		-- upvalues: GetFFlagEnablePromptPurchaseRequestedV2Module (upval), GetFFlagEnablePromptPurchaseRequestedV2Take2Module (upval), FFlagAXSupportRentalPurchaseInUnifiedProductPurchaseFlow (upval), MarketplaceService (upval), InfoType (copy), ProductId (copy), ExpectedPrice (copy), RequestId (copy), IsRobloxPurchase (copy), CollectibleItemId (copy), CollectibleProductId (copy), IdempotencyKey (copy), PurchaseAuthToken (copy), TimedOptionsDays (copy), EngineFeatureEnablePurchasePayload (upval), PurchasePayload (copy), PurchaseOptions (copy), FFlagEnableMarketplacePurchaseDeepLinkAttribution (upval)
-		return if GetFFlagEnablePromptPurchaseRequestedV2Module() or GetFFlagEnablePromptPurchaseRequestedV2Take2Module() then if FFlagAXSupportRentalPurchaseInUnifiedProductPurchaseFlow then MarketplaceService:PerformPurchase(InfoType, ProductId, ExpectedPrice, RequestId, IsRobloxPurchase, CollectibleItemId, CollectibleProductId, IdempotencyKey, PurchaseAuthToken, TimedOptionsDays, if EngineFeatureEnablePurchasePayload then PurchasePayload else nil, PurchaseOptions) elseif EngineFeatureEnablePurchasePayload then MarketplaceService:PerformPurchase(InfoType, ProductId, ExpectedPrice, RequestId, IsRobloxPurchase, CollectibleItemId, CollectibleProductId, IdempotencyKey, PurchaseAuthToken, nil, PurchasePayload, if FFlagEnableMarketplacePurchaseDeepLinkAttribution then PurchaseOptions else nil) else MarketplaceService:PerformPurchase(InfoType, ProductId, ExpectedPrice, RequestId, IsRobloxPurchase, CollectibleItemId, CollectibleProductId, IdempotencyKey, PurchaseAuthToken, nil, nil, if FFlagEnableMarketplacePurchaseDeepLinkAttribution then PurchaseOptions else nil) else MarketplaceService:PerformPurchase(InfoType, ProductId, ExpectedPrice, RequestId, IsRobloxPurchase, CollectibleItemId, CollectibleProductId, IdempotencyKey)
+		-- upvalues: GetFFlagEnablePromptPurchaseRequestedV2Module (upval), GetFFlagEnablePromptPurchaseRequestedV2Take2Module (upval), FFlagAXSupportRentalPurchaseInUnifiedProductPurchaseFlow (upval), MarketplaceService (upval), InfoType (copy), ProductId (copy), ExpectedPrice (copy), RequestId (copy), IsRobloxPurchase (copy), CollectibleItemId (copy), CollectibleProductId (copy), IdempotencyKey (copy), PurchaseAuthToken (copy), TimedOptionsDays (copy), FFlagEnablePurchasePayloadInExperienceShop (upval), PurchasePayload (copy), PurchaseOptions (copy), FFlagEnableMarketplacePurchaseDeepLinkAttribution (upval)
+		return if GetFFlagEnablePromptPurchaseRequestedV2Module() or GetFFlagEnablePromptPurchaseRequestedV2Take2Module() then if FFlagAXSupportRentalPurchaseInUnifiedProductPurchaseFlow then MarketplaceService:PerformPurchase(InfoType, ProductId, ExpectedPrice, RequestId, IsRobloxPurchase, CollectibleItemId, CollectibleProductId, IdempotencyKey, PurchaseAuthToken, TimedOptionsDays, if FFlagEnablePurchasePayloadInExperienceShop then PurchasePayload else nil, PurchaseOptions) elseif FFlagEnablePurchasePayloadInExperienceShop then MarketplaceService:PerformPurchase(InfoType, ProductId, ExpectedPrice, RequestId, IsRobloxPurchase, CollectibleItemId, CollectibleProductId, IdempotencyKey, PurchaseAuthToken, nil, PurchasePayload, if FFlagEnableMarketplacePurchaseDeepLinkAttribution then PurchaseOptions else nil) else MarketplaceService:PerformPurchase(InfoType, ProductId, ExpectedPrice, RequestId, IsRobloxPurchase, CollectibleItemId, CollectibleProductId, IdempotencyKey, PurchaseAuthToken, nil, nil, if FFlagEnableMarketplacePurchaseDeepLinkAttribution then PurchaseOptions else nil) else MarketplaceService:PerformPurchase(InfoType, ProductId, ExpectedPrice, RequestId, IsRobloxPurchase, CollectibleItemId, CollectibleProductId, IdempotencyKey)
 	end)
 	
 	if Success then
@@ -168,11 +168,11 @@ local function performPurchaseV2(InfoType, ProductId, ExpectedPrice, RequestId, 
 	end
 end
 
-local function performCreatorStorePurchase(ProductTargetId, AssetType)
+local function performCreatorStorePurchase(p1, p2)
 	-- upvalues: CreatorStoreService (copy), IsGenericChallengeResponseModule (copy)
 	local Success, Result = pcall(function()
-		-- upvalues: CreatorStoreService (upval), ProductTargetId (copy), AssetType (copy)
-		return CreatorStoreService:PerformCreatorStorePurchase(ProductTargetId, AssetType)
+		-- upvalues: CreatorStoreService (upval), p1 (copy), p2 (copy)
+		return CreatorStoreService:performCreatorStorePurchase(p1, p2)
 	end)
 	
 	if Success then
@@ -184,14 +184,14 @@ local function performCreatorStorePurchase(ProductTargetId, AssetType)
 	end
 end
 
-local function getAssetInfo(AssetId)
+local function getAssetInfo(p1)
 	-- upvalues: CreatorStoreService (copy)
-	return CreatorStoreService:GetAssetInfoAsync(AssetId)
+	return CreatorStoreService:getAssetInfoAsync(p1)
 end
 
-local function getCreatorStoreProductInfo(ProductTargetId, AssetType)
+local function getCreatorStoreProductInfo(p1, p2)
 	-- upvalues: CreatorStoreService (copy)
-	return CreatorStoreService:GetCreatorStoreProductInfoAsync(ProductTargetId, AssetType)
+	return CreatorStoreService:getCreatorStoreProductInfoAsync(p1, p2)
 end
 
 local function loadAssetForEquip(AssetId)

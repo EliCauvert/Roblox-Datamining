@@ -1,18 +1,18 @@
 ﻿local AvatarWorkshop = script:FindFirstAncestor("AvatarWorkshop")
-local SlotsNavigatorViewModule = require(AvatarWorkshop.Navigation.NavigatorViews.SlotsNavigatorView)
+local TabsNavigatorViewModule = require(AvatarWorkshop.Navigation.NavigatorViews.TabsNavigatorView)
 local InventoryGridContainerModule = require(AvatarWorkshop.Components.Inventory.InventoryGrid.InventoryGridContainer)
 local CreateInventoryPageRouteModule = require(script.Parent.createInventoryPageRoute)
 local CreatePageGroupRouteModule = require(script.Parent.createPageGroupRoute)
 local Inventory = require(AvatarWorkshop.Navigation.Screens).Inventory
 
-return require(script.Parent.createPagesNavigator)(require(AvatarWorkshop.Navigation.NavigatorViews.TabsNavigatorView), {
+return require(script.Parent.createPagesNavigator)(TabsNavigatorViewModule, {
 	CreateInventoryPageRouteModule(Inventory.Avatars, InventoryGridContainerModule),
-	CreatePageGroupRouteModule(Inventory.Body.Root, SlotsNavigatorViewModule, {
+	CreatePageGroupRouteModule(Inventory.Body.Root, TabsNavigatorViewModule, {
 		CreateInventoryPageRouteModule(Inventory.Body.FullBody, InventoryGridContainerModule),
 		CreateInventoryPageRouteModule(Inventory.Body.Head, InventoryGridContainerModule),
 		CreateInventoryPageRouteModule(Inventory.Body.Hair, InventoryGridContainerModule)
 	}),
-	CreatePageGroupRouteModule(Inventory.Clothing.Root, SlotsNavigatorViewModule, {
+	CreatePageGroupRouteModule(Inventory.Clothing.Root, TabsNavigatorViewModule, {
 		CreateInventoryPageRouteModule(Inventory.Clothing.Top, InventoryGridContainerModule),
 		CreateInventoryPageRouteModule(Inventory.Clothing.Outterwear, InventoryGridContainerModule),
 		CreateInventoryPageRouteModule(Inventory.Clothing.Bottom, InventoryGridContainerModule),
@@ -21,7 +21,7 @@ return require(script.Parent.createPagesNavigator)(require(AvatarWorkshop.Naviga
 		CreateInventoryPageRouteModule(Inventory.Clothing.ClassicPants, InventoryGridContainerModule),
 		CreateInventoryPageRouteModule(Inventory.Clothing.ClassicTShirt, InventoryGridContainerModule)
 	}),
-	CreatePageGroupRouteModule(Inventory.Accessories.Root, SlotsNavigatorViewModule, {
+	CreatePageGroupRouteModule(Inventory.Accessories.Root, TabsNavigatorViewModule, {
 		CreateInventoryPageRouteModule(Inventory.Accessories.Hat, InventoryGridContainerModule),
 		CreateInventoryPageRouteModule(Inventory.Accessories.Face, InventoryGridContainerModule),
 		CreateInventoryPageRouteModule(Inventory.Accessories.Neck, InventoryGridContainerModule),
@@ -31,7 +31,7 @@ return require(script.Parent.createPagesNavigator)(require(AvatarWorkshop.Naviga
 		CreateInventoryPageRouteModule(Inventory.Accessories.Front, InventoryGridContainerModule),
 		CreateInventoryPageRouteModule(Inventory.Accessories.Gear, InventoryGridContainerModule)
 	}),
-	CreatePageGroupRouteModule(Inventory.Animations.Root, SlotsNavigatorViewModule, {
+	CreatePageGroupRouteModule(Inventory.Animations.Root, TabsNavigatorViewModule, {
 		CreateInventoryPageRouteModule(Inventory.Animations.FullSet, InventoryGridContainerModule),
 		CreateInventoryPageRouteModule(Inventory.Animations.Idle, InventoryGridContainerModule),
 		CreateInventoryPageRouteModule(Inventory.Animations.Walk, InventoryGridContainerModule),

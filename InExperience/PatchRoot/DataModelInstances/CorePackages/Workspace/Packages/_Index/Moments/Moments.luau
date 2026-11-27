@@ -1,5 +1,4 @@
-﻿local _ = require(script.Components.MomentSearch.MomentSearchProvider)
-local FeedModule = require(script.Components.Feed)
+﻿local FeedModule = require(script.Components.Feed)
 local _ = require(script.MomentsHostContext)
 
 return {
