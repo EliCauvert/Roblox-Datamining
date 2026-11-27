@@ -305,9 +305,6 @@ Authentication.Login.Action.Apple,Apple
 Authentication.Login.Action.ConnectionError.RetryReady,
 Authentication.Login.Action.ConnectionError.RetryWait,Thử lại: {WaitTime}
 Authentication.Login.Action.Continue,
-Authentication.Login.Action.ContinueSetup,Tiếp tục thiết lập
-Authentication.Login.Action.ContinueWithProvider,Tiếp tục với {provider}
-Authentication.Login.Action.CreateANewAccount,
 Authentication.Login.Action.DownloadNow,Tải Xuống Ngay
 Authentication.Login.Action.EmailACode,Gửi mã qua email
 Authentication.Login.Action.EmailMeCode,Gửi mã cho tôi qua email
@@ -317,7 +314,6 @@ Authentication.Login.Action.ForgotUsername,Đã quên tên tài khoản?
 Authentication.Login.Action.ForgotUsernameOrPassword,Quên tên tài khoản hoặc mật khẩu?
 Authentication.Login.Action.GetCodeByEmail,Nhận mã qua email
 Authentication.Login.Action.Google,Google
-Authentication.Login.Action.Leave,Rời khỏi
 Authentication.Login.Action.LogInEmailOneTimeCode,Gửi mã một lần cho tôi qua email
 Authentication.Login.Action.NeedHelp,Bạn cần trợ giúp?
 Authentication.Login.Action.Next,
@@ -342,19 +338,14 @@ Authentication.Login.Description.ChooseHowToPlay,Chọn cách chơi mong muốn
 Authentication.Login.Description.DownloadNewVersion,Tài khoản của bạn không thể sử dụng phiên bản Roblox này. Vui lòng tải xuống phiên bản phù hợp để tiếp tục.
 Authentication.Login.Description.EnterOneTimeCodeHelpV2,Nhập mã chúng tôi vừa gửi đến: {email}
 Authentication.Login.Description.GetOneTimeCodeHelp,Nhập email đã xác minh cho tài khoản của bạn để nhận mã một lần.
-Authentication.Login.Description.LeaveAccountSetup,"Nếu rời khỏi ngay lúc này, tài khoản Roblox của bạn sẽ chưa được thiết lập."
 Authentication.Login.Description.PasskeyDescription,"Tài khoản của bạn có mã xác nhận, phương thức đăng nhập an toàn hơn mật khẩu. Bạn có thể sử dụng vân tay, khuôn mặt hoặc khóa màn hình để đăng nhập trên thiết bị này."
 Authentication.Login.Description.PasskeyLoginIncompatibleDevice,"Chúng tôi không thể xác định thiết bị của bạn có hỗ trợ mã xác nhận hay không. Hãy thử lại hoặc chạm vào ""Lỗi Đăng Nhập"" để khôi phục tài khoản của bạn bằng email hoặc số điện thoại."
 Authentication.Login.Description.PasskeyMobileOnly,Mã xác nhận chỉ dùng được trên thiết bị di động. Vui lòng chọn cách đăng nhập khác.
 Authentication.Login.Description.SigningInWith,Đăng nhập bằng <b>{identifier}</b>
-Authentication.Login.Description.SsoLinkMultiple,"Chúng tôi tìm thấy nhiều tài khoản Roblox đang dùng email này. Hãy chọn một tài khoản để liên kết với {provider} giúp đăng nhập nhanh hơn, hoặc hãy tạo tài khoản mới."
-Authentication.Login.Description.SsoLinkSingle,"Chúng tôi tìm thấy một tài khoản Roblox đang dùng email này. Hãy liên kết tài khoản đó với {provider} để đăng nhập nhanh hơn, hoặc hãy tạo tài khoản mới."
 Authentication.Login.Description.UsernameHandle,@<b>{username}</b>
 Authentication.Login.Description.VerificationCodeSentTo,"Nếu tài khoản Roblox tồn tại, bạn sẽ nhận được mã xác minh tại địa chỉ {email}"
 Authentication.Login.Error.PasskeyOnlyAccount,Tài khoản của bạn được thiết lập ở chế độ chỉ cho phép đăng nhập bằng khóa bảo mật. Hãy đăng nhập bằng khóa bảo mật hoặc tiến hành khôi phục tài khoản.
 Authentication.Login.Error.PlatformAccountConnectionFailure,Không xác minh được tài khoản trên nền tảng. Vui lòng thử lại sau.
-Authentication.Login.Header.LeaveAccountSetup,Rời khỏi quá trình thiết lập tài khoản?
-Authentication.Login.Header.YouAlreadyHaveAnAccount,Bạn đã có tài khoản rồi
 Authentication.Login.Heading.EnterYourCode,Nhập mã của bạn
 Authentication.Login.Heading.GetStarted,Bắt đầu
 Authentication.Login.Heading.IncompatibleAccounts,Tài khoản không phù hợp
@@ -378,7 +369,6 @@ Authentication.Login.Label.ConnectionError.RetryWait,"Rất tiếc, tiến trìn
 
 Vui lòng chờ và thử lại."
 Authentication.Login.Label.ConnectionError.Title,Lỗi kết nối
-Authentication.Login.Label.DontHaveARobloxAccountCreateOne,Bạn chưa có tài khoản Roblox? {startTag}Tạo tài khoản{endTag}
 Authentication.Login.Label.DontHaveAnAccountCreateOne,Bạn chưa có tài khoản? {startTag}Tạo tài khoản{endTag}
 Authentication.Login.Label.Email,
 Authentication.Login.Label.EmailAddress,Địa chỉ email
@@ -414,7 +404,6 @@ Authentication.Login.Label.VerificationCode,Mã xác minh
 Authentication.Login.Label.WeChatUserCancel,Bạn đã đăng xuất khỏi WeChat. Vui lòng đăng nhập vào WeChat.
 Authentication.Login.Label.WeChatVersionNotSupported,Phiên bản WeChat không được hỗ trợ
 Authentication.Login.LinkIllegalChildAccountLinking,Không thể liên kết tài khoản Roblox này với tài khoản Xbox của trẻ em. Vui lòng thử dùng một tài khoản khác hoặc kiểm tra tùy chọn cài đặt của bạn.
-Authentication.Login.Message.SsoProviderLinked,Hiện bạn đã có thể đăng nhập bằng {provider}
 Authentication.Login.QrCodeLoginTitle,Quét mã QR để đăng nhập
 Authentication.Login.Response.AccountNotFound,Không tìm thấy tài khoản. Vui lòng thử lại.
 Authentication.Login.Response.AlreadyLinked,Tài khoản Roblox này đã được liên kết với một tài khoản dùng cho {platform}. Vui lòng thử đăng nhập bằng một tài khoản Roblox khác.
@@ -473,7 +462,7 @@ Authentication.ResetPassword.Response.ResetPasswordStarted,Bạn phải đặt l
 Authentication.SignUp.Action.ApplyOnNextRespawn,Áp dụng cho lần hồi sinh tiếp theo
 Authentication.SignUp.Action.Cancel,
 Authentication.SignUp.Action.Continue,
-Authentication.SignUp.Action.ContinueSetup,
+Authentication.SignUp.Action.ContinueSetup,Tiếp tục thiết lập
 Authentication.SignUp.Action.Create,Tạo
 Authentication.SignUp.Action.CreateAPasskey,
 Authentication.SignUp.Action.CreateAccount,Tạo Tài khoản
@@ -1621,6 +1610,7 @@ Feature.AddFriends.Label.AgedUpSearchForFriendsPrompt,Tìm người chơi trên 
 Feature.AddFriends.Label.ConnectWithContacts,Mời liên hệ hoặc kết nối với bạn bè đang chơi Roblox!
 Feature.AddFriends.Label.ContactsTile,Liên hệ
 Feature.AddFriends.Label.DeclineAllBackgrounded,Bỏ qua tất cả yêu cầu kết bạn. Quá trình này có thể mất chút thời gian.
+Feature.AddFriends.Label.EmptyStatePrompt,Bạn sẽ khám phá Roblox với ai? Tìm kiếm người chơi để thêm hoặc kết nối với bạn bè mà bạn đã biết!
 Feature.AddFriends.Label.FriendRequests,Yêu Cầu Kết Bạn
 Feature.AddFriends.Label.InputPlaceholder.SearchForPeopleAltCapitalization,Tìm kiếm mọi người
 Feature.AddFriends.Label.MyQrCode,Mã QR Của Tôi
@@ -2691,8 +2681,6 @@ Feature.Build.Label.AdvancedModel,Nâng cao
 Feature.Build.Label.All,
 Feature.Build.Label.AllGames,Tất cả trò chơi
 Feature.Build.Label.AmountAvailable,Còn {AMOUNT}
-Feature.Build.Label.AttachmentCountPlural,{count} tệp đính kèm
-Feature.Build.Label.AttachmentCountSingular,1 tệp đính kèm
 Feature.Build.Label.Autosaved,Đã tự động lưu
 Feature.Build.Label.Available,còn lại
 Feature.Build.Label.AvailableForPurchase,Có thể mua
@@ -2712,7 +2700,6 @@ Feature.Build.Label.DefaultDeveloperProductName,sản phẩm của nhà phát tr
 Feature.Build.Label.DefaultModel,
 Feature.Build.Label.Deleted,Đã xóa
 Feature.Build.Label.DescribeIdea,Mô tả ý tưởng
-Feature.Build.Label.DescribeIdeaOrPick,Mô tả ý tưởng hoặc chọn một ý tưởng bên dưới
 Feature.Build.Label.Description,
 Feature.Build.Label.DeveloperProductDescription,Mô tả: {DESCRIPTION}
 Feature.Build.Label.DeveloperProductName,Tên: {NAME}
@@ -3053,7 +3040,6 @@ Feature.BuyRobux.Label.MyFriendsWithCount,Bạn bè của tôi ({count})
 Feature.BuyRobux.Label.PeopleWithCount,Mọi người ({count})
 Feature.BuyRobux.Label.Search,
 Feature.Call.Error.Description.Generic,
-Feature.Captures.Title.Captures,Ảnh chụp/Video quay màn hình
 Feature.Captures.Title.Gallery,Thư Viện
 Feature.Catalog.Action.Buy,
 Feature.Catalog.Action.Cancel,
@@ -3548,7 +3534,6 @@ Feature.Chat.Label.SearchWord,
 Feature.Chat.Label.SelectToRemove,Chọn để xóa
 Feature.Chat.Label.Sent,Đã Gửi
 Feature.Chat.Label.SnoozePartyNotifications,Tắt thông báo tổ đội trong trải nghiệm đối với:
-Feature.Chat.Label.StartChatting,Bắt đầu trò chuyện
 Feature.Chat.Label.SwipeToReplyTooltip,Vuốt để trả lời
 Feature.Chat.Label.TapToRemove,Nhấn để xóa
 Feature.Chat.Label.TimestampDaysAbbreviatedPlural,{num_days}ng
@@ -3899,6 +3884,7 @@ Feature.Friends.Error.UserBannedError,Bạn bị cấm thực hiện thao tác n
 Feature.Friends.Error.UserBlockedError,Bạn bị chặn thực hiện thao tác này.
 Feature.Friends.Error.UserNotPassedCaptcha,Bạn chưa vượt qua captcha.
 Feature.Friends.Feature.Friends.Heading.AddFriends,
+Feature.Friends.FriendingTooltipBody,Một số yêu cầu kết bạn có thể đến từ những người dùng tìm thấy bạn bằng số điện thoại của bạn. Hãy chắc chắn rằng bạn biết họ trước khi trở thành bạn bè.
 Feature.Friends.Heading.Activities,
 Feature.Friends.Heading.FilterBy,Lọc Theo
 Feature.Friends.Heading.Friends,
@@ -3932,6 +3918,7 @@ Feature.Friends.Label.FriendOfUser,Bạn bè của {displayName}
 Feature.Friends.Label.FriendOwns,1 Người bạn sở hữu
 Feature.Friends.Label.FriendRecentlyPlayed,<b>1 Người bạn</b> vừa mới chơi
 Feature.Friends.Label.FriendRequest,
+Feature.Friends.Label.FriendingTooltip,Mẹo Kết Bạn
 Feature.Friends.Label.Friends,
 Feature.Friends.Label.FriendsAreNowConnections,"Bạn bè bây giờ được gọi là ""Người quen""!"
 Feature.Friends.Label.FriendsHintBold,Cùng chơi nào!
@@ -4120,7 +4107,6 @@ Feature.GameDetails.Message.HidingExperienceQuestion,Vì sao bạn ẩn trải n
 Feature.GameDetails.Message.LeavingRobloxTitle,Đang Rời Khỏi Roblox
 Feature.GameDetails.Message.PurchaseGame,Mở khóa quyền truy cập cho {gameName} với R${X}?
 Feature.GameDetails.Message.PurchaseGameV2,Mở khóa quyền truy cập cho {gameName} với {X} Robux?
-Feature.GameDetails.Message.RobloxWebsiteSignedInWarning,"Khi nhấp chuột vào ""Tiếp tục"", trình duyệt web sẽ mở trang roblox.com và bạn sẽ được đăng nhập vào tài khoản Roblox của mình."
 Feature.GameDetails.Message.SponsoredDisclosure.Error,Không thể hiển thị thông tin tài trợ do lỗi tạm thời.
 Feature.GameDetails.Message.SponsoredDisclosure.O18NonPersonalizedNoLink,"Bạn nhìn thấy nội dung được tài trợ này dựa trên các yếu tố không được cá nhân hóa như thông tin thiết bị, vị trí và độ tuổi để hiển thị nội dung phù hợp với bạn. Nhà sáng tạo trải nghiệm là {CreatorName}. Khoản tài trợ được {PayerName} chi trả. Để tìm hiểu thêm, vui lòng truy cập trang “Quyền riêng tư và mức độ nội dung người lớn” trong phần cài đặt tài khoản tại đây:"
 Feature.GameDetails.Message.SponsoredDisclosure.O18PersonalizedNoLink,"Bạn nhìn thấy nội dung được tài trợ này dựa trên các yếu tố khác như vị trí, thông tin thiết bị, độ tuổi và hoạt động trên nền tảng để hiển thị nội dung phù hợp với bạn. Nhà sáng tạo trải nghiệm là {CreatorName}. Khoản tài trợ được {PayerName} chi trả. Để tìm hiểu thêm, vui lòng truy cập trang “Quyền riêng tư và mức độ nội dung người lớn” trong phần cài đặt tài khoản tại đây:"
@@ -4140,8 +4126,6 @@ Feature.GameFollows.TooltipTurnedOnNotifications,Đã mở thông báo cho {expe
 Feature.GameJoin.Description.DifferentServer,Bạn sẽ bắt đầu ở máy chủ khác
 Feature.GameJoin.Label.PlayTogether,Các bạn có thể chơi cùng nhau
 Feature.GameJoin.Label.PlayTogetherSoon,Các bạn sẽ sớm có thể chơi cùng nhau
-Feature.GameJoin.Label.Played,đã chơi
-Feature.GameJoin.Label.RecentCoplay,Gần đây hai bạn đã chơi cùng nhau
 Feature.GamePage.Action.BackToTop,Về đầu trang
 Feature.GamePage.Label.Ad,
 Feature.GamePage.Label.Sponsored,Được Tài Trợ
@@ -4435,7 +4419,6 @@ Feature.Moments.Action.Hide,Ẩn chi tiết
 Feature.Moments.Action.HowToCapture,Xem cách chụp
 Feature.Moments.Action.KeepEditing,Tiếp tục chỉnh sửa
 Feature.Moments.Action.Leave,
-Feature.Moments.Action.LoadMore,Tải thêm
 Feature.Moments.Action.Minimize,Thu nhỏ
 Feature.Moments.Action.Ok,
 Feature.Moments.Action.Play,Phát
@@ -5389,7 +5372,6 @@ Feature.RobloxSubscription.Description.ReferralRecipientLegalDisclosurePurchase,
 Feature.RobloxSubscription.Description.ReferralRecipientReward,Ưu đãi chỉ áp dụng cho người mới đăng ký Plus.
 Feature.RobloxSubscription.Description.ReferralReferrerReward,Khi có người mua gói Plus bằng đường liên kết của bạn.
 Feature.RobloxSubscription.Description.ReferralShare,Mời bạn bè đăng ký gói Plus để cả hai cùng nhận được {amount} Robux khi họ mua gói Plus.
-Feature.RobloxSubscription.Description.SpawnEffectsPlusUpsell,Đăng ký gói Plus để được hưởng các quyền lợi như hiệu ứng hồi sinh và nhiều tính năng khác.
 Feature.RobloxSubscription.Description.UnlockSpawnEffectsWithPlus,Nhận hiệu ứng hồi sinh với gói Plus
 Feature.RobloxSubscription.Disclosure.BlackbirdTermsAgreement,"Khi nhấp chuột vào \u{201C}{ctaText}\u{201D}, bạn đồng ý với <a href=""{termsUrl}"">Điều khoản gói đăng ký của Roblox</a>. Hệ thống sẽ tự động thu phí hằng tháng cho đến khi bạn hủy."
 Feature.RobloxSubscription.Heading.ReferralEntry,Chia sẻ Plus để nhận {amount} Robux
@@ -5830,6 +5812,7 @@ Feature.UniversalShareSheet.Response.SharedCustomMessage,{CUSTOM_MESSAGE} + 1 ng
 Feature.UniversalShareSheet.Response.SharedMessage,Tin nhắn đã được gửi
 Feature.UniversalShareSheet.Response.SharedMultipleMessages,
 Feature.UniversalShareSheet.SharedCustomMultipleMessages,{CUSTOM_MESSAGE} + {N} người khác
+Feature.UserLibrary.Label.MyLibrary,Thư viện của tôi
 Feature.VIPServer.Message.TooManyFreeServersOnGame,Bạn không thể tạo thêm máy chủ riêng miễn phí trong trò chơi này.
 Feature.VIPServer.Message.TooManyTotalActiveFreeServers,Số lượng máy chủ riêng tư miễn phí có thể hoạt động cùng lúc đã đạt mức tối đa. Vui lòng tắt máy chủ khác trước.
 Feature.VerificationUpsell.Action.AddPhone,
@@ -6251,7 +6234,7 @@ Roblox.ReferralRewards.RewardBannerHeader,Nhận {rewardName}!
 Roblox.ReferralRewards.RewardBannerModalCreatorSupport,Đây là phần thưởng từ {creatorName}. Vui lòng liên hệ trực tiếp với nhà sáng tạo để được hỗ trợ và giải đáp thắc mắc.
 Roblox.ReferralRewards.RewardBannerModalRewardDetails,Chi tiết phần thưởng
 Roblox.ReferralRewards.RewardBannerModalTitle,Phần thưởng giới thiệu bạn bè
-Search.GlobalSearch.Action.LoadMore,
+Search.GlobalSearch.Action.LoadMore,Tải thêm
 Search.GlobalSearch.Example.SearchCatalog,Tìm trong mục lục
 Search.GlobalSearch.Example.SearchGames,
 Search.GlobalSearch.Example.SearchMarketplace,Tìm trong chợ
